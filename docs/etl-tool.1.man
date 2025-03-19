@@ -1,0 +1,212 @@
+ETL-TOOL(1)                      General Commands Manual                      ETL-TOOL(1)
+
+NAME
+       etl-tool - A generic Extract-Transform-Load (ETL) utility
+
+SYNOPSIS
+       etl-tool [OPTIONS]
+
+DESCRIPTION
+       etl-tool is a command-line utility designed to extract data from various
+       sources, apply configurable transformations, deduplicate the records, and
+       load the processed data into a destination. It supports input formats such as
+       JSON, CSV, XLSX, XML, and PostgreSQL queries, and can output to PostgreSQL,
+       CSV, XLSX, XML, or JSON.
+
+OPTIONS
+       -config file
+              Specify the YAML configuration file to use (default:
+              "config/etl-config.yaml").
+
+       -input file
+              (Optional) Override the input file path specified in the configuration.
+
+       -db connection_string
+              PostgreSQL connection string. If not provided, etl-tool will
+              use the DB_CREDENTIALS environment variable.
+
+       -loglevel level
+              Set the logging level. Supported values are "none", "info", or
+              "debug" (default: "info").
+
+CONFIGURATION FILE
+       The configuration file is written in YAML and controls the behavior of
+       etl-tool. It is composed of the following main sections:
+
+       source:
+              Defines the input source.
+       destination:
+              Defines the output destination.
+       mappings:
+              An ordered list of transformation rules.
+       dedup:
+              (Optional) Configuration for deduplication.
+       loader:
+              (Optional) Additional loader settings for PostgreSQL destinations.
+
+SOURCE CONFIGURATION
+       The "source" section specifies how etl-tool obtains the input data. It must
+       include the following keys:
+
+       type:   (Required) The type of the input source. Valid values are:
+               • "json"      – A JSON file.
+               • "csv"       – A CSV file.
+               • "xlsx"      – An Excel (XLSX) file.
+               • "xml"       – An XML file.
+               • "postgres"  – Data obtained via a PostgreSQL query.
+
+       file:   (Required for file-based sources) The path to the input file.
+       query:  (Required for type "postgres") The SQL query to execute on the
+               PostgreSQL database.
+
+DESTINATION CONFIGURATION
+       The "destination" section specifies where etl-tool should load the processed
+       data. It supports the following keys:
+
+       type:          (Required) The type of destination. Valid values are:
+                      • "postgres"  – A PostgreSQL database table.
+                      • "csv"       – A CSV file.
+                      • "xlsx"      – An Excel (XLSX) file.
+                      • "xml"       – An XML file.
+                      • "json"      – A JSON file.
+
+       target_table:  (Required for "postgres") The name of the target database table.
+       file:          (Required for file-based destinations) The path to the output file.
+       loader:        (Optional, for PostgreSQL destinations) A nested configuration
+                      that provides advanced loading options:
+                      • mode:       (Optional) Loader mode. If set to "sql", a custom SQL
+                                    command is used.
+                      • command:    (Required if mode is "sql") The custom SQL command
+                                    to execute for each record or batch.
+                      • preload:    (Optional) A list of SQL commands to run before loading.
+                      • postload:   (Optional) A list of SQL commands to run after loading.
+                      • batch_size: (Optional) The number of records per batch when using
+                                    custom SQL.
+
+MAPPING RULES
+       The "mappings" section is an array of transformation rules that determine
+       how each input record is processed and transformed. Each mapping rule has
+       the following keys:
+
+       source:    (Required) The field name in the input record.
+       target:    (Required) The field name in the output record.
+       transform: (Optional) The transformation function to apply. It is specified
+                  as "function_name:parameters" (the parameters part is optional and
+                  may be provided via the params map as well).
+       params:    (Optional) A map of additional parameters needed by the transform.
+                  For example:
+                  - For regexExtract, include a "pattern" key.
+                  - For dateConvert, include "inputFormat" and "outputFormat".
+                  - For substring, include "start" and "length".
+
+DEDUPLICATION
+       The "dedup" section is optional and provides deduplication based on a
+       composite key. It supports:
+
+       keys:      (Required) An array of field names. The values from these fields
+                  are concatenated to form a composite key; records with duplicate
+                  keys are merged (only the first occurrence is kept).
+
+TRANSFORMATION FUNCTIONS
+       etl-tool provides a variety of built-in transformation functions that can be
+       applied via the mapping rules. Supported functions include:
+
+       • epochToDate
+              Converts an epoch timestamp (number or string) into a formatted date
+              (format "2006-01-02").
+
+       • calculateAge
+              Computes the number of days elapsed since the given epoch timestamp.
+
+       • regexExtract
+              Uses a regular expression to extract a substring. Requires a "pattern"
+              parameter in params or appended to the transform string.
+
+       • trim
+              Removes leading and trailing whitespace from a string.
+
+       • toUpperCase
+              Converts a string to all uppercase letters.
+
+       • toLowerCase
+              Converts a string to all lowercase letters.
+
+       • branch
+              Evaluates dynamic conditions (using the govaluate library) to select
+              a branch value.
+
+       • dateConvert
+              Converts date strings between different formats. Supports parameters
+              "inputFormat" and "outputFormat". Falls back to RFC3339 if needed.
+
+       • toInt
+              Converts a value to an integer; logs a warning on conversion failure.
+
+       • toFloat
+              Converts a value to a floating-point number; logs a warning on conversion
+              failure.
+
+       • toBool
+              Converts a value to a boolean. Accepts common true/false string
+              representations.
+
+       • toString
+              Converts a value to a string.
+
+       • replaceAll
+              Replaces all occurrences of a substring with a new substring.
+              Requires "old" and "new" parameters.
+
+       • substring
+              Extracts a substring from a string based on "start" and "length"
+              parameters.
+
+       • coalesce
+              Returns the first non-empty value among a list of fields.
+
+       • multiDateConvert
+              Attempts to convert a date string using multiple date formats. Requires a
+              list of "formats" and optionally an "outputFormat".
+
+LOGGING
+       etl-tool supports three levels of logging output:
+
+       • none  – No logging.
+       • info  – Basic informational messages.
+       • debug – Detailed debug messages.
+
+       The log level is set using the -loglevel option. Debug logging provides
+       extensive details about the processing steps.
+
+ENVIRONMENT VARIABLES
+       DB_CREDENTIALS
+              If the -db option is not specified, etl-tool will use the DB_CREDENTIALS
+              environment variable to obtain the PostgreSQL connection string.
+
+EXAMPLES
+       1. Basic usage with a configuration file:
+              etl-tool -config config/etl-config.yaml
+
+       2. Overriding the input file:
+              etl-tool -config config/etl-config.yaml -input /path/to/new_input.csv
+
+       3. Providing the PostgreSQL connection string via command-line:
+              etl-tool -config config/etl-config.yaml -db "postgres://user:password@host:port/dbname"
+
+FILES
+       /path/to/etl-config.yaml
+              A sample YAML configuration file for etl-tool.
+
+SEE ALSO
+       pgx(7), govaluate(7), excelize(7), yaml(7)
+
+AUTHORS
+       Developed as part of the etl-tool project.
+
+REPORTING BUGS
+       Please report bugs to the project maintainers.
+
+COPYRIGHT
+       MIT License
+
+
