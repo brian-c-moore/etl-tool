@@ -106,7 +106,7 @@ The tool supports these logging levels:
 Set the log level using the -loglevel option.
 
 ## License
-API Tool is released under the MIT License. See the LICENSE file for details.
+ETL Tool is released under the MIT License. See the LICENSE file for details.
 
 ## Acknowledgments
 This tool was designed to address a gap I saw in existing automation tools. Golang seemed like the best choice to accomplish my goals, but my experience has been with other programming languages. I’ve leveraged ChatGPT for assistance with coding and as a way to teach myself a new language while building something useful. The overall design, architecture, and direction are entirely my own.
