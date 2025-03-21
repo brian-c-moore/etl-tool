@@ -21,7 +21,7 @@ A generic Extract-Transform-Load (ETL) utility for extracting data from various 
 
 1. Clone the repository:
 
-       git clone https://your-repository-url.git
+       git clone https://github.com/brian-c-moore/etl-tool
        cd etl-tool
 
 2. Build the project:
