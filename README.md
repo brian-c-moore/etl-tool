@@ -37,11 +37,44 @@ etl-tool -config <config_file.yaml> [options]
 *   `DB_CREDENTIALS`: PostgreSQL connection string (used if -db flag is not set).
 *   Other variables (e.g., `$MY_PATH`, `${VAR_NAME}`, `%WIN_PATH%`) can be used within configuration file paths and connection strings for expansion.
 
-## Building and Testing
+### Build from Source
+
+Ensure you have Go (version 1.22 or later recommended) installed and configured.
+
+```sh
+# Clone the repository
+git clone https://github.com/brian-c-moore/api-tool.git
+cd api-tool
+
+# Tidy dependencies
+go mod tidy
+
+# Build the binary
+go build -o api-tool ./cmd/api-tool/
+
+# (Optional) Install to your Go bin directory
+go install ./cmd/api-tool/
+# Make sure $GOPATH/bin (or $HOME/go/bin) is in your PATH
+```
+
+## Testing
 
 *   Build: `go build -o etl-tool ./cmd/etl-tool/main.go`
 *   Run Tests: `go test ./...`
 *   Run Tests (Docker): `./docker-test.sh`
+
+Example test output:
+
+```
+?       etl-tool/cmd/etl-tool   [no test files]
+ok      etl-tool/internal/app   0.391s
+ok      etl-tool/internal/config        0.204s
+ok      etl-tool/internal/io    0.830s
+ok      etl-tool/internal/logging       0.448s
+ok      etl-tool/internal/processor     0.595s
+ok      etl-tool/internal/transform     1.018s
+ok      etl-tool/internal/util  0.887s
+```
 
 ## License
 
