@@ -1,0 +1,547 @@
+ETL-TOOL(1)                 User Commands                  ETL-TOOL(1)
+
+NAME
+       etl-tool - A flexible command-line tool for Extract, Transform,
+       Load (ETL) operations.
+
+SYNOPSIS
+       etl-tool [OPTIONS]
+
+DESCRIPTION
+       etl-tool is a configuration-driven utility designed to read data
+       from various sources, apply transformations and validations,
+       filter records, handle duplicates, and load the resulting data
+       into various destinations. It supports common file formats and
+       PostgreSQL databases. The entire process is controlled via a YAML
+       configuration file, allowing for complex ETL workflows to be
+       defined declaratively.
+
+       The core workflow follows these steps:
+       1. Extract: Read data from the configured source (file or database).
+       2. Filter: Optionally remove records based on a filter
+          expression applied to the source data.
+       3. Transform: Apply a series of mapping rules to modify,
+          validate, and restructure the data fields.
+       4. Deduplicate: Optionally remove duplicate records based on
+          specified key fields and strategy, applied after transformations.
+       5. Load: Write the final processed records to the configured
+          destination (file or database).
+
+OPTIONS
+       The following command-line options are available:
+
+       -config string
+              Specifies the path to the YAML configuration file that defines
+              the ETL process. Environment variables in the path will be
+              expanded. Defaults to "config/etl-config.yaml".
+
+       -input string
+              Overrides the input file path specified in the source.file
+              section of the configuration file. This option is ignored if
+              the source type is 'postgres'. Environment variables in the
+              path will be expanded.
+
+       -output string
+              Overrides the output file path or target table specified in the
+              destination.file or destination.target_table section of the
+              configuration file. This option is ignored if the destination
+              type is 'postgres' when overriding target_table. Environment
+              variables in the path will be expanded.
+
+       -db string
+              Specifies the PostgreSQL connection string (e.g.,
+              "postgres://user:password@host:port/database"). This overrides
+              the DB_CREDENTIALS environment variable if both are set.
+              Required if source or destination type is 'postgres' and
+              DB_CREDENTIALS is not set. Environment variables in the
+              string will be expanded. Passwords included here will be
+              masked in log output.
+
+       -loglevel string
+              Sets the logging verbosity level. Valid levels are
+              (case-insensitive): none, error, warn (or warning), info,
+              debug. Overrides the level set in the configuration file.
+              Defaults to "info".
+
+       -dry-run
+              If set, the tool performs all steps (extraction, filtering,
+              transformation, deduplication) but skips the final load step.
+              This is useful for testing configuration and transformations
+              without modifying the destination. Log output will indicate
+              the number of records that would have been written. Defaults
+              to false.
+
+       -fips
+              Enables FIPS 140-2 compliance mode. This restricts certain
+              cryptographic algorithms, notably preventing the use of MD5
+              hashing in transformations. Overrides the fipsMode setting in
+              the configuration file. Defaults to false.
+
+       -help
+              Displays the help message summarizing usage, options, and
+              environment variables, then exits.
+
+ENVIRONMENT
+       DB_CREDENTIALS
+              Specifies the PostgreSQL connection string. Used if the -db
+              command-line flag is not provided when connecting to PostgreSQL.
+              Environment variables within this string will also be expanded.
+              Passwords included here will be masked in log output.
+
+       Universal Variable Expansion
+              File paths and connection strings specified in the configuration
+              file or via command-line flags can contain environment variables.
+              The tool supports Unix-style ($VAR, ${VAR}) and Windows-style
+              (%VAR%) expansion. If a variable is not set in the environment,
+              it is replaced with an empty string.
+
+CONFIGURATION
+       The ETL process is defined by a YAML configuration file, typically
+       specified via the -config flag. The structure is as follows:
+
+         logging:
+              Configuration for logging output.
+
+                level: string
+                     Sets the logging verbosity. Options: "none", "error",
+                     "warn", "info", "debug". Defaults to "info". Can be
+                     overridden by the -loglevel flag.
+
+         source:
+              Defines the data source. Required.
+
+                type: string
+                     The type of the data source. Required. Supported types:
+
+                       json: Reads a JSON file containing an array of objects
+                             or a single object.
+                       csv:  Reads a Comma Separated Values file. Assumes the
+                             first row is the header.
+                       xlsx: Reads data from a Microsoft Excel (.xlsx) file.
+                       xml:  Reads data from an XML file, expecting repeating
+                             elements representing records.
+                       yaml: Reads a YAML file containing a list of mappings
+                             (records) or a single mapping.
+                       postgres: Reads data by executing a SQL query against
+                                 a PostgreSQL database.
+
+                file: string
+                     Path to the input file. Required for file-based source
+                     types (json, csv, xlsx, xml, yaml). Ignored for 'postgres'.
+                     Environment variables are expanded. Can be overridden by
+                     the -input flag.
+
+                query: string
+                     The SQL query to execute. Required for 'postgres' source
+                     type. Ignored for file-based types.
+
+                delimiter: string (CSV specific)
+                     The single character used as a field delimiter in CSV
+                     files. Use '\t' for tab. Defaults to ",".
+
+                commentChar: string (CSV specific)
+                     A single character indicating comment lines in CSV files.
+                     Lines starting with this character are ignored. Defaults
+                     to disabled (empty string).
+
+                sheetName: string (XLSX specific)
+                     The name of the sheet to read from in the Excel file. If
+                     specified, takes precedence over sheetIndex. If neither
+                     is specified, reads from the active sheet (or the first
+                     sheet if the active one cannot be determined).
+
+                sheetIndex: integer (XLSX specific)
+                     The 0-based index of the sheet to read from. Used only if
+                     sheetName is not specified. Defaults to the active sheet
+                     index (usually 0).
+
+                xmlRecordTag: string (XML specific)
+                     The local name of the XML elements that represent
+                     individual records. Defaults to "record".
+
+         destination:
+              Defines the data destination. Required.
+
+                type: string
+                     The type of the data destination. Required. Supported types:
+
+                       json: Writes records as a JSON array to a file.
+                       csv:  Writes records to a CSV file, with the first row
+                             as the header.
+                       xlsx: Writes records to a sheet in a Microsoft Excel
+                             (.xlsx) file.
+                       xml:  Writes records as repeating elements within a root
+                             element to an XML file.
+                       yaml: Writes records as a YAML list (sequence of
+                             mappings) to a file.
+                       postgres: Writes records to a table in a PostgreSQL
+                                 database. Uses high-performance COPY FROM by
+                                 default.
+
+                file: string
+                     Path to the output file. Required for file-based
+                     destination types (json, csv, xlsx, xml, yaml). Ignored
+                     for 'postgres'. Environment variables are expanded. Can
+                     be overridden by the -output flag.
+
+                target_table: string
+                     The name of the target table (optionally
+                     schema-qualified, e.g., "public.my_table") in the
+                     PostgreSQL database. Required for 'postgres' destination
+                     type. Ignored for file-based types. Can be overridden by
+                     the -output flag.
+
+                delimiter: string (CSV specific)
+                     The single character used as a field delimiter when
+                     writing CSV files. Use '\t' for tab. Defaults to ",".
+
+                sheetName: string (XLSX specific)
+                     The name of the sheet to write to in the Excel file.
+                     Defaults to "Sheet1". If the sheet exists, it will be
+                     overwritten.
+
+                xmlRecordTag: string (XML specific)
+                     The local name for the XML elements representing
+                     individual records in the output. Defaults to "record".
+
+                xmlRootTag: string (XML specific)
+                     The local name for the root XML element that contains all
+                     record elements. Defaults to "records".
+
+                loader: (Postgres specific)
+                     Optional configuration for customizing PostgreSQL loading
+                     behavior. If omitted or mode is empty, the default
+                     high-performance COPY mechanism is used.
+
+                       mode: string
+                            Specifies the loading strategy. Currently only
+                            supports "sql" for custom command execution.
+                            Defaults to "" (uses COPY).
+                       command: string
+                            The SQL command (e.g., INSERT, UPDATE, function
+                            call) executed for each record when mode is "sql".
+                            Use placeholders like $1, $2 corresponding to the
+                            alphabetical order of the target field names from
+                            the mappings. Required if mode is "sql".
+                       preload: array of strings
+                            A list of SQL commands executed once in a single
+                            transaction *before* any records are loaded via
+                            custom SQL. Useful for setup like TRUNCATE TABLE.
+                            Optional, only used if mode is "sql".
+                       postload: array of strings
+                            A list of SQL commands executed once in a single
+                            transaction *after* all records have been loaded
+                            via custom SQL. Useful for cleanup or analysis like
+                            ANALYZE TABLE. Optional, only used if mode is "sql".
+                       batch_size: integer
+                            The number of records processed in a single
+                            transaction/batch when mode is "sql". A value of 0
+                            or less disables batching (each record is processed
+                            individually). Default is 0.
+
+         filter: string
+              An optional expression (using govaluate syntax) evaluated
+              against each *input* record *before* transformations are
+              applied. Records for which the expression evaluates to false
+              are skipped. Fields from the source record can be used as
+              variables. Example: "status == 'active' && amount > 0"
+
+         mappings:
+              An array of rules defining transformations and validations
+              applied sequentially to each record. Required. At least one
+              rule must be defined.
+
+                source: string
+                     The name of the field in the input record (or the target
+                     field from a previous mapping rule) to use as input for
+                     this rule. Required.
+                target: string
+                     The name of the field in the output record where the
+                     result of this rule will be stored. Required. Must be
+                     unique across all mappings.
+                transform: string
+                     The name of the transformation or validation function to
+                     apply. Optional. If omitted, the source value is assigned
+                     directly to the target. Can include simple parameters
+                     using a colon (e.g., "regexExtract:^(\\d+)",
+                     "validateRegex:[a-z]+"). Available functions:
+
+                       toString: Converts input value to its string
+                                 representation. Handles nil as "".
+                       toInt: Attempts to convert input value (string, float,
+                              int types) to an int64. Returns nil on failure.
+                       mustToInt: Converts input value to an int64. Returns an
+                                  error if conversion fails, triggering error
+                                  handling (halt/skip).
+                       toFloat: Attempts to convert input value (string, float,
+                                int types) to a float64. Returns nil on failure.
+                       mustToFloat: Converts input value to a float64. Returns
+                                    an error if conversion fails.
+                       toBool: Attempts to convert input value (string, numeric,
+                               bool) to a boolean. Recognizes "true", "t",
+                               "yes", "y", "1" (and case variations) as true;
+                               "false", "f", "no", "n", "0", "" as false.
+                               Returns nil for unrecognized strings. Non-zero
+                               numbers are true. Nil is false.
+                       mustToBool: Converts input value to a boolean using the
+                                   same rules as toBool, but returns an error
+                                   for nil, empty string, or unrecognized
+                                   string values.
+                       toUpperCase: Converts a string value to uppercase.
+                                    Non-strings pass through.
+                       toLowerCase: Converts a string value to lowercase.
+                                    Non-strings pass through.
+                       trim: Removes leading and trailing whitespace from a
+                             string value. Non-strings pass through.
+                       epochToDate: Converts a numeric Unix epoch timestamp
+                                    (seconds, can be float) to a date string
+                                    in "YYYY-MM-DD" format (UTC). Returns
+                                    original value on parse failure.
+                       mustEpochToDate: Converts a numeric Unix epoch timestamp
+                                        to "YYYY-MM-DD" format. Returns an error
+                                        if conversion fails.
+                       dateConvert: Converts a date/time string or time.Time
+                                    object from one format to another. Uses
+                                    parameters `inputFormat` (Go layout string,
+                                    defaults to RFC3339 and common fallbacks)
+                                    and `outputFormat` (Go layout string,
+                                    defaults to RFC3339). Returns original
+                                    value on parse failure.
+                       mustDateConvert: Converts a date/time string or time.Time
+                                        object using `inputFormat` and
+                                        `outputFormat`. Returns an error if
+                                        parsing fails.
+                       multiDateConvert: Attempts to parse a date string using
+                                         multiple potential input formats
+                                         specified in the `formats` parameter
+                                         (an array of Go layout strings). Returns
+                                         the formatted date (using `outputFormat`)
+                                         on the first successful parse, or the
+                                         original value if none match. Requires
+                                         `formats` and `outputFormat` params.
+                       calculateAge: Calculates the age in *days* between a
+                                     Unix epoch timestamp (seconds) and the
+                                     current time (UTC). Returns an integer
+                                     number of days, or nil on parse failure.
+                                     Returns 0 for future dates.
+                       replaceAll: Replaces all occurrences of a substring within
+                                   a string. Requires `old` and `new` string
+                                   parameters. Non-strings pass through.
+                       substring: Extracts a portion of a string. Requires
+                                  `start` (0-based index) and `length` integer
+                                  parameters. Handles multi-byte characters
+                                  correctly. Returns original value if input is
+                                  not a string or params are invalid.
+                       regexExtract: Extracts the first capture group from a
+                                     string using a regular expression. Requires
+                                     a `pattern` string parameter (or shorthand:
+                                     "regexExtract:pattern"). Returns the
+                                     captured string or nil if no match or
+                                     capture group exists, or on pattern error.
+                       hash: Generates a cryptographic hash (hex string) of the
+                             concatenated string representations of values from
+                             specified fields. Requires `algorithm` (string:
+                             "sha256", "sha512", "md5") and `fields` (array of
+                             strings) parameters. Fields are sorted
+                             alphabetically before concatenation. MD5 is
+                             disallowed if FIPS mode is enabled.
+                       coalesce: Returns the first non-nil value from a list of
+                                 fields specified in the `fields` parameter (an
+                                 array of strings). If the value is a string,
+                                 it must also be non-empty. Returns nil if no
+                                 suitable value is found.
+                       branch: Evaluates conditions sequentially and returns a
+                               corresponding value. Requires a `branches`
+                               parameter, which is an array of maps. Each map
+                               must contain a `condition` (string, govaluate
+                               expression) and a `value` (any type). Returns
+                               the `value` from the first branch whose `condition`
+                               evaluates to true. If no condition matches,
+                               returns the original input value passed to the
+                               transform. Uses `inputValue` to refer to the input
+                               value in conditions, and other record fields by
+                               name.
+                       validateRequired: Returns an error if the input value is
+                                         nil, an empty string, or a whitespace-only
+                                         string. Otherwise, returns the original value.
+                       validateRegex: Returns an error if the input string value
+                                      does not match the provided regular expression
+                                      pattern. Requires a `pattern` string parameter
+                                      (or shorthand: "validateRegex:pattern").
+                                      Non-string values pass validation.
+                       validateNumericRange: Returns an error if the input numeric
+                                             value is outside the specified range.
+                                             Requires at least one of `min` or `max`
+                                             numeric parameters. Non-numeric values
+                                             pass validation.
+                       validateAllowedValues: Returns an error if the input value
+                                              is not present in the specified list.
+                                              Requires a `values` array parameter.
+                                              Comparison uses type-aware logic
+                                              (e.g., int 10 matches string "10").
+
+                params: map
+                     A map providing additional configuration for the
+                     transformation/validation function specified in transform.
+                     Structure depends on the function (e.g., date formats,
+                     regex pattern, hashing algorithm, validation rules).
+                     Optional.
+
+         dedup:
+              Optional configuration for removing duplicate records.
+              Deduplication happens *after* all transformations are applied.
+
+                keys: array of strings
+                     A list of target field names used to identify duplicates.
+                     A composite key is formed from the values of these fields.
+                     Required if dedup section is present.
+                strategy: string
+                     Defines how to select which record to keep when duplicates
+                     are found. Options:
+
+                       first: (Default) Keeps the first record encountered with
+                              a given key.
+                       last: Keeps the last record encountered with a given key.
+                       min: Keeps the record with the minimum value in the field
+                            specified by strategyField.
+                       max: Keeps the record with the maximum value in the field
+                            specified by strategyField.
+
+                strategyField: string
+                     The target field name used for comparison when strategy is
+                     "min" or "max". Required for those strategies.
+
+         errorHandling:
+              Optional configuration defining how record-level processing
+              errors (from transformations or validations) are handled.
+
+                mode: string
+                     Specifies the error handling behavior. Options:
+
+                       halt: (Default) Stops the entire ETL process immediately
+                             upon the first record processing error.
+                       skip: Skips the record that caused the error and continues
+                             processing subsequent records.
+
+                logErrors: boolean
+                     If true, logs details of skipped records and the associated
+                     error when mode is "skip". Defaults to true if mode is
+                     "skip" and this is omitted, otherwise ignored.
+                errorFile: string
+                     Path to a file (typically CSV) where skipped records
+                     (original data) and their processing errors will be
+                     appended. Used only if mode is "skip". Environment
+                     variables are expanded.
+
+         fipsMode: boolean
+              If true, enables FIPS compliance mode, restricting certain
+              cryptographic algorithms (e.g., MD5 hashing). Defaults to false.
+              Can be overridden by the -fips flag.
+
+EXAMPLES
+       1. Basic CSV to JSON conversion:
+
+          # config.yaml
+          source:
+            type: csv
+            file: input.csv
+          destination:
+            type: json
+            file: output.json
+          mappings:
+            - { source: user_id, target: userId }
+            - { source: email_address, target: email }
+            - { source: value, target: amount, transform: toFloat }
+
+          etl-tool -config config.yaml
+
+       2. Reading from PostgreSQL and writing to XLSX, with filtering:
+
+          # pg_to_xlsx.yaml
+          source:
+            type: postgres
+            query: "SELECT product_id, name, category, price, created_at FROM products WHERE price > 0"
+          destination:
+            type: xlsx
+            file: /data/output/active_products.xlsx
+            sheetName: Active Products
+          filter: "category != 'discontinued'"
+          mappings:
+            - { source: product_id, target: ProductID }
+            - { source: name, target: ProductName, transform: toUpperCase }
+            - { source: price, target: Price }
+            - { source: created_at, target: CreatedDate, transform: dateConvert, params: { outputFormat: "2006-01-02" } }
+
+          etl-tool -config pg_to_xlsx.yaml -db "postgres://user:pass@host/db"
+
+       3. Transforming data and handling errors by skipping:
+
+          # transform_skip.yaml
+          source:
+            type: json
+            file: raw_data.json
+          destination:
+            type: csv
+            file: processed_data.csv
+          errorHandling:
+            mode: skip
+            logErrors: true
+            errorFile: errors.csv
+          mappings:
+            - { source: id, target: record_id, transform: mustToInt } # Error if not int
+            - { source: event_time, target: event_date, transform: mustEpochToDate } # Error if invalid epoch
+            - { source: status_code, target: status, transform: toString }
+            - { source: notes, target: notes, transform: trim }
+            - { source: email, target: email, transform: validateRegex, params: { pattern: "\\S+@\\S+\\.\\S+" } } # Error if invalid email
+
+          etl-tool -config transform_skip.yaml
+
+       4. Deduplicating records based on the latest timestamp:
+
+          # dedup.yaml
+          source:
+            type: csv
+            file: updates.csv # Assume columns: key, value, update_time (RFC3339)
+          destination:
+            type: json
+            file: latest_updates.json
+          mappings:
+            - { source: key, target: itemKey }
+            - { source: value, target: itemValue }
+            - { source: update_time, target: updateTime, transform: dateConvert } # Convert to time.Time
+          dedup:
+            keys: [itemKey]
+            strategy: max
+            strategyField: updateTime
+
+          etl-tool -config dedup.yaml
+
+       5. Dry run for testing a complex configuration:
+
+          etl-tool -config complex_config.yaml -loglevel debug -dry-run
+
+FILES
+       config/etl-config.yaml
+              The default path searched for the configuration file if the
+              -config flag is not specified.
+
+EXIT STATUS
+       0
+              Successful completion.
+       1
+              An error occurred during execution (e.g., configuration error,
+              processing error in halt mode, file I/O error). Details are
+              typically logged to standard error.
+
+BUGS
+       Report bugs to the project maintainer. Ensure FIPS mode is used
+       appropriately based on security requirements. Ensure PostgreSQL loader
+       configuration (especially custom SQL) is secure and correct.
+
+AUTHOR
+       Brian Moore
+
+COPYRIGHT
+       Refer to the LICENSE file distributed with this software.
+
+etl-tool                      April 3, 2025                    ETL-TOOL(1)

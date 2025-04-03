@@ -1,212 +1,399 @@
-ETL-TOOL(1)                      General Commands Manual                      ETL-TOOL(1)
+.\" Man page for etl-tool
+.\" Contact Brian Moore for corrections.
+.TH etl-tool 1 "April 3, 2025" "etl-tool" "User Commands"
+.SH NAME
+etl-tool \- A flexible command-line tool for Extract, Transform, Load (ETL) operations.
+.SH SYNOPSIS
+.B etl-tool
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+.B etl-tool
+is a configuration-driven utility designed to read data from various sources, apply transformations and validations, filter records, handle duplicates, and load the resulting data into various destinations. It supports common file formats and PostgreSQL databases. The entire process is controlled via a YAML configuration file, allowing for complex ETL workflows to be defined declaratively.
 
-NAME
-       etl-tool - A generic Extract-Transform-Load (ETL) utility
+The core workflow follows these steps:
+1. Extract: Read data from the configured source (file or database).
+2. Filter: Optionally remove records based on a filter expression applied to the source data.
+3. Transform: Apply a series of mapping rules to modify, validate, and restructure the data fields.
+4. Deduplicate: Optionally remove duplicate records based on specified key fields and strategy, applied after transformations.
+5. Load: Write the final processed records to the configured destination (file or database).
+.SH OPTIONS
+The following command-line options are available:
+.TP
+.B \-config \fIstring\fR
+Specifies the path to the YAML configuration file that defines the ETL process. Environment variables in the path will be expanded.
+Defaults to "config/etl-config.yaml".
+.TP
+.B \-input \fIstring\fR
+Overrides the input file path specified in the \fBsource.file\fR section of the configuration file. This option is ignored if the source type is 'postgres'. Environment variables in the path will be expanded.
+.TP
+.B \-output \fIstring\fR
+Overrides the output file path or target table specified in the \fBdestination.file\fR or \fBdestination.target_table\fR section of the configuration file. This option is ignored if the destination type is 'postgres' when overriding \fBtarget_table\fR. Environment variables in the path will be expanded.
+.TP
+.B \-db \fIstring\fR
+Specifies the PostgreSQL connection string (e.g., "postgres://user:password@host:port/database"). This overrides the \fBDB_CREDENTIALS\fR environment variable if both are set. Required if source or destination type is 'postgres' and \fBDB_CREDENTIALS\fR is not set. Environment variables in the string will be expanded. Passwords included here will be masked in log output.
+.TP
+.B \-loglevel \fIstring\fR
+Sets the logging verbosity level. Valid levels are (case-insensitive): \fBnone\fR, \fBerror\fR, \fBwarn\fR (or \fBwarning\fR), \fBinfo\fR, \fBdebug\fR. Overrides the level set in the configuration file.
+Defaults to "info".
+.TP
+.B \-dry-run
+If set, the tool performs all steps (extraction, filtering, transformation, deduplication) but skips the final load step. This is useful for testing configuration and transformations without modifying the destination. Log output will indicate the number of records that would have been written.
+Defaults to false.
+.TP
+.B \-fips
+Enables FIPS 140-2 compliance mode. This restricts certain cryptographic algorithms, notably preventing the use of MD5 hashing in transformations. Overrides the \fBfipsMode\fR setting in the configuration file.
+Defaults to false.
+.TP
+.B \-help
+Displays the help message summarizing usage, options, and environment variables, then exits.
+.SH ENVIRONMENT
+.TP
+.B DB_CREDENTIALS
+Specifies the PostgreSQL connection string. Used if the \fB-db\fR command-line flag is not provided when connecting to PostgreSQL. Environment variables within this string will also be expanded. Passwords included here will be masked in log output.
+.TP
+.B Universal Variable Expansion
+File paths and connection strings specified in the configuration file or via command-line flags can contain environment variables. The tool supports Unix-style (\fB$VAR\fR, \fB${VAR}\fR) and Windows-style (\fB%VAR%\fR) expansion. If a variable is not set in the environment, it is replaced with an empty string.
+.SH CONFIGURATION
+The ETL process is defined by a YAML configuration file, typically specified via the \fB-config\fR flag. The structure is as follows:
+.RS
+.TP
+.B logging:
+Configuration for logging output.
+.RS
+.TP
+.B level: \fIstring\fR
+Sets the logging verbosity. Options: "none", "error", "warn", "info", "debug". Defaults to "info". Can be overridden by the \fB-loglevel\fR flag.
+.RE
+.TP
+.B source:
+Defines the data source. Required.
+.RS
+.TP
+.B type: \fIstring\fR
+The type of the data source. Required. Supported types:
+.RS
+.TP
+\fBjson\fR: Reads a JSON file containing an array of objects or a single object.
+.TP
+\fBcsv\fR: Reads a Comma Separated Values file. Assumes the first row is the header.
+.TP
+\fBxlsx\fR: Reads data from a Microsoft Excel (.xlsx) file.
+.TP
+\fBxml\fR: Reads data from an XML file, expecting repeating elements representing records.
+.TP
+\fByaml\fR: Reads a YAML file containing a list of mappings (records) or a single mapping.
+.TP
+\fBpostgres\fR: Reads data by executing a SQL query against a PostgreSQL database.
+.RE
+.TP
+.B file: \fIstring\fR
+Path to the input file. Required for file-based source types (json, csv, xlsx, xml, yaml). Ignored for 'postgres'. Environment variables are expanded. Can be overridden by the \fB-input\fR flag.
+.TP
+.B query: \fIstring\fR
+The SQL query to execute. Required for 'postgres' source type. Ignored for file-based types.
+.TP
+.B delimiter: \fIstring\fR (CSV specific)
+The single character used as a field delimiter in CSV files. Use '\t' for tab. Defaults to ",".
+.TP
+.B commentChar: \fIstring\fR (CSV specific)
+A single character indicating comment lines in CSV files. Lines starting with this character are ignored. Defaults to disabled (empty string).
+.TP
+.B sheetName: \fIstring\fR (XLSX specific)
+The name of the sheet to read from in the Excel file. If specified, takes precedence over \fBsheetIndex\fR. If neither is specified, reads from the active sheet (or the first sheet if the active one cannot be determined).
+.TP
+.B sheetIndex: \fIinteger\fR (XLSX specific)
+The 0-based index of the sheet to read from. Used only if \fBsheetName\fR is not specified. Defaults to the active sheet index (usually 0).
+.TP
+.B xmlRecordTag: \fIstring\fR (XML specific)
+The local name of the XML elements that represent individual records. Defaults to "record".
+.RE
+.TP
+.B destination:
+Defines the data destination. Required.
+.RS
+.TP
+.B type: \fIstring\fR
+The type of the data destination. Required. Supported types:
+.RS
+.TP
+\fBjson\fR: Writes records as a JSON array to a file.
+.TP
+\fBcsv\fR: Writes records to a CSV file, with the first row as the header.
+.TP
+\fBxlsx\fR: Writes records to a sheet in a Microsoft Excel (.xlsx) file.
+.TP
+\fBxml\fR: Writes records as repeating elements within a root element to an XML file.
+.TP
+\fByaml\fR: Writes records as a YAML list (sequence of mappings) to a file.
+.TP
+\fBpostgres\fR: Writes records to a table in a PostgreSQL database. Uses high-performance COPY FROM by default.
+.RE
+.TP
+.B file: \fIstring\fR
+Path to the output file. Required for file-based destination types (json, csv, xlsx, xml, yaml). Ignored for 'postgres'. Environment variables are expanded. Can be overridden by the \fB-output\fR flag.
+.TP
+.B target_table: \fIstring\fR
+The name of the target table (optionally schema-qualified, e.g., "public.my_table") in the PostgreSQL database. Required for 'postgres' destination type. Ignored for file-based types. Can be overridden by the \fB-output\fR flag.
+.TP
+.B delimiter: \fIstring\fR (CSV specific)
+The single character used as a field delimiter when writing CSV files. Use '\t' for tab. Defaults to ",".
+.TP
+.B sheetName: \fIstring\fR (XLSX specific)
+The name of the sheet to write to in the Excel file. Defaults to "Sheet1". If the sheet exists, it will be overwritten.
+.TP
+.B xmlRecordTag: \fIstring\fR (XML specific)
+The local name for the XML elements representing individual records in the output. Defaults to "record".
+.TP
+.B xmlRootTag: \fIstring\fR (XML specific)
+The local name for the root XML element that contains all record elements. Defaults to "records".
+.TP
+.B loader: (Postgres specific)
+Optional configuration for customizing PostgreSQL loading behavior. If omitted or \fBmode\fR is empty, the default high-performance COPY mechanism is used.
+.RS
+.TP
+.B mode: \fIstring\fR
+Specifies the loading strategy. Currently only supports "sql" for custom command execution. Defaults to "" (uses COPY).
+.TP
+.B command: \fIstring\fR
+The SQL command (e.g., INSERT, UPDATE, function call) executed for each record when \fBmode\fR is "sql". Use placeholders like $1, $2 corresponding to the alphabetical order of the target field names from the mappings. Required if \fBmode\fR is "sql".
+.TP
+.B preload: \fIarray of strings\fR
+A list of SQL commands executed once in a single transaction *before* any records are loaded via custom SQL. Useful for setup like TRUNCATE TABLE. Optional, only used if \fBmode\fR is "sql".
+.TP
+.B postload: \fIarray of strings\fR
+A list of SQL commands executed once in a single transaction *after* all records have been loaded via custom SQL. Useful for cleanup or analysis like ANALYZE TABLE. Optional, only used if \fBmode\fR is "sql".
+.TP
+.B batch_size: \fIinteger\fR
+The number of records processed in a single transaction/batch when \fBmode\fR is "sql". A value of 0 or less disables batching (each record is processed individually). Default is 0.
+.RE
+.RE
+.TP
+.B filter: \fIstring\fR
+An optional expression (using govaluate syntax) evaluated against each *input* record *before* transformations are applied. Records for which the expression evaluates to \fBfalse\fR are skipped. Fields from the source record can be used as variables.
+Example: "status == 'active' && amount > 0"
+.TP
+.B mappings:
+An array of rules defining transformations and validations applied sequentially to each record. Required. At least one rule must be defined.
+.RS
+.TP
+.B source: \fIstring\fR
+The name of the field in the input record (or the target field from a previous mapping rule) to use as input for this rule. Required.
+.TP
+.B target: \fIstring\fR
+The name of the field in the output record where the result of this rule will be stored. Required. Must be unique across all mappings.
+.TP
+.B transform: \fIstring\fR
+The name of the transformation or validation function to apply. Optional. If omitted, the source value is assigned directly to the target. Can include simple parameters using a colon (e.g., "regexExtract:^(\\d+)", "validateRegex:[a-z]+"). Available functions:
+.RS
+.TP
+\fBtoString\fR: Converts input value to its string representation. Handles nil as "".
+.TP
+\fBtoInt\fR: Attempts to convert input value (string, float, int types) to an int64. Returns nil on failure.
+.TP
+\fBmustToInt\fR: Converts input value to an int64. Returns an error if conversion fails, triggering error handling (halt/skip).
+.TP
+\fBtoFloat\fR: Attempts to convert input value (string, float, int types) to a float64. Returns nil on failure.
+.TP
+\fBmustToFloat\fR: Converts input value to a float64. Returns an error if conversion fails.
+.TP
+\fBtoBool\fR: Attempts to convert input value (string, numeric, bool) to a boolean. Recognizes "true", "t", "yes", "y", "1" (and case variations) as true; "false", "f", "no", "n", "0", "" as false. Returns nil for unrecognized strings. Non-zero numbers are true. Nil is false.
+.TP
+\fBmustToBool\fR: Converts input value to a boolean using the same rules as \fBtoBool\fR, but returns an error for nil, empty string, or unrecognized string values.
+.TP
+\fBtoUpperCase\fR: Converts a string value to uppercase. Non-strings pass through.
+.TP
+\fBtoLowerCase\fR: Converts a string value to lowercase. Non-strings pass through.
+.TP
+\fBtrim\fR: Removes leading and trailing whitespace from a string value. Non-strings pass through.
+.TP
+\fBepochToDate\fR: Converts a numeric Unix epoch timestamp (seconds, can be float) to a date string in "YYYY-MM-DD" format (UTC). Returns original value on parse failure.
+.TP
+\fBmustEpochToDate\fR: Converts a numeric Unix epoch timestamp to "YYYY-MM-DD" format. Returns an error if conversion fails.
+.TP
+\fBdateConvert\fR: Converts a date/time string or time.Time object from one format to another. Uses parameters `inputFormat` (Go layout string, defaults to RFC3339 and common fallbacks) and `outputFormat` (Go layout string, defaults to RFC3339). Returns original value on parse failure.
+.TP
+\fBmustDateConvert\fR: Converts a date/time string or time.Time object using `inputFormat` and `outputFormat`. Returns an error if parsing fails.
+.TP
+\fBmultiDateConvert\fR: Attempts to parse a date string using multiple potential input formats specified in the `formats` parameter (an array of Go layout strings). Returns the formatted date (using `outputFormat`) on the first successful parse, or the original value if none match. Requires `formats` and `outputFormat` params.
+.TP
+\fBcalculateAge\fR: Calculates the age in *days* between a Unix epoch timestamp (seconds) and the current time (UTC). Returns an integer number of days, or nil on parse failure. Returns 0 for future dates.
+.TP
+\fBreplaceAll\fR: Replaces all occurrences of a substring within a string. Requires `old` and `new` string parameters. Non-strings pass through.
+.TP
+\fBsubstring\fR: Extracts a portion of a string. Requires `start` (0-based index) and `length` integer parameters. Handles multi-byte characters correctly. Returns original value if input is not a string or params are invalid.
+.TP
+\fBregexExtract\fR: Extracts the first capture group from a string using a regular expression. Requires a `pattern` string parameter (or shorthand: "regexExtract:pattern"). Returns the captured string or nil if no match or capture group exists, or on pattern error.
+.TP
+\fBhash\fR: Generates a cryptographic hash (hex string) of the concatenated string representations of values from specified fields. Requires `algorithm` (string: "sha256", "sha512", "md5") and `fields` (array of strings) parameters. Fields are sorted alphabetically before concatenation. MD5 is disallowed if FIPS mode is enabled.
+.TP
+\fBcoalesce\fR: Returns the first non-nil value from a list of fields specified in the `fields` parameter (an array of strings). If the value is a string, it must also be non-empty. Returns nil if no suitable value is found.
+.TP
+\fBbranch\fR: Evaluates conditions sequentially and returns a corresponding value. Requires a `branches` parameter, which is an array of maps. Each map must contain a `condition` (string, govaluate expression) and a `value` (any type). Returns the `value` from the first branch whose `condition` evaluates to true. If no condition matches, returns the original input value passed to the transform. Uses `inputValue` to refer to the input value in conditions, and other record fields by name.
+.TP
+\fBvalidateRequired\fR: Returns an error if the input value is nil, an empty string, or a whitespace-only string. Otherwise, returns the original value.
+.TP
+\fBvalidateRegex\fR: Returns an error if the input string value does not match the provided regular expression pattern. Requires a `pattern` string parameter (or shorthand: "validateRegex:pattern"). Non-string values pass validation.
+.TP
+\fBvalidateNumericRange\fR: Returns an error if the input numeric value is outside the specified range. Requires at least one of `min` or `max` numeric parameters. Non-numeric values pass validation.
+.TP
+\fBvalidateAllowedValues\fR: Returns an error if the input value is not present in the specified list. Requires a `values` array parameter. Comparison uses type-aware logic (e.g., int 10 matches string "10").
+.RE
+.TP
+.B params: \fImap\fR
+A map providing additional configuration for the transformation/validation function specified in \fBtransform\fR. Structure depends on the function (e.g., date formats, regex pattern, hashing algorithm, validation rules). Optional.
+.RE
+.TP
+.B dedup:
+Optional configuration for removing duplicate records. Deduplication happens *after* all transformations are applied.
+.RS
+.TP
+.B keys: \fIarray of strings\fR
+A list of target field names used to identify duplicates. A composite key is formed from the values of these fields. Required if \fBdedup\fR section is present.
+.TP
+.B strategy: \fIstring\fR
+Defines how to select which record to keep when duplicates are found. Options:
+.RS
+.TP
+\fBfirst\fR: (Default) Keeps the first record encountered with a given key.
+.TP
+\fBlast\fR: Keeps the last record encountered with a given key.
+.TP
+\fBmin\fR: Keeps the record with the minimum value in the field specified by \fBstrategyField\fR.
+.TP
+\fBmax\fR: Keeps the record with the maximum value in the field specified by \fBstrategyField\fR.
+.RE
+.TP
+.B strategyField: \fIstring\fR
+The target field name used for comparison when \fBstrategy\fR is "min" or "max". Required for those strategies.
+.RE
+.TP
+.B errorHandling:
+Optional configuration defining how record-level processing errors (from transformations or validations) are handled.
+.RS
+.TP
+.B mode: \fIstring\fR
+Specifies the error handling behavior. Options:
+.RS
+.TP
+\fBhalt\fR: (Default) Stops the entire ETL process immediately upon the first record processing error.
+.TP
+\fBskip\fR: Skips the record that caused the error and continues processing subsequent records.
+.RE
+.TP
+.B logErrors: \fIboolean\fR
+If true, logs details of skipped records and the associated error when \fBmode\fR is "skip". Defaults to true if \fBmode\fR is "skip" and this is omitted, otherwise ignored.
+.TP
+.B errorFile: \fIstring\fR
+Path to a file (typically CSV) where skipped records (original data) and their processing errors will be appended. Used only if \fBmode\fR is "skip". Environment variables are expanded.
+.RE
+.TP
+.B fipsMode: \fIboolean\fR
+If true, enables FIPS compliance mode, restricting certain cryptographic algorithms (e.g., MD5 hashing). Defaults to false. Can be overridden by the \fB-fips\fR flag.
+.RE
+.SH EXAMPLES
+1. Basic CSV to JSON conversion:
+.RS
+.nf
+# config.yaml
+source:
+  type: csv
+  file: input.csv
+destination:
+  type: json
+  file: output.json
+mappings:
+  - { source: user_id, target: userId }
+  - { source: email_address, target: email }
+  - { source: value, target: amount, transform: toFloat }
+.fi
+.B etl-tool -config config.yaml
+.RE
 
-SYNOPSIS
-       etl-tool [OPTIONS]
+2. Reading from PostgreSQL and writing to XLSX, with filtering:
+.RS
+.nf
+# pg_to_xlsx.yaml
+source:
+  type: postgres
+  query: "SELECT product_id, name, category, price, created_at FROM products WHERE price > 0"
+destination:
+  type: xlsx
+  file: /data/output/active_products.xlsx
+  sheetName: Active Products
+filter: "category != 'discontinued'"
+mappings:
+  - { source: product_id, target: ProductID }
+  - { source: name, target: ProductName, transform: toUpperCase }
+  - { source: price, target: Price }
+  - { source: created_at, target: CreatedDate, transform: dateConvert, params: { outputFormat: "2006-01-02" } }
+.fi
+.B etl-tool -config pg_to_xlsx.yaml -db "postgres://user:pass@host/db"
+.RE
 
-DESCRIPTION
-       etl-tool is a command-line utility designed to extract data from various
-       sources, apply configurable transformations, deduplicate the records, and
-       load the processed data into a destination. It supports input formats such as
-       JSON, CSV, XLSX, XML, and PostgreSQL queries, and can output to PostgreSQL,
-       CSV, XLSX, XML, or JSON.
+3. Transforming data and handling errors by skipping:
+.RS
+.nf
+# transform_skip.yaml
+source:
+  type: json
+  file: raw_data.json
+destination:
+  type: csv
+  file: processed_data.csv
+errorHandling:
+  mode: skip
+  logErrors: true
+  errorFile: errors.csv
+mappings:
+  - { source: id, target: record_id, transform: mustToInt } # Error if not int
+  - { source: event_time, target: event_date, transform: mustEpochToDate } # Error if invalid epoch
+  - { source: status_code, target: status, transform: toString }
+  - { source: notes, target: notes, transform: trim }
+  - { source: email, target: email, transform: validateRegex, params: { pattern: "\\\\S+@\\\\S+\\\\.\\\\S+" } } # Error if invalid email
+.fi
+.B etl-tool -config transform_skip.yaml
+.RE
 
-OPTIONS
-       -config file
-              Specify the YAML configuration file to use (default:
-              "config/etl-config.yaml").
+4. Deduplicating records based on the latest timestamp:
+.RS
+.nf
+# dedup.yaml
+source:
+  type: csv
+  file: updates.csv # Assume columns: key, value, update_time (RFC3339)
+destination:
+  type: json
+  file: latest_updates.json
+mappings:
+  - { source: key, target: itemKey }
+  - { source: value, target: itemValue }
+  - { source: update_time, target: updateTime, transform: dateConvert } # Convert to time.Time
+dedup:
+  keys: [itemKey]
+  strategy: max
+  strategyField: updateTime
+.fi
+.B etl-tool -config dedup.yaml
+.RE
 
-       -input file
-              (Optional) Override the input file path specified in the configuration.
-
-       -db connection_string
-              PostgreSQL connection string. If not provided, etl-tool will
-              use the DB_CREDENTIALS environment variable.
-
-       -loglevel level
-              Set the logging level. Supported values are "none", "info", or
-              "debug" (default: "info").
-
-CONFIGURATION FILE
-       The configuration file is written in YAML and controls the behavior of
-       etl-tool. It is composed of the following main sections:
-
-       source:
-              Defines the input source.
-       destination:
-              Defines the output destination.
-       mappings:
-              An ordered list of transformation rules.
-       dedup:
-              (Optional) Configuration for deduplication.
-       loader:
-              (Optional) Additional loader settings for PostgreSQL destinations.
-
-SOURCE CONFIGURATION
-       The "source" section specifies how etl-tool obtains the input data. It must
-       include the following keys:
-
-       type:   (Required) The type of the input source. Valid values are:
-               • "json"      – A JSON file.
-               • "csv"       – A CSV file.
-               • "xlsx"      – An Excel (XLSX) file.
-               • "xml"       – An XML file.
-               • "postgres"  – Data obtained via a PostgreSQL query.
-
-       file:   (Required for file-based sources) The path to the input file.
-       query:  (Required for type "postgres") The SQL query to execute on the
-               PostgreSQL database.
-
-DESTINATION CONFIGURATION
-       The "destination" section specifies where etl-tool should load the processed
-       data. It supports the following keys:
-
-       type:          (Required) The type of destination. Valid values are:
-                      • "postgres"  – A PostgreSQL database table.
-                      • "csv"       – A CSV file.
-                      • "xlsx"      – An Excel (XLSX) file.
-                      • "xml"       – An XML file.
-                      • "json"      – A JSON file.
-
-       target_table:  (Required for "postgres") The name of the target database table.
-       file:          (Required for file-based destinations) The path to the output file.
-       loader:        (Optional, for PostgreSQL destinations) A nested configuration
-                      that provides advanced loading options:
-                      • mode:       (Optional) Loader mode. If set to "sql", a custom SQL
-                                    command is used.
-                      • command:    (Required if mode is "sql") The custom SQL command
-                                    to execute for each record or batch.
-                      • preload:    (Optional) A list of SQL commands to run before loading.
-                      • postload:   (Optional) A list of SQL commands to run after loading.
-                      • batch_size: (Optional) The number of records per batch when using
-                                    custom SQL.
-
-MAPPING RULES
-       The "mappings" section is an array of transformation rules that determine
-       how each input record is processed and transformed. Each mapping rule has
-       the following keys:
-
-       source:    (Required) The field name in the input record.
-       target:    (Required) The field name in the output record.
-       transform: (Optional) The transformation function to apply. It is specified
-                  as "function_name:parameters" (the parameters part is optional and
-                  may be provided via the params map as well).
-       params:    (Optional) A map of additional parameters needed by the transform.
-                  For example:
-                  - For regexExtract, include a "pattern" key.
-                  - For dateConvert, include "inputFormat" and "outputFormat".
-                  - For substring, include "start" and "length".
-
-DEDUPLICATION
-       The "dedup" section is optional and provides deduplication based on a
-       composite key. It supports:
-
-       keys:      (Required) An array of field names. The values from these fields
-                  are concatenated to form a composite key; records with duplicate
-                  keys are merged (only the first occurrence is kept).
-
-TRANSFORMATION FUNCTIONS
-       etl-tool provides a variety of built-in transformation functions that can be
-       applied via the mapping rules. Supported functions include:
-
-       • epochToDate
-              Converts an epoch timestamp (number or string) into a formatted date
-              (format "2006-01-02").
-
-       • calculateAge
-              Computes the number of days elapsed since the given epoch timestamp.
-
-       • regexExtract
-              Uses a regular expression to extract a substring. Requires a "pattern"
-              parameter in params or appended to the transform string.
-
-       • trim
-              Removes leading and trailing whitespace from a string.
-
-       • toUpperCase
-              Converts a string to all uppercase letters.
-
-       • toLowerCase
-              Converts a string to all lowercase letters.
-
-       • branch
-              Evaluates dynamic conditions (using the govaluate library) to select
-              a branch value.
-
-       • dateConvert
-              Converts date strings between different formats. Supports parameters
-              "inputFormat" and "outputFormat". Falls back to RFC3339 if needed.
-
-       • toInt
-              Converts a value to an integer; logs a warning on conversion failure.
-
-       • toFloat
-              Converts a value to a floating-point number; logs a warning on conversion
-              failure.
-
-       • toBool
-              Converts a value to a boolean. Accepts common true/false string
-              representations.
-
-       • toString
-              Converts a value to a string.
-
-       • replaceAll
-              Replaces all occurrences of a substring with a new substring.
-              Requires "old" and "new" parameters.
-
-       • substring
-              Extracts a substring from a string based on "start" and "length"
-              parameters.
-
-       • coalesce
-              Returns the first non-empty value among a list of fields.
-
-       • multiDateConvert
-              Attempts to convert a date string using multiple date formats. Requires a
-              list of "formats" and optionally an "outputFormat".
-
-LOGGING
-       etl-tool supports three levels of logging output:
-
-       • none  – No logging.
-       • info  – Basic informational messages.
-       • debug – Detailed debug messages.
-
-       The log level is set using the -loglevel option. Debug logging provides
-       extensive details about the processing steps.
-
-ENVIRONMENT VARIABLES
-       DB_CREDENTIALS
-              If the -db option is not specified, etl-tool will use the DB_CREDENTIALS
-              environment variable to obtain the PostgreSQL connection string.
-
-EXAMPLES
-       1. Basic usage with a configuration file:
-              etl-tool -config config/etl-config.yaml
-
-       2. Overriding the input file:
-              etl-tool -config config/etl-config.yaml -input /path/to/new_input.csv
-
-       3. Providing the PostgreSQL connection string via command-line:
-              etl-tool -config config/etl-config.yaml -db "postgres://user:password@host:port/dbname"
-
-FILES
-       /path/to/etl-config.yaml
-              A sample YAML configuration file for etl-tool.
-
-SEE ALSO
-       pgx(7), govaluate(7), excelize(7), yaml(7)
-
-AUTHORS
-       Developed as part of the etl-tool project.
-
-REPORTING BUGS
-       Please report bugs to the project maintainers.
-
-COPYRIGHT
-       MIT License
-
-
+5. Dry run for testing a complex configuration:
+.RS
+.B etl-tool -config complex_config.yaml -loglevel debug -dry-run
+.RE
+.SH FILES
+.TP
+config/etl-config.yaml
+The default path searched for the configuration file if the \fB-config\fR flag is not specified.
+.SH EXIT STATUS
+.TP
+.B 0
+Successful completion.
+.TP
+.B 1
+An error occurred during execution (e.g., configuration error, processing error in halt mode, file I/O error). Details are typically logged to standard error.
+.SH BUGS
+Report bugs to the project maintainer. Ensure FIPS mode is used appropriately based on security requirements. Ensure PostgreSQL loader configuration (especially custom SQL) is secure and correct.
+.SH AUTHOR
+Brian Moore
+.SH COPYRIGHT
+Refer to the LICENSE file distributed with this software.
