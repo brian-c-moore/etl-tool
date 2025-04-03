@@ -2,20 +2,20 @@
 
 ## Overview
 
-etl-tool is a command-line application for performing Extract, Transform, and Load (ETL) operations. It reads data from various sources, applies transformations based on a configuration file, and writes the results to various destinations.
+etl-tool is a command-line application for performing Extract, Transform, and Load (ETL) operations. It reads data from various sources, applies transformations based on a configuration file, and writes the results to various destinations. It's designed to be flexible and driven by a declarative YAML configuration.
 
 ## Features
 
 *   Configuration-driven ETL processes using YAML.
 *   Supports multiple data sources: CSV, JSON, XLSX, XML, YAML, PostgreSQL.
 *   Supports multiple data destinations: CSV, JSON, XLSX, XML, YAML, PostgreSQL.
-*   Data filtering capabilities using expressions.
-*   Record transformation and validation rules.
-*   Data deduplication based on specified keys and strategies.
-*   Configurable error handling (halt or skip).
-*   Optional FIPS compliance mode.
-*   Dry-run mode to preview actions without writing data.
-*   Environment variable expansion in configuration paths and connection strings.
+*   Data filtering capabilities using expressions applied before transformations.
+*   Extensive record transformation and validation rules (type conversion, string manipulation, date/time handling, regex, hashing, required fields, numeric ranges, allowed values).
+*   Data deduplication based on specified keys and strategies (first, last, min, max), applied after transformations.
+*   Configurable error handling (halt or skip) with optional error logging to a file.
+*   Optional FIPS compliance mode (restricts certain crypto algorithms like MD5 hashing).
+*   Dry-run mode to preview actions without writing data to the destination.
+*   Environment variable expansion (Unix-style `$VAR`, `${VAR}` and Windows-style `%VAR%`) in configuration file paths and connection strings.
 
 ## Usage
 
