@@ -36,7 +36,6 @@ func LoadConfig(filename string) (*ETLConfig, error) {
 }
 
 // applyDefaults sets default values for various configuration sections.
-// Ensure this function definition exists.
 func applyDefaults(cfg *ETLConfig) {
 	// Logging level default
 	if cfg.Logging.Level == "" {
@@ -64,12 +63,23 @@ func applyDefaults(cfg *ETLConfig) {
 		cfg.Dedup.Strategy = DefaultDedupStrategy
 	}
 
+	// Flattening Defaults ---
+	if cfg.Flattening != nil {
+		if cfg.Flattening.IncludeParent == nil {
+			trueVal := true
+			cfg.Flattening.IncludeParent = &trueVal // Default to true
+		}
+		if cfg.Flattening.ErrorOnNonList == nil {
+			falseVal := false
+			cfg.Flattening.ErrorOnNonList = &falseVal // Default to false
+		}
+	}
+
 	// Apply format-specific defaults
 	applyFormatDefaults(&cfg.Source, &cfg.Destination)
 }
 
 // applyFormatDefaults sets defaults for format-specific options in source and destination.
-// Ensure this function definition exists.
 func applyFormatDefaults(src *SourceConfig, dest *DestinationConfig) {
 	// CSV Source Defaults
 	if src.Type == SourceTypeCSV {

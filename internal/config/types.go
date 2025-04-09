@@ -1,6 +1,6 @@
 package config
 
-// Define constants for configuration keys, types, modes etc. for better maintainability.
+// Define constants for configuration keys, types, modes etc.
 const (
 	SourceTypeJSON     = "json"
 	SourceTypeCSV      = "csv"
@@ -49,9 +49,14 @@ type ETLConfig struct {
 	Filter string `yaml:"filter,omitempty"`
 	// Mappings define the transformation and validation rules applied to the data.
 	Mappings []MappingRule `yaml:"mappings"`
-	// Dedup specifies optional deduplication settings based on key fields, applied *after* transformations.
+	// --- ADDED ---
+	// Flattening specifies optional configuration to expand records based on a list/slice field.
+	// This occurs *after* mapping/transformation and *before* deduplication.
+	Flattening *FlatteningConfig `yaml:"flattening,omitempty"`
+	// --- END ADDED ---
+	// Dedup specifies optional deduplication settings based on key fields, applied *after* transformations (and flattening).
 	Dedup *DedupConfig `yaml:"dedup,omitempty"`
-	// ErrorHandling defines how record-level processing errors (transformations, validations) are handled.
+	// ErrorHandling defines how record-level processing errors (transformations, validations, flattening) are handled.
 	ErrorHandling *ErrorHandlingConfig `yaml:"errorHandling,omitempty"`
 	// FIPSMode indicates if FIPS compliance restrictions should be enforced (e.g., allowed crypto algorithms).
 	// Can be overridden by the -fips command-line flag.
@@ -136,8 +141,31 @@ type MappingRule struct {
 	Params map[string]interface{} `yaml:"params,omitempty"`
 }
 
+// FlatteningConfig defines settings for expanding records based on a list/slice field.
+type FlatteningConfig struct {
+	// SourceField specifies the field containing the list/slice to flatten. Required.
+	// Supports dot-notation for nested fields (e.g., "details.addresses").
+	SourceField string `yaml:"sourceField"`
+	// TargetField specifies the name of the field in the *output* record where each
+	// individual item from the source list will be placed. Required.
+	TargetField string `yaml:"targetField"`
+	// IncludeParent, if true (default), copies all top-level fields from the original
+	// (parent) record into each flattened record. If false, only the TargetField is included.
+	IncludeParent *bool `yaml:"includeParent,omitempty"` // Default: true
+	// ErrorOnNonList, if true, causes processing to halt or skip (based on global ErrorHandling)
+	// if the SourceField does not exist, is nil, or is not a list/slice type.
+	// If false (default), such records are silently skipped during flattening.
+	ErrorOnNonList *bool `yaml:"errorOnNonList,omitempty"` // Default: false
+	// ConditionField is an optional field (dot-notation supported) in the parent record
+	// whose value must match ConditionValue for flattening to occur for that record.
+	ConditionField string `yaml:"conditionField,omitempty"`
+	// ConditionValue is the required value for the ConditionField to enable flattening.
+	// Required if ConditionField is set. Comparison is string-based.
+	ConditionValue string `yaml:"conditionValue,omitempty"`
+}
+
 // DedupConfig defines settings for removing duplicate records based on specified key fields.
-// Deduplication happens *after* all transformations have been applied.
+// Deduplication happens *after* all transformations and flattening have been applied.
 type DedupConfig struct {
 	// Keys is a list of target field names used to construct a composite key for identifying duplicates. Required.
 	Keys []string `yaml:"keys"`

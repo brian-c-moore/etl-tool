@@ -1,0 +1,1853 @@
+?   	etl-tool/cmd/etl-tool	[no test files]
+=== RUN   TestAppRunner_Usage
+--- PASS: TestAppRunner_Usage (0.00s)
+=== RUN   TestAppRunner_Run_Help
+--- PASS: TestAppRunner_Run_Help (0.00s)
+=== RUN   TestAppRunner_Run_NoArgs
+--- PASS: TestAppRunner_Run_NoArgs (0.00s)
+=== RUN   TestAppRunner_Run_InvalidFlag
+--- PASS: TestAppRunner_Run_InvalidFlag (0.00s)
+=== RUN   TestAppRunner_Run_ConfigNotFound
+--- PASS: TestAppRunner_Run_ConfigNotFound (0.00s)
+=== RUN   TestAppRunner_Run_InvalidConfigContent
+=== RUN   TestAppRunner_Run_InvalidConfigContent/InvalidYAML
+=== RUN   TestAppRunner_Run_InvalidConfigContent/InvalidSchema
+--- PASS: TestAppRunner_Run_InvalidConfigContent (0.00s)
+    --- PASS: TestAppRunner_Run_InvalidConfigContent/InvalidYAML (0.00s)
+    --- PASS: TestAppRunner_Run_InvalidConfigContent/InvalidSchema (0.00s)
+=== RUN   TestAppRunner_Run_HappyPath_Minimal
+--- PASS: TestAppRunner_Run_HappyPath_Minimal (0.00s)
+=== RUN   TestAppRunner_Run_DryRun
+--- PASS: TestAppRunner_Run_DryRun (0.00s)
+=== RUN   TestAppRunner_Run_FlagOverrides
+--- PASS: TestAppRunner_Run_FlagOverrides (0.00s)
+=== RUN   TestAppRunner_Run_EnvVarExpansion
+--- PASS: TestAppRunner_Run_EnvVarExpansion (0.00s)
+=== RUN   TestAppRunner_Run_ErrorHandling
+=== RUN   TestAppRunner_Run_ErrorHandling/HaltMode
+=== RUN   TestAppRunner_Run_ErrorHandling/SkipModeWithErrorFile
+--- PASS: TestAppRunner_Run_ErrorHandling (0.00s)
+    --- PASS: TestAppRunner_Run_ErrorHandling/HaltMode (0.00s)
+    --- PASS: TestAppRunner_Run_ErrorHandling/SkipModeWithErrorFile (0.00s)
+=== RUN   TestAppRunner_Run_Filtering
+--- PASS: TestAppRunner_Run_Filtering (0.00s)
+=== RUN   TestAppRunner_Run_ComponentErrors
+=== RUN   TestAppRunner_Run_ComponentErrors/InputReadErr
+=== RUN   TestAppRunner_Run_ComponentErrors/OutputWriteErr
+=== RUN   TestAppRunner_Run_ComponentErrors/OutputCloseErr
+=== RUN   TestAppRunner_Run_ComponentErrors/ErrWriterFactoryErr
+=== RUN   TestAppRunner_Run_ComponentErrors/MkdirAllErr
+--- PASS: TestAppRunner_Run_ComponentErrors (0.00s)
+    --- PASS: TestAppRunner_Run_ComponentErrors/InputReadErr (0.00s)
+    --- PASS: TestAppRunner_Run_ComponentErrors/OutputWriteErr (0.00s)
+    --- PASS: TestAppRunner_Run_ComponentErrors/OutputCloseErr (0.00s)
+    --- PASS: TestAppRunner_Run_ComponentErrors/ErrWriterFactoryErr (0.00s)
+    --- PASS: TestAppRunner_Run_ComponentErrors/MkdirAllErr (0.00s)
+=== RUN   Test_anyFlagsSet
+=== RUN   Test_anyFlagsSet/no
+=== RUN   Test_anyFlagsSet/one
+=== RUN   Test_anyFlagsSet/multi
+=== RUN   Test_anyFlagsSet/help
+--- PASS: Test_anyFlagsSet (0.00s)
+    --- PASS: Test_anyFlagsSet/no (0.00s)
+    --- PASS: Test_anyFlagsSet/one (0.00s)
+    --- PASS: Test_anyFlagsSet/multi (0.00s)
+    --- PASS: Test_anyFlagsSet/help (0.00s)
+=== RUN   Test_isFlagSet
+=== RUN   Test_isFlagSet/set
+=== RUN   Test_isFlagSet/not
+=== RUN   Test_isFlagSet/bool_set
+=== RUN   Test_isFlagSet/bool_not
+=== RUN   Test_isFlagSet/no
+=== RUN   Test_isFlagSet/help
+--- PASS: Test_isFlagSet (0.00s)
+    --- PASS: Test_isFlagSet/set (0.00s)
+    --- PASS: Test_isFlagSet/not (0.00s)
+    --- PASS: Test_isFlagSet/bool_set (0.00s)
+    --- PASS: Test_isFlagSet/bool_not (0.00s)
+    --- PASS: Test_isFlagSet/no (0.00s)
+    --- PASS: Test_isFlagSet/help (0.00s)
+PASS
+ok  	etl-tool/internal/app	0.380s
+=== RUN   TestLoadConfig_Success
+--- PASS: TestLoadConfig_Success (0.00s)
+=== RUN   TestLoadConfig_Defaults
+--- PASS: TestLoadConfig_Defaults (0.00s)
+=== RUN   TestLoadConfig_FileNotFound
+--- PASS: TestLoadConfig_FileNotFound (0.00s)
+=== RUN   TestLoadConfig_InvalidYAML
+--- PASS: TestLoadConfig_InvalidYAML (0.00s)
+=== RUN   TestLoadConfig_InvalidConfig
+--- PASS: TestLoadConfig_InvalidConfig (0.00s)
+=== RUN   TestValidateConfig_ValidCases
+=== RUN   TestValidateConfig_ValidCases/Minimal_valid_CSV_to_JSON
+=== RUN   TestValidateConfig_ValidCases/Postgres_to_Postgres_with_Loader
+=== RUN   TestValidateConfig_ValidCases/XLSX_Source_with_Sheet_Name
+=== RUN   TestValidateConfig_ValidCases/XLSX_Source_with_Sheet_Index
+=== RUN   TestValidateConfig_ValidCases/XML_Source/Dest_with_Tags
+=== RUN   TestValidateConfig_ValidCases/YAML_Source/Dest
+=== RUN   TestValidateConfig_ValidCases/Filter_expression
+=== RUN   TestValidateConfig_ValidCases/Deduplication_Min_Strategy
+=== RUN   TestValidateConfig_ValidCases/Error_Handling_Skip_No_Log
+=== RUN   TestValidateConfig_ValidCases/Valid_Mapping_Transforms
+--- PASS: TestValidateConfig_ValidCases (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/Minimal_valid_CSV_to_JSON (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/Postgres_to_Postgres_with_Loader (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/XLSX_Source_with_Sheet_Name (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/XLSX_Source_with_Sheet_Index (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/XML_Source/Dest_with_Tags (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/YAML_Source/Dest (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/Filter_expression (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/Deduplication_Min_Strategy (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/Error_Handling_Skip_No_Log (0.00s)
+    --- PASS: TestValidateConfig_ValidCases/Valid_Mapping_Transforms (0.00s)
+=== RUN   TestValidateConfig_InvalidCases
+=== RUN   TestValidateConfig_InvalidCases/Invalid_log_level
+=== RUN   TestValidateConfig_InvalidCases/Missing_source_type
+=== RUN   TestValidateConfig_InvalidCases/Invalid_source_type
+=== RUN   TestValidateConfig_InvalidCases/Missing_source_file_for_file_type
+=== RUN   TestValidateConfig_InvalidCases/Missing_source_query_for_postgres_type
+=== RUN   TestValidateConfig_InvalidCases/Invalid_CSV_delimiter
+=== RUN   TestValidateConfig_InvalidCases/Invalid_XLSX_sheet_index
+=== RUN   TestValidateConfig_InvalidCases/Invalid_XLSX_sheet_name_chars
+=== RUN   TestValidateConfig_InvalidCases/Invalid_XLSX_sheet_name_length
+=== RUN   TestValidateConfig_InvalidCases/Invalid_XML_record_tag
+=== RUN   TestValidateConfig_InvalidCases/Missing_destination_type
+=== RUN   TestValidateConfig_InvalidCases/Missing_destination_file_for_file_type
+=== RUN   TestValidateConfig_InvalidCases/Missing_target_table_for_postgres
+=== RUN   TestValidateConfig_InvalidCases/Invalid_postgres_loader_mode
+=== RUN   TestValidateConfig_InvalidCases/Missing_command_for_sql_loader_mode
+=== RUN   TestValidateConfig_InvalidCases/Invalid_XML_root_tag
+=== RUN   TestValidateConfig_InvalidCases/Invalid_filter_syntax
+=== RUN   TestValidateConfig_InvalidCases/Missing_mappings
+=== RUN   TestValidateConfig_InvalidCases/Mapping_missing_source
+=== RUN   TestValidateConfig_InvalidCases/Mapping_missing_target
+=== RUN   TestValidateConfig_InvalidCases/Mapping_duplicate_target
+=== RUN   TestValidateConfig_InvalidCases/Mapping_unknown_transform
+=== RUN   TestValidateConfig_InvalidCases/Mapping_missing_required_param_(regex)
+=== RUN   TestValidateConfig_InvalidCases/Mapping_invalid_param_type_(regex_pattern)
+=== RUN   TestValidateConfig_InvalidCases/Mapping_invalid_regex_syntax
+=== RUN   TestValidateConfig_InvalidCases/Mapping_numeric_range_min_>_max
+=== RUN   TestValidateConfig_InvalidCases/Mapping_FIPS_hash_MD5
+=== RUN   TestValidateConfig_InvalidCases/Dedup_missing_keys
+=== RUN   TestValidateConfig_InvalidCases/Dedup_invalid_strategy
+=== RUN   TestValidateConfig_InvalidCases/Dedup_min_strategy_missing_field
+=== RUN   TestValidateConfig_InvalidCases/Invalid_error_handling_mode
+=== RUN   TestValidateConfig_InvalidCases/Error_file_is_directory
+--- PASS: TestValidateConfig_InvalidCases (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_log_level (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Missing_source_type (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_source_type (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Missing_source_file_for_file_type (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Missing_source_query_for_postgres_type (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_CSV_delimiter (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_XLSX_sheet_index (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_XLSX_sheet_name_chars (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_XLSX_sheet_name_length (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_XML_record_tag (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Missing_destination_type (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Missing_destination_file_for_file_type (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Missing_target_table_for_postgres (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_postgres_loader_mode (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Missing_command_for_sql_loader_mode (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_XML_root_tag (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_filter_syntax (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Missing_mappings (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_missing_source (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_missing_target (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_duplicate_target (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_unknown_transform (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_missing_required_param_(regex) (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_invalid_param_type_(regex_pattern) (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_invalid_regex_syntax (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_numeric_range_min_>_max (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Mapping_FIPS_hash_MD5 (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Dedup_missing_keys (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Dedup_invalid_strategy (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Dedup_min_strategy_missing_field (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Invalid_error_handling_mode (0.00s)
+    --- PASS: TestValidateConfig_InvalidCases/Error_file_is_directory (0.00s)
+=== RUN   TestIsValidEnumValue
+--- PASS: TestIsValidEnumValue (0.00s)
+=== RUN   TestValidateSingleRuneString
+=== RUN   TestValidateSingleRuneString/valid_single_ascii
+=== RUN   TestValidateSingleRuneString/valid_single_multibyte
+=== RUN   TestValidateSingleRuneString/valid_tab
+=== RUN   TestValidateSingleRuneString/empty_allowed
+=== RUN   TestValidateSingleRuneString/empty_not_allowed
+=== RUN   TestValidateSingleRuneString/multiple_ascii
+=== RUN   TestValidateSingleRuneString/multiple_multibyte
+--- PASS: TestValidateSingleRuneString (0.00s)
+    --- PASS: TestValidateSingleRuneString/valid_single_ascii (0.00s)
+    --- PASS: TestValidateSingleRuneString/valid_single_multibyte (0.00s)
+    --- PASS: TestValidateSingleRuneString/valid_tab (0.00s)
+    --- PASS: TestValidateSingleRuneString/empty_allowed (0.00s)
+    --- PASS: TestValidateSingleRuneString/empty_not_allowed (0.00s)
+    --- PASS: TestValidateSingleRuneString/multiple_ascii (0.00s)
+    --- PASS: TestValidateSingleRuneString/multiple_multibyte (0.00s)
+=== RUN   TestValidateSheetName
+=== RUN   TestValidateSheetName/valid_name
+=== RUN   TestValidateSheetName/valid_name_with_spaces
+=== RUN   TestValidateSheetName/valid_name_max_length
+=== RUN   TestValidateSheetName/invalid_char_*
+=== RUN   TestValidateSheetName/invalid_char_/
+=== RUN   TestValidateSheetName/invalid_char_\
+=== RUN   TestValidateSheetName/invalid_char_?
+=== RUN   TestValidateSheetName/invalid_char_[
+=== RUN   TestValidateSheetName/invalid_char_]
+=== RUN   TestValidateSheetName/invalid_char_:
+=== RUN   TestValidateSheetName/invalid_start_quote
+=== RUN   TestValidateSheetName/invalid_end_quote
+=== RUN   TestValidateSheetName/invalid_too_long
+=== RUN   TestValidateSheetName/invalid_empty
+--- PASS: TestValidateSheetName (0.00s)
+    --- PASS: TestValidateSheetName/valid_name (0.00s)
+    --- PASS: TestValidateSheetName/valid_name_with_spaces (0.00s)
+    --- PASS: TestValidateSheetName/valid_name_max_length (0.00s)
+    --- PASS: TestValidateSheetName/invalid_char_* (0.00s)
+    --- PASS: TestValidateSheetName/invalid_char_/ (0.00s)
+    --- PASS: TestValidateSheetName/invalid_char_\ (0.00s)
+    --- PASS: TestValidateSheetName/invalid_char_? (0.00s)
+    --- PASS: TestValidateSheetName/invalid_char_[ (0.00s)
+    --- PASS: TestValidateSheetName/invalid_char_] (0.00s)
+    --- PASS: TestValidateSheetName/invalid_char_: (0.00s)
+    --- PASS: TestValidateSheetName/invalid_start_quote (0.00s)
+    --- PASS: TestValidateSheetName/invalid_end_quote (0.00s)
+    --- PASS: TestValidateSheetName/invalid_too_long (0.00s)
+    --- PASS: TestValidateSheetName/invalid_empty (0.00s)
+=== RUN   TestValidateXMLName
+=== RUN   TestValidateXMLName/valid_simple
+=== RUN   TestValidateXMLName/valid_with_numbers
+=== RUN   TestValidateXMLName/valid_with_underscore
+=== RUN   TestValidateXMLName/valid_with_hyphen
+=== RUN   TestValidateXMLName/valid_with_dot
+=== RUN   TestValidateXMLName/invalid_empty
+=== RUN   TestValidateXMLName/invalid_starts_with_number
+=== RUN   TestValidateXMLName/invalid_starts_with_hyphen
+=== RUN   TestValidateXMLName/invalid_starts_with_dot
+=== RUN   TestValidateXMLName/invalid_with_space
+=== RUN   TestValidateXMLName/invalid_with_?
+=== RUN   TestValidateXMLName/invalid_with_@
+=== RUN   TestValidateXMLName/invalid_starts_with_xml
+=== RUN   TestValidateXMLName/invalid_starts_with_XML
+=== RUN   TestValidateXMLName/invalid_starts_with_Xml
+--- PASS: TestValidateXMLName (0.00s)
+    --- PASS: TestValidateXMLName/valid_simple (0.00s)
+    --- PASS: TestValidateXMLName/valid_with_numbers (0.00s)
+    --- PASS: TestValidateXMLName/valid_with_underscore (0.00s)
+    --- PASS: TestValidateXMLName/valid_with_hyphen (0.00s)
+    --- PASS: TestValidateXMLName/valid_with_dot (0.00s)
+    --- PASS: TestValidateXMLName/invalid_empty (0.00s)
+    --- PASS: TestValidateXMLName/invalid_starts_with_number (0.00s)
+    --- PASS: TestValidateXMLName/invalid_starts_with_hyphen (0.00s)
+    --- PASS: TestValidateXMLName/invalid_starts_with_dot (0.00s)
+    --- PASS: TestValidateXMLName/invalid_with_space (0.00s)
+    --- PASS: TestValidateXMLName/invalid_with_? (0.00s)
+    --- PASS: TestValidateXMLName/invalid_with_@ (0.00s)
+    --- PASS: TestValidateXMLName/invalid_starts_with_xml (0.00s)
+    --- PASS: TestValidateXMLName/invalid_starts_with_XML (0.00s)
+    --- PASS: TestValidateXMLName/invalid_starts_with_Xml (0.00s)
+=== RUN   TestParseParamAsNumber
+=== RUN   TestParseParamAsNumber/int
+=== RUN   TestParseParamAsNumber/float64
+=== RUN   TestParseParamAsNumber/string_int
+=== RUN   TestParseParamAsNumber/string_float
+=== RUN   TestParseParamAsNumber/string_scientific
+=== RUN   TestParseParamAsNumber/string_invalid
+=== RUN   TestParseParamAsNumber/bool_true
+=== RUN   TestParseParamAsNumber/nil
+--- PASS: TestParseParamAsNumber (0.00s)
+    --- PASS: TestParseParamAsNumber/int (0.00s)
+    --- PASS: TestParseParamAsNumber/float64 (0.00s)
+    --- PASS: TestParseParamAsNumber/string_int (0.00s)
+    --- PASS: TestParseParamAsNumber/string_float (0.00s)
+    --- PASS: TestParseParamAsNumber/string_scientific (0.00s)
+    --- PASS: TestParseParamAsNumber/string_invalid (0.00s)
+    --- PASS: TestParseParamAsNumber/bool_true (0.00s)
+    --- PASS: TestParseParamAsNumber/nil (0.00s)
+=== RUN   TestParseParamAsInt
+=== RUN   TestParseParamAsInt/int
+=== RUN   TestParseParamAsInt/float64_whole
+=== RUN   TestParseParamAsInt/float64_fraction
+=== RUN   TestParseParamAsInt/string_int
+=== RUN   TestParseParamAsInt/string_float_whole
+=== RUN   TestParseParamAsInt/string_float_fraction
+=== RUN   TestParseParamAsInt/string_invalid
+=== RUN   TestParseParamAsInt/bool_true
+=== RUN   TestParseParamAsInt/nil
+--- PASS: TestParseParamAsInt (0.00s)
+    --- PASS: TestParseParamAsInt/int (0.00s)
+    --- PASS: TestParseParamAsInt/float64_whole (0.00s)
+    --- PASS: TestParseParamAsInt/float64_fraction (0.00s)
+    --- PASS: TestParseParamAsInt/string_int (0.00s)
+    --- PASS: TestParseParamAsInt/string_float_whole (0.00s)
+    --- PASS: TestParseParamAsInt/string_float_fraction (0.00s)
+    --- PASS: TestParseParamAsInt/string_invalid (0.00s)
+    --- PASS: TestParseParamAsInt/bool_true (0.00s)
+    --- PASS: TestParseParamAsInt/nil (0.00s)
+=== RUN   TestIsFieldSet
+=== RUN   TestIsFieldSet/string_set
+=== RUN   TestIsFieldSet/string_zero_(empty)
+=== RUN   TestIsFieldSet/int_set
+=== RUN   TestIsFieldSet/int_zero
+=== RUN   TestIsFieldSet/bool_set_(true)
+=== RUN   TestIsFieldSet/bool_zero_(false)
+=== RUN   TestIsFieldSet/slice_set_(non-nil)
+=== RUN   TestIsFieldSet/slice_zero_(nil)
+=== RUN   TestIsFieldSet/slice_zero_(empty)
+=== RUN   TestIsFieldSet/map_set_(non-nil)
+=== RUN   TestIsFieldSet/map_zero_(nil)
+=== RUN   TestIsFieldSet/map_zero_(empty)
+=== RUN   TestIsFieldSet/ptr_set_(non-nil)
+=== RUN   TestIsFieldSet/ptr_zero_(nil_ptr)
+=== RUN   TestIsFieldSet/field_not_exists
+--- PASS: TestIsFieldSet (0.00s)
+    --- PASS: TestIsFieldSet/string_set (0.00s)
+    --- PASS: TestIsFieldSet/string_zero_(empty) (0.00s)
+    --- PASS: TestIsFieldSet/int_set (0.00s)
+    --- PASS: TestIsFieldSet/int_zero (0.00s)
+    --- PASS: TestIsFieldSet/bool_set_(true) (0.00s)
+    --- PASS: TestIsFieldSet/bool_zero_(false) (0.00s)
+    --- PASS: TestIsFieldSet/slice_set_(non-nil) (0.00s)
+    --- PASS: TestIsFieldSet/slice_zero_(nil) (0.00s)
+    --- PASS: TestIsFieldSet/slice_zero_(empty) (0.00s)
+    --- PASS: TestIsFieldSet/map_set_(non-nil) (0.00s)
+    --- PASS: TestIsFieldSet/map_zero_(nil) (0.00s)
+    --- PASS: TestIsFieldSet/map_zero_(empty) (0.00s)
+    --- PASS: TestIsFieldSet/ptr_set_(non-nil) (0.00s)
+    --- PASS: TestIsFieldSet/ptr_zero_(nil_ptr) (0.00s)
+    --- PASS: TestIsFieldSet/field_not_exists (0.00s)
+PASS
+ok  	etl-tool/internal/config	0.190s
+=== RUN   TestNewCSVReader
+=== RUN   TestNewCSVReader/Default
+=== RUN   TestNewCSVReader/Comma_delimiter
+=== RUN   TestNewCSVReader/Tab_delimiter
+=== RUN   TestNewCSVReader/Pipe_delimiter
+=== RUN   TestNewCSVReader/Hash_comment
+=== RUN   TestNewCSVReader/Semicolon_comment
+=== RUN   TestNewCSVReader/Empty_comment_char
+=== RUN   TestNewCSVReader/Invalid_delimiter_(multi)
+=== RUN   TestNewCSVReader/Invalid_delimiter_(empty)
+=== RUN   TestNewCSVReader/Invalid_comment_(multi)
+--- PASS: TestNewCSVReader (0.00s)
+    --- PASS: TestNewCSVReader/Default (0.00s)
+    --- PASS: TestNewCSVReader/Comma_delimiter (0.00s)
+    --- PASS: TestNewCSVReader/Tab_delimiter (0.00s)
+    --- PASS: TestNewCSVReader/Pipe_delimiter (0.00s)
+    --- PASS: TestNewCSVReader/Hash_comment (0.00s)
+    --- PASS: TestNewCSVReader/Semicolon_comment (0.00s)
+    --- PASS: TestNewCSVReader/Empty_comment_char (0.00s)
+    --- PASS: TestNewCSVReader/Invalid_delimiter_(multi) (0.00s)
+    --- PASS: TestNewCSVReader/Invalid_delimiter_(empty) (0.00s)
+    --- PASS: TestNewCSVReader/Invalid_comment_(multi) (0.00s)
+=== RUN   TestCSVReader_Read
+=== RUN   TestCSVReader_Read/Valid_CSV_comma
+=== RUN   TestCSVReader_Read/Valid_CSV_pipe_delimiter
+=== RUN   TestCSVReader_Read/With_comments
+=== RUN   TestCSVReader_Read/Quoted_fields
+=== RUN   TestCSVReader_Read/Empty_file
+2025/04/09 10:09:15.860648 [WARN] CSV file '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVReader_ReadEmpty_file4240804650/001/test_306837685.csv' is empty or contains no data
+=== RUN   TestCSVReader_Read/Header_only
+2025/04/09 10:09:15.861010 [WARN] CSV file '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVReader_ReadHeader_only14095536/001/test_2664648056.csv' contains only a header row
+=== RUN   TestCSVReader_Read/Mismatched_columns_(skip)
+2025/04/09 10:09:15.861335 [WARN] CSVReader: Row 3 in '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVReader_ReadMismatched_columns_(skip)1420708021/001/test_1804406740.csv' has 1 fields, expected 2 based on header count; skipping row. Data: [val3]
+=== RUN   TestCSVReader_Read/Empty_header_(skip_column)
+2025/04/09 10:09:15.861814 [WARN] CSVReader: Empty header found in column 2 of file '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVReader_ReadEmpty_header_(skip_column)1270572858/001/test_2316434216.csv'; this column will be skipped
+=== RUN   TestCSVReader_Read/Duplicate_headers_(last_wins)
+2025/04/09 10:09:15.862191 [WARN] CSVReader: Duplicate header 'h1' found at column 3 in file '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVReader_ReadDuplicate_headers_(last_wins)3490844216/001/test_2723247156.csv'; data for this header name will represent the last occurring column
+=== RUN   TestCSVReader_Read/CRLF_line_endings
+=== RUN   TestCSVReader_Read/Malformed_CSV_(unclosed_quote)
+=== RUN   TestCSVReader_Read/Malformed_CSV_(trailing_comma_allowed)
+2025/04/09 10:09:15.863165 [WARN] CSVReader: Empty header found in column 3 of file '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVReader_ReadMalformed_CSV_(trailing_comma_allowed)3105382598/001/test_3336834280.csv'; this column will be skipped
+=== RUN   TestCSVReader_Read/File_Not_Found
+--- PASS: TestCSVReader_Read (0.01s)
+    --- PASS: TestCSVReader_Read/Valid_CSV_comma (0.00s)
+    --- PASS: TestCSVReader_Read/Valid_CSV_pipe_delimiter (0.00s)
+    --- PASS: TestCSVReader_Read/With_comments (0.00s)
+    --- PASS: TestCSVReader_Read/Quoted_fields (0.00s)
+    --- PASS: TestCSVReader_Read/Empty_file (0.00s)
+    --- PASS: TestCSVReader_Read/Header_only (0.00s)
+    --- PASS: TestCSVReader_Read/Mismatched_columns_(skip) (0.00s)
+    --- PASS: TestCSVReader_Read/Empty_header_(skip_column) (0.00s)
+    --- PASS: TestCSVReader_Read/Duplicate_headers_(last_wins) (0.00s)
+    --- PASS: TestCSVReader_Read/CRLF_line_endings (0.00s)
+    --- PASS: TestCSVReader_Read/Malformed_CSV_(unclosed_quote) (0.00s)
+    --- PASS: TestCSVReader_Read/Malformed_CSV_(trailing_comma_allowed) (0.00s)
+    --- PASS: TestCSVReader_Read/File_Not_Found (0.00s)
+=== RUN   TestNewCSVWriter
+=== RUN   TestNewCSVWriter/Default
+=== RUN   TestNewCSVWriter/Comma
+=== RUN   TestNewCSVWriter/Tab
+=== RUN   TestNewCSVWriter/Pipe
+=== RUN   TestNewCSVWriter/Invalid_delimiter_(multi)
+--- PASS: TestNewCSVWriter (0.00s)
+    --- PASS: TestNewCSVWriter/Default (0.00s)
+    --- PASS: TestNewCSVWriter/Comma (0.00s)
+    --- PASS: TestNewCSVWriter/Tab (0.00s)
+    --- PASS: TestNewCSVWriter/Pipe (0.00s)
+    --- PASS: TestNewCSVWriter/Invalid_delimiter_(multi) (0.00s)
+=== RUN   TestCSVWriter_WriteAndClose
+=== RUN   TestCSVWriter_WriteAndClose/Write_valid_comma
+=== RUN   TestCSVWriter_WriteAndClose/Write_valid_pipe
+=== RUN   TestCSVWriter_WriteAndClose/Write_empty_records_(first_call)
+=== RUN   TestCSVWriter_WriteAndClose/Write_nil_records_(first_call)
+=== RUN   TestCSVWriter_WriteAndClose/Write_with_directory_creation
+=== RUN   TestCSVWriter_WriteAndClose/Multiple_writes_build_file
+=== RUN   TestCSVWriter_WriteAndClose/Close_idempotency
+=== RUN   TestCSVWriter_WriteAndClose/Directory_Creation_Failure
+--- PASS: TestCSVWriter_WriteAndClose (0.00s)
+    --- PASS: TestCSVWriter_WriteAndClose/Write_valid_comma (0.00s)
+    --- PASS: TestCSVWriter_WriteAndClose/Write_valid_pipe (0.00s)
+    --- PASS: TestCSVWriter_WriteAndClose/Write_empty_records_(first_call) (0.00s)
+    --- PASS: TestCSVWriter_WriteAndClose/Write_nil_records_(first_call) (0.00s)
+    --- PASS: TestCSVWriter_WriteAndClose/Write_with_directory_creation (0.00s)
+    --- PASS: TestCSVWriter_WriteAndClose/Multiple_writes_build_file (0.00s)
+    --- PASS: TestCSVWriter_WriteAndClose/Close_idempotency (0.00s)
+    --- PASS: TestCSVWriter_WriteAndClose/Directory_Creation_Failure (0.00s)
+=== RUN   TestNewCSVErrorWriter
+=== RUN   TestNewCSVErrorWriter/Successful_creation
+=== RUN   TestNewCSVErrorWriter/Directory_creation
+=== RUN   TestNewCSVErrorWriter/File_creation_failure_(permission)
+--- PASS: TestNewCSVErrorWriter (0.00s)
+    --- PASS: TestNewCSVErrorWriter/Successful_creation (0.00s)
+    --- PASS: TestNewCSVErrorWriter/Directory_creation (0.00s)
+    --- PASS: TestNewCSVErrorWriter/File_creation_failure_(permission) (0.00s)
+=== RUN   TestCSVErrorWriter_WriteAndClose
+=== RUN   TestCSVErrorWriter_WriteAndClose/Write_to_new_file
+=== RUN   TestCSVErrorWriter_WriteAndClose/Append_to_existing_file
+=== RUN   TestCSVErrorWriter_WriteAndClose/Write_with_nil_error
+=== RUN   TestCSVErrorWriter_WriteAndClose/Close_idempotency_and_write_after_close
+=== RUN   TestCSVErrorWriter_WriteAndClose/Simulate_write_error_on_close
+2025/04/09 10:09:15.868672 [ERROR] CSVErrorWriter file close error for '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVErrorWriter_WriteAndCloseSimulate_write_error_on_close3098161383/001/write_err.csv': close /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVErrorWriter_WriteAndCloseSimulate_write_error_on_close3098161383/001/write_err.csv: file already closed
+    csv_test.go:821: Close() returned expected error after simulated write failure: CSVErrorWriter file close error for '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVErrorWriter_WriteAndCloseSimulate_write_error_on_close3098161383/001/write_err.csv': close /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestCSVErrorWriter_WriteAndCloseSimulate_write_error_on_close3098161383/001/write_err.csv: file already closed
+--- PASS: TestCSVErrorWriter_WriteAndClose (0.00s)
+    --- PASS: TestCSVErrorWriter_WriteAndClose/Write_to_new_file (0.00s)
+    --- PASS: TestCSVErrorWriter_WriteAndClose/Append_to_existing_file (0.00s)
+    --- PASS: TestCSVErrorWriter_WriteAndClose/Write_with_nil_error (0.00s)
+    --- PASS: TestCSVErrorWriter_WriteAndClose/Close_idempotency_and_write_after_close (0.00s)
+    --- PASS: TestCSVErrorWriter_WriteAndClose/Simulate_write_error_on_close (0.00s)
+=== RUN   TestNewInputReader
+=== RUN   TestNewInputReader/JSON_Reader
+=== RUN   TestNewInputReader/CSV_Reader_Valid
+=== RUN   TestNewInputReader/XLSX_Reader
+=== RUN   TestNewInputReader/XML_Reader
+=== RUN   TestNewInputReader/YAML_Reader
+=== RUN   TestNewInputReader/Postgres_Reader_Valid
+=== RUN   TestNewInputReader/Case_Insensitive_Type_(CSV)
+=== RUN   TestNewInputReader/Unsupported_Type
+=== RUN   TestNewInputReader/Postgres_Missing_Connection_String
+=== RUN   TestNewInputReader/Postgres_Missing_Query
+=== RUN   TestNewInputReader/CSV_Invalid_Delimiter_(propagated)
+=== RUN   TestNewInputReader/CSV_Invalid_Comment_Char_(propagated)
+--- PASS: TestNewInputReader (0.00s)
+    --- PASS: TestNewInputReader/JSON_Reader (0.00s)
+    --- PASS: TestNewInputReader/CSV_Reader_Valid (0.00s)
+    --- PASS: TestNewInputReader/XLSX_Reader (0.00s)
+    --- PASS: TestNewInputReader/XML_Reader (0.00s)
+    --- PASS: TestNewInputReader/YAML_Reader (0.00s)
+    --- PASS: TestNewInputReader/Postgres_Reader_Valid (0.00s)
+    --- PASS: TestNewInputReader/Case_Insensitive_Type_(CSV) (0.00s)
+    --- PASS: TestNewInputReader/Unsupported_Type (0.00s)
+    --- PASS: TestNewInputReader/Postgres_Missing_Connection_String (0.00s)
+    --- PASS: TestNewInputReader/Postgres_Missing_Query (0.00s)
+    --- PASS: TestNewInputReader/CSV_Invalid_Delimiter_(propagated) (0.00s)
+    --- PASS: TestNewInputReader/CSV_Invalid_Comment_Char_(propagated) (0.00s)
+=== RUN   TestNewOutputWriter
+=== RUN   TestNewOutputWriter/JSON_Writer
+=== RUN   TestNewOutputWriter/CSV_Writer_Valid
+=== RUN   TestNewOutputWriter/XLSX_Writer
+=== RUN   TestNewOutputWriter/XML_Writer
+=== RUN   TestNewOutputWriter/YAML_Writer
+=== RUN   TestNewOutputWriter/Postgres_Writer_Valid
+=== RUN   TestNewOutputWriter/Postgres_Writer_with_Loader
+=== RUN   TestNewOutputWriter/Case_Insensitive_Type_(JSON)
+=== RUN   TestNewOutputWriter/Unsupported_Type
+=== RUN   TestNewOutputWriter/Postgres_Missing_Connection_String
+=== RUN   TestNewOutputWriter/Postgres_Missing_Target_Table
+=== RUN   TestNewOutputWriter/CSV_Invalid_Delimiter_(propagated)
+--- PASS: TestNewOutputWriter (0.00s)
+    --- PASS: TestNewOutputWriter/JSON_Writer (0.00s)
+    --- PASS: TestNewOutputWriter/CSV_Writer_Valid (0.00s)
+    --- PASS: TestNewOutputWriter/XLSX_Writer (0.00s)
+    --- PASS: TestNewOutputWriter/XML_Writer (0.00s)
+    --- PASS: TestNewOutputWriter/YAML_Writer (0.00s)
+    --- PASS: TestNewOutputWriter/Postgres_Writer_Valid (0.00s)
+    --- PASS: TestNewOutputWriter/Postgres_Writer_with_Loader (0.00s)
+    --- PASS: TestNewOutputWriter/Case_Insensitive_Type_(JSON) (0.00s)
+    --- PASS: TestNewOutputWriter/Unsupported_Type (0.00s)
+    --- PASS: TestNewOutputWriter/Postgres_Missing_Connection_String (0.00s)
+    --- PASS: TestNewOutputWriter/Postgres_Missing_Target_Table (0.00s)
+    --- PASS: TestNewOutputWriter/CSV_Invalid_Delimiter_(propagated) (0.00s)
+=== RUN   TestJSONReader_Read
+=== RUN   TestJSONReader_Read/Valid_JSON_array
+=== RUN   TestJSONReader_Read/Valid_single_JSON_object
+=== RUN   TestJSONReader_Read/Empty_JSON_array
+=== RUN   TestJSONReader_Read/JSON_array_with_empty_object
+=== RUN   TestJSONReader_Read/JSON_with_nested_structure
+=== RUN   TestJSONReader_Read/Empty_file
+=== RUN   TestJSONReader_Read/Malformed_JSON_(missing_comma)
+=== RUN   TestJSONReader_Read/Malformed_JSON_(trailing_comma)
+=== RUN   TestJSONReader_Read/Not_JSON_(plain_text)
+=== RUN   TestJSONReader_Read/Not_JSON_(XML)
+=== RUN   TestJSONReader_Read/File_Not_Found
+--- PASS: TestJSONReader_Read (0.00s)
+    --- PASS: TestJSONReader_Read/Valid_JSON_array (0.00s)
+    --- PASS: TestJSONReader_Read/Valid_single_JSON_object (0.00s)
+    --- PASS: TestJSONReader_Read/Empty_JSON_array (0.00s)
+    --- PASS: TestJSONReader_Read/JSON_array_with_empty_object (0.00s)
+    --- PASS: TestJSONReader_Read/JSON_with_nested_structure (0.00s)
+    --- PASS: TestJSONReader_Read/Empty_file (0.00s)
+    --- PASS: TestJSONReader_Read/Malformed_JSON_(missing_comma) (0.00s)
+    --- PASS: TestJSONReader_Read/Malformed_JSON_(trailing_comma) (0.00s)
+    --- PASS: TestJSONReader_Read/Not_JSON_(plain_text) (0.00s)
+    --- PASS: TestJSONReader_Read/Not_JSON_(XML) (0.00s)
+    --- PASS: TestJSONReader_Read/File_Not_Found (0.00s)
+=== RUN   TestJSONWriter_Write
+=== RUN   TestJSONWriter_Write/Write_valid_records
+=== RUN   TestJSONWriter_Write/Write_empty_record_slice
+=== RUN   TestJSONWriter_Write/Write_nil_record_slice
+=== RUN   TestJSONWriter_Write/Write_with_directory_creation
+=== RUN   TestJSONWriter_Write/Directory_Creation_Failure
+--- PASS: TestJSONWriter_Write (0.00s)
+    --- PASS: TestJSONWriter_Write/Write_valid_records (0.00s)
+    --- PASS: TestJSONWriter_Write/Write_empty_record_slice (0.00s)
+    --- PASS: TestJSONWriter_Write/Write_nil_record_slice (0.00s)
+    --- PASS: TestJSONWriter_Write/Write_with_directory_creation (0.00s)
+    --- PASS: TestJSONWriter_Write/Directory_Creation_Failure (0.00s)
+=== RUN   TestJSONWriter_Close
+--- PASS: TestJSONWriter_Close (0.00s)
+=== RUN   TestNewPostgresReader
+--- PASS: TestNewPostgresReader (0.00s)
+=== RUN   TestNewPostgresWriter
+--- PASS: TestNewPostgresWriter (0.00s)
+=== RUN   TestPostgresWriter_Write_EdgeCases
+=== RUN   TestPostgresWriter_Write_EdgeCases/Write_Empty_Records
+2025/04/09 10:09:15.874337 [INFO] PostgresWriter: No records to write to table 'public.edge_table'. Skipping.
+2025/04/09 10:09:15.874339 [INFO] PostgresWriter: No records to write to table 'public.edge_table'. Skipping.
+=== RUN   TestPostgresWriter_Write_EdgeCases/Pool_Creation_Error
+2025/04/09 10:09:15.874366 [ERROR] PostgresWriter failed to create connection pool: postgres://test:********@localhost:5432/edge_db
+--- PASS: TestPostgresWriter_Write_EdgeCases (0.00s)
+    --- PASS: TestPostgresWriter_Write_EdgeCases/Write_Empty_Records (0.00s)
+    --- PASS: TestPostgresWriter_Write_EdgeCases/Pool_Creation_Error (0.00s)
+=== RUN   TestPostgresWriter_Close
+--- PASS: TestPostgresWriter_Close (0.00s)
+=== RUN   TestNewXLSXReader
+=== RUN   TestNewXLSXReader/No_specific_sheet
+=== RUN   TestNewXLSXReader/By_Name
+=== RUN   TestNewXLSXReader/By_Index
+=== RUN   TestNewXLSXReader/Name_takes_precedence
+=== RUN   TestNewXLSXReader/By_Index_0
+--- PASS: TestNewXLSXReader (0.00s)
+    --- PASS: TestNewXLSXReader/No_specific_sheet (0.00s)
+    --- PASS: TestNewXLSXReader/By_Name (0.00s)
+    --- PASS: TestNewXLSXReader/By_Index (0.00s)
+    --- PASS: TestNewXLSXReader/Name_takes_precedence (0.00s)
+    --- PASS: TestNewXLSXReader/By_Index_0 (0.00s)
+=== RUN   TestXLSXReader_Read
+=== RUN   TestXLSXReader_Read/Read_default_sheet_(Sheet1)
+2025/04/09 10:09:15.876957 [INFO] XLSXReader successfully loaded 2 records from sheet 'Sheet1' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXReader_ReadRead_default_sheet_(Sheet1)2504416579/001/test_600061864.xlsx
+=== RUN   TestXLSXReader_Read/Read_by_sheet_name_(Sheet2)
+2025/04/09 10:09:15.879133 [INFO] XLSXReader successfully loaded 2 records from sheet 'Sheet2' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXReader_ReadRead_by_sheet_name_(Sheet2)2736212081/001/multisheet_2652418409.xlsx
+=== RUN   TestXLSXReader_Read/Read_by_sheet_index_(Sheet2_->_index_1)
+2025/04/09 10:09:15.880878 [INFO] XLSXReader successfully loaded 2 records from sheet 'Sheet2' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXReader_ReadRead_by_sheet_index_(Sheet2_-_index_1)3281873962/001/multisheet_3298058025.xlsx
+=== RUN   TestXLSXReader_Read/Read_by_name_takes_precedence
+2025/04/09 10:09:15.882791 [INFO] XLSXReader successfully loaded 2 records from sheet 'Sheet1' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXReader_ReadRead_by_name_takes_precedence624493403/001/multisheet_21680746.xlsx
+=== RUN   TestXLSXReader_Read/Empty_sheet
+2025/04/09 10:09:15.884697 [WARN] XLSX sheet 'EmptySheet' in '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXReader_ReadEmpty_sheet2134094437/001/test_1791756003.xlsx' is empty or contains no header row.
+=== RUN   TestXLSXReader_Read/Sheet_with_header_only
+2025/04/09 10:09:15.886617 [INFO] XLSXReader successfully loaded 0 records from sheet 'HeaderOnly' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXReader_ReadSheet_with_header_only1350954197/001/test_2055162581.xlsx
+=== RUN   TestXLSXReader_Read/Sheet_name_not_found
+=== RUN   TestXLSXReader_Read/Sheet_index_out_of_bounds_(positive)
+=== RUN   TestXLSXReader_Read/Sheet_index_out_of_bounds_(negative)
+=== RUN   TestXLSXReader_Read/File_with_empty_header_column
+2025/04/09 10:09:15.893294 [WARN] XLSXReader: Empty header found in column 2 of sheet 'Sheet1'. This column's data will be ignored.
+2025/04/09 10:09:15.893339 [INFO] XLSXReader successfully loaded 2 records from sheet 'Sheet1' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXReader_ReadFile_with_empty_header_column1473771868/001/test_1923043958.xlsx
+=== RUN   TestXLSXReader_Read/File_with_duplicate_header_column_(last_wins)
+2025/04/09 10:09:15.894885 [INFO] XLSXReader successfully loaded 2 records from sheet 'Sheet1' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXReader_ReadFile_with_duplicate_header_column_(last_wins)2837085758/001/test_688187731.xlsx
+=== RUN   TestXLSXReader_Read/File_with_no_valid_headers
+2025/04/09 10:09:15.897015 [WARN] XLSXReader: No valid headers found in the first row of sheet 'Sheet1'. Cannot process data.
+=== RUN   TestXLSXReader_Read/File_Not_Found
+--- PASS: TestXLSXReader_Read (0.02s)
+    --- PASS: TestXLSXReader_Read/Read_default_sheet_(Sheet1) (0.00s)
+    --- PASS: TestXLSXReader_Read/Read_by_sheet_name_(Sheet2) (0.00s)
+    --- PASS: TestXLSXReader_Read/Read_by_sheet_index_(Sheet2_->_index_1) (0.00s)
+    --- PASS: TestXLSXReader_Read/Read_by_name_takes_precedence (0.00s)
+    --- PASS: TestXLSXReader_Read/Empty_sheet (0.00s)
+    --- PASS: TestXLSXReader_Read/Sheet_with_header_only (0.00s)
+    --- PASS: TestXLSXReader_Read/Sheet_name_not_found (0.00s)
+    --- PASS: TestXLSXReader_Read/Sheet_index_out_of_bounds_(positive) (0.00s)
+    --- PASS: TestXLSXReader_Read/Sheet_index_out_of_bounds_(negative) (0.00s)
+    --- PASS: TestXLSXReader_Read/File_with_empty_header_column (0.00s)
+    --- PASS: TestXLSXReader_Read/File_with_duplicate_header_column_(last_wins) (0.00s)
+    --- PASS: TestXLSXReader_Read/File_with_no_valid_headers (0.00s)
+    --- PASS: TestXLSXReader_Read/File_Not_Found (0.00s)
+=== RUN   TestNewXLSXWriter
+=== RUN   TestNewXLSXWriter/Specific_Name
+=== RUN   TestNewXLSXWriter/Empty_Name_Uses_Default
+--- PASS: TestNewXLSXWriter (0.00s)
+    --- PASS: TestNewXLSXWriter/Specific_Name (0.00s)
+    --- PASS: TestNewXLSXWriter/Empty_Name_Uses_Default (0.00s)
+=== RUN   TestXLSXWriter_Write
+=== RUN   TestXLSXWriter_Write/Write_valid_records_(default_sheet)
+2025/04/09 10:09:15.898598 [INFO] XLSXWriter successfully wrote 2 data rows (plus header) to sheet 'Sheet1' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXWriter_WriteWrite_valid_records_(default_sheet)2280242939/001/output.xlsx
+=== RUN   TestXLSXWriter_Write/Write_valid_records_(custom_sheet)
+2025/04/09 10:09:15.900333 [INFO] XLSXWriter successfully wrote 2 data rows (plus header) to sheet 'OutputData' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXWriter_WriteWrite_valid_records_(custom_sheet)1647669273/001/output.xlsx
+=== RUN   TestXLSXWriter_Write/Write_empty_record_slice_(creates_empty_file/sheet)
+2025/04/09 10:09:15.901650 [INFO] XLSXWriter: No records provided, saving empty file /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXWriter_WriteWrite_empty_record_slice_(creates_empty_filesheet)3346409923/001/output.xlsx with sheet 'EmptyTest'.
+=== RUN   TestXLSXWriter_Write/Write_nil_record_slice_(creates_empty_file/sheet)
+2025/04/09 10:09:15.903217 [INFO] XLSXWriter: No records provided, saving empty file /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXWriter_WriteWrite_nil_record_slice_(creates_empty_filesheet)1322927952/001/output.xlsx with sheet 'NilTest'.
+=== RUN   TestXLSXWriter_Write/Write_with_directory_creation
+2025/04/09 10:09:15.905354 [INFO] XLSXWriter successfully wrote 1 data rows (plus header) to sheet 'SubdirData' in /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXLSXWriter_WriteWrite_with_directory_creation446808193/001/excel_output/nested/output.xlsx
+=== RUN   TestXLSXWriter_Write/Write_with_invalid_sheet_name
+2025/04/09 10:09:15.906439 [WARN] XLSXWriter: Failed to rename default sheet to 'Invalid:Sheet' (the sheet can not contain any of the characters :\/?*[or]), attempting to create new sheet.
+=== RUN   TestXLSXWriter_Write/Directory_Creation_Failure
+--- PASS: TestXLSXWriter_Write (0.01s)
+    --- PASS: TestXLSXWriter_Write/Write_valid_records_(default_sheet) (0.00s)
+    --- PASS: TestXLSXWriter_Write/Write_valid_records_(custom_sheet) (0.00s)
+    --- PASS: TestXLSXWriter_Write/Write_empty_record_slice_(creates_empty_file/sheet) (0.00s)
+    --- PASS: TestXLSXWriter_Write/Write_nil_record_slice_(creates_empty_file/sheet) (0.00s)
+    --- PASS: TestXLSXWriter_Write/Write_with_directory_creation (0.00s)
+    --- PASS: TestXLSXWriter_Write/Write_with_invalid_sheet_name (0.00s)
+    --- PASS: TestXLSXWriter_Write/Directory_Creation_Failure (0.00s)
+=== RUN   TestXLSXWriter_Close
+--- PASS: TestXLSXWriter_Close (0.00s)
+=== RUN   TestNewXMLReader
+=== RUN   TestNewXMLReader/Specific_Tag
+=== RUN   TestNewXMLReader/Empty_Tag_Uses_Default
+--- PASS: TestNewXMLReader (0.00s)
+    --- PASS: TestNewXMLReader/Specific_Tag (0.00s)
+    --- PASS: TestNewXMLReader/Empty_Tag_Uses_Default (0.00s)
+=== RUN   TestXMLReader_Read
+=== RUN   TestXMLReader_Read/Valid_simple_XML
+2025/04/09 10:09:15.907083 [INFO] XMLReader successfully loaded 2 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadValid_simple_XML4264936154/001/test_2567670850.xml
+=== RUN   TestXMLReader_Read/Valid_XML_with_default_record_tag
+2025/04/09 10:09:15.907438 [INFO] XMLReader successfully loaded 2 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadValid_XML_with_default_record_tag2516823098/001/test_1867719692.xml
+=== RUN   TestXMLReader_Read/Empty_elements
+2025/04/09 10:09:15.907746 [INFO] XMLReader successfully loaded 2 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadEmpty_elements802850099/001/test_2901542382.xml
+=== RUN   TestXMLReader_Read/XML_with_no_records
+2025/04/09 10:09:15.908032 [INFO] XMLReader successfully loaded 0 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadXML_with_no_records3447726852/001/test_1090353872.xml
+=== RUN   TestXMLReader_Read/Empty_file
+=== RUN   TestXMLReader_Read/XML_only_root
+2025/04/09 10:09:15.908573 [INFO] XMLReader successfully loaded 0 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadXML_only_root3491093380/001/test_657610732.xml
+=== RUN   TestXMLReader_Read/XML_with_comments_and_processing_instructions
+2025/04/09 10:09:15.908865 [INFO] XMLReader successfully loaded 1 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadXML_with_comments_and_processing_instructions871592525/001/test_2635575116.xml
+=== RUN   TestXMLReader_Read/XML_with_nested_elements_treated_as_string
+2025/04/09 10:09:15.909188 [INFO] XMLReader successfully loaded 1 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadXML_with_nested_elements_treated_as_string1760217512/001/test_1499296620.xml
+=== RUN   TestXMLReader_Read/XML_with_attributes_ignored
+2025/04/09 10:09:15.909582 [INFO] XMLReader successfully loaded 1 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadXML_with_attributes_ignored3380250091/001/test_1921902762.xml
+=== RUN   TestXMLReader_Read/Wrong_record_tag
+2025/04/09 10:09:15.909872 [INFO] XMLReader successfully loaded 0 records from /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLReader_ReadWrong_record_tag2960507904/001/test_1036724820.xml
+=== RUN   TestXMLReader_Read/Malformed_XML_(unclosed_tag)
+=== RUN   TestXMLReader_Read/Malformed_XML_(unexpected_end_tag)
+=== RUN   TestXMLReader_Read/File_Not_Found
+--- PASS: TestXMLReader_Read (0.00s)
+    --- PASS: TestXMLReader_Read/Valid_simple_XML (0.00s)
+    --- PASS: TestXMLReader_Read/Valid_XML_with_default_record_tag (0.00s)
+    --- PASS: TestXMLReader_Read/Empty_elements (0.00s)
+    --- PASS: TestXMLReader_Read/XML_with_no_records (0.00s)
+    --- PASS: TestXMLReader_Read/Empty_file (0.00s)
+    --- PASS: TestXMLReader_Read/XML_only_root (0.00s)
+    --- PASS: TestXMLReader_Read/XML_with_comments_and_processing_instructions (0.00s)
+    --- PASS: TestXMLReader_Read/XML_with_nested_elements_treated_as_string (0.00s)
+    --- PASS: TestXMLReader_Read/XML_with_attributes_ignored (0.00s)
+    --- PASS: TestXMLReader_Read/Wrong_record_tag (0.00s)
+    --- PASS: TestXMLReader_Read/Malformed_XML_(unclosed_tag) (0.00s)
+    --- PASS: TestXMLReader_Read/Malformed_XML_(unexpected_end_tag) (0.00s)
+    --- PASS: TestXMLReader_Read/File_Not_Found (0.00s)
+=== RUN   TestNewXMLWriter
+=== RUN   TestNewXMLWriter/Specific_Tags
+=== RUN   TestNewXMLWriter/Empty_Tags_Uses_Defaults
+=== RUN   TestNewXMLWriter/Empty_Record_Tag
+=== RUN   TestNewXMLWriter/Empty_Root_Tag
+--- PASS: TestNewXMLWriter (0.00s)
+    --- PASS: TestNewXMLWriter/Specific_Tags (0.00s)
+    --- PASS: TestNewXMLWriter/Empty_Tags_Uses_Defaults (0.00s)
+    --- PASS: TestNewXMLWriter/Empty_Record_Tag (0.00s)
+    --- PASS: TestNewXMLWriter/Empty_Root_Tag (0.00s)
+=== RUN   TestXMLWriter_Write
+=== RUN   TestXMLWriter_Write/Write_valid_records_(defaults)
+2025/04/09 10:09:15.911010 [INFO] XMLWriter successfully wrote 3 records to /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLWriter_WriteWrite_valid_records_(defaults)769314501/001/output.xml
+=== RUN   TestXMLWriter_Write/Write_valid_records_(custom_tags)
+2025/04/09 10:09:15.911402 [INFO] XMLWriter successfully wrote 3 records to /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLWriter_WriteWrite_valid_records_(custom_tags)2120417439/001/output.xml
+=== RUN   TestXMLWriter_Write/Write_empty_records_slice
+2025/04/09 10:09:15.911790 [INFO] XMLWriter successfully wrote 0 records to /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLWriter_WriteWrite_empty_records_slice2465103789/001/output.xml
+=== RUN   TestXMLWriter_Write/Write_nil_records_slice
+2025/04/09 10:09:15.912166 [INFO] XMLWriter successfully wrote 0 records to /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLWriter_WriteWrite_nil_records_slice3650249681/001/output.xml
+=== RUN   TestXMLWriter_Write/Write_with_directory_creation
+2025/04/09 10:09:15.912589 [INFO] XMLWriter successfully wrote 1 records to /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLWriter_WriteWrite_with_directory_creation1505207040/001/xml_out/output.xml
+=== RUN   TestXMLWriter_Write/Directory_Creation_Failure
+--- PASS: TestXMLWriter_Write (0.00s)
+    --- PASS: TestXMLWriter_Write/Write_valid_records_(defaults) (0.00s)
+    --- PASS: TestXMLWriter_Write/Write_valid_records_(custom_tags) (0.00s)
+    --- PASS: TestXMLWriter_Write/Write_empty_records_slice (0.00s)
+    --- PASS: TestXMLWriter_Write/Write_nil_records_slice (0.00s)
+    --- PASS: TestXMLWriter_Write/Write_with_directory_creation (0.00s)
+    --- PASS: TestXMLWriter_Write/Directory_Creation_Failure (0.00s)
+=== RUN   TestXMLWriter_Close
+--- PASS: TestXMLWriter_Close (0.00s)
+=== RUN   TestXMLWriter_OutputFormat
+2025/04/09 10:09:15.913418 [INFO] XMLWriter successfully wrote 3 records to /var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestXMLWriter_OutputFormat1432716175/001/output_format.xml
+--- PASS: TestXMLWriter_OutputFormat (0.00s)
+=== RUN   TestYAMLReader_Read
+=== RUN   TestYAMLReader_Read/Valid_YAML_list
+    yaml_test.go:133: Test: "Valid YAML list", Read Error: <nil>, Got Records Count: 2
+=== RUN   TestYAMLReader_Read/Valid_single_YAML_map
+    yaml_test.go:133: Test: "Valid single YAML map", Read Error: <nil>, Got Records Count: 1
+=== RUN   TestYAMLReader_Read/Empty_YAML_list
+    yaml_test.go:133: Test: "Empty YAML list", Read Error: <nil>, Got Records Count: 0
+=== RUN   TestYAMLReader_Read/Empty_YAML_map
+    yaml_test.go:133: Test: "Empty YAML map", Read Error: <nil>, Got Records Count: 1
+=== RUN   TestYAMLReader_Read/YAML_with_explicit_types
+    yaml_test.go:133: Test: "YAML with explicit types", Read Error: <nil>, Got Records Count: 2
+=== RUN   TestYAMLReader_Read/YAML_with_null_values
+    yaml_test.go:133: Test: "YAML with null values", Read Error: <nil>, Got Records Count: 2
+=== RUN   TestYAMLReader_Read/YAML_representing_resolved_anchor/alias
+    yaml_test.go:133: Test: "YAML representing resolved anchor/alias", Read Error: <nil>, Got Records Count: 2
+=== RUN   TestYAMLReader_Read/Empty_file
+    yaml_test.go:133: Test: "Empty file", Read Error: <nil>, Got Records Count: 0
+=== RUN   TestYAMLReader_Read/Malformed_YAML_(bad_mix_list/map)
+2025/04/09 10:09:15.916713 [WARN] YAMLReader failed to unmarshal as list (yaml: line 1: did not find expected '-' indicator) or map (yaml: line 1: did not find expected '-' indicator) from '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestYAMLReader_ReadMalformed_YAML_(bad_mix_listmap)3807955583/001/test_2057454152.yaml'. Returning list error.
+    yaml_test.go:133: Test: "Malformed YAML (bad mix list/map)", Read Error: YAMLReader failed to unmarshal YAML from '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestYAMLReader_ReadMalformed_YAML_(bad_mix_listmap)3807955583/001/test_2057454152.yaml': yaml: line 1: did not find expected '-' indicator, Got Records Count: 0
+=== RUN   TestYAMLReader_Read/Malformed_YAML_(unclosed_sequence)
+2025/04/09 10:09:15.917095 [WARN] YAMLReader failed to unmarshal as list (yaml: unmarshal errors:
+  line 1: cannot unmarshal !!str `item1` into map[string]interface {}
+  line 2: cannot unmarshal !!str `item2` into map[string]interface {}) or map (yaml: unmarshal errors:
+  line 1: cannot unmarshal !!seq into map[string]interface {}) from '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestYAMLReader_ReadMalformed_YAML_(unclosed_sequence)1080655249/001/test_784271572.yaml'. Returning list error.
+    yaml_test.go:133: Test: "Malformed YAML (unclosed sequence)", Read Error: YAMLReader failed to unmarshal YAML from '/var/folders/8y/q4hdckn15ml2zt1l9d2x9f600000gn/T/TestYAMLReader_ReadMalformed_YAML_(unclosed_sequence)1080655249/001/test_784271572.yaml': yaml: unmarshal errors:
+          line 1: cannot unmarshal !!str `item1` into map[string]interface {}
+          line 2: cannot unmarshal !!str `item2` into map[string]interface {}, Got Records Count: 0
+=== RUN   TestYAMLReader_Read/File_Not_Found
+--- PASS: TestYAMLReader_Read (0.00s)
+    --- PASS: TestYAMLReader_Read/Valid_YAML_list (0.00s)
+    --- PASS: TestYAMLReader_Read/Valid_single_YAML_map (0.00s)
+    --- PASS: TestYAMLReader_Read/Empty_YAML_list (0.00s)
+    --- PASS: TestYAMLReader_Read/Empty_YAML_map (0.00s)
+    --- PASS: TestYAMLReader_Read/YAML_with_explicit_types (0.00s)
+    --- PASS: TestYAMLReader_Read/YAML_with_null_values (0.00s)
+    --- PASS: TestYAMLReader_Read/YAML_representing_resolved_anchor/alias (0.00s)
+    --- PASS: TestYAMLReader_Read/Empty_file (0.00s)
+    --- PASS: TestYAMLReader_Read/Malformed_YAML_(bad_mix_list/map) (0.00s)
+    --- PASS: TestYAMLReader_Read/Malformed_YAML_(unclosed_sequence) (0.00s)
+    --- PASS: TestYAMLReader_Read/File_Not_Found (0.00s)
+=== RUN   TestYAMLWriter_Write
+=== RUN   TestYAMLWriter_Write/Write_valid_records
+    yaml_test.go:249: Test: "Write valid records", Input records isNil: false
+    yaml_test.go:279: Test: "Write valid records", Got file content:
+        - attrs:
+            - red
+            - sweet
+          count: 10
+          item: Apple
+          price: 0.5
+        - attrs: null
+          count: 5
+          item: Banana
+          organic: true
+          price: 0.25
+=== RUN   TestYAMLWriter_Write/Write_empty_record_slice
+    yaml_test.go:249: Test: "Write empty record slice", Input records isNil: false
+    yaml_test.go:279: Test: "Write empty record slice", Got file content:
+        []
+=== RUN   TestYAMLWriter_Write/Write_nil_record_slice
+    yaml_test.go:249: Test: "Write nil record slice", Input records isNil: true
+    yaml_test.go:279: Test: "Write nil record slice", Got file content:
+        null
+=== RUN   TestYAMLWriter_Write/Write_with_directory_creation
+    yaml_test.go:249: Test: "Write with directory creation", Input records isNil: false
+    yaml_test.go:279: Test: "Write with directory creation", Got file content:
+        - id: 99
+          status: ok
+=== RUN   TestYAMLWriter_Write/Directory_Creation_Failure
+--- PASS: TestYAMLWriter_Write (0.00s)
+    --- PASS: TestYAMLWriter_Write/Write_valid_records (0.00s)
+    --- PASS: TestYAMLWriter_Write/Write_empty_record_slice (0.00s)
+    --- PASS: TestYAMLWriter_Write/Write_nil_record_slice (0.00s)
+    --- PASS: TestYAMLWriter_Write/Write_with_directory_creation (0.00s)
+    --- PASS: TestYAMLWriter_Write/Directory_Creation_Failure (0.00s)
+=== RUN   TestYAMLWriter_Close
+--- PASS: TestYAMLWriter_Close (0.00s)
+PASS
+ok  	etl-tool/internal/io	0.684s
+=== RUN   TestParseLevel
+=== RUN   TestParseLevel/none
+=== RUN   TestParseLevel/error
+=== RUN   TestParseLevel/warn
+=== RUN   TestParseLevel/warning
+=== RUN   TestParseLevel/info
+=== RUN   TestParseLevel/debug
+=== RUN   TestParseLevel/invalid
+=== RUN   TestParseLevel/#00
+--- PASS: TestParseLevel (0.00s)
+    --- PASS: TestParseLevel/none (0.00s)
+    --- PASS: TestParseLevel/error (0.00s)
+    --- PASS: TestParseLevel/warn (0.00s)
+    --- PASS: TestParseLevel/warning (0.00s)
+    --- PASS: TestParseLevel/info (0.00s)
+    --- PASS: TestParseLevel/debug (0.00s)
+    --- PASS: TestParseLevel/invalid (0.00s)
+    --- PASS: TestParseLevel/#00 (0.00s)
+=== RUN   TestSetGetLevel
+=== RUN   TestSetGetLevel/SetLevel(0)
+=== RUN   TestSetGetLevel/SetLevel(1)
+=== RUN   TestSetGetLevel/SetLevel(2)
+=== RUN   TestSetGetLevel/SetLevel(3)
+=== RUN   TestSetGetLevel/SetLevel(4)
+=== RUN   TestSetGetLevel/SetLevel(-1)
+=== RUN   TestSetGetLevel/SetLevel(-100)
+=== RUN   TestSetGetLevel/SetLevel(5)
+=== RUN   TestSetGetLevel/SetLevel(100)
+--- PASS: TestSetGetLevel (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(0) (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(1) (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(2) (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(3) (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(4) (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(-1) (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(-100) (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(5) (0.00s)
+    --- PASS: TestSetGetLevel/SetLevel(100) (0.00s)
+=== RUN   TestSetupLogging
+=== RUN   TestSetupLogging/valid_info
+=== RUN   TestSetupLogging/valid_debug_upper
+=== RUN   TestSetupLogging/valid_none_mixed_case
+=== RUN   TestSetupLogging/invalid_level
+=== RUN   TestSetupLogging/empty_string
+--- PASS: TestSetupLogging (0.00s)
+    --- PASS: TestSetupLogging/valid_info (0.00s)
+    --- PASS: TestSetupLogging/valid_debug_upper (0.00s)
+    --- PASS: TestSetupLogging/valid_none_mixed_case (0.00s)
+    --- PASS: TestSetupLogging/invalid_level (0.00s)
+    --- PASS: TestSetupLogging/empty_string (0.00s)
+=== RUN   TestSetOutput
+--- PASS: TestSetOutput (0.00s)
+=== RUN   TestLogfBehavior
+=== RUN   TestLogfBehavior/LevelSetTo_None
+=== RUN   TestLogfBehavior/LevelSetTo_Error
+=== RUN   TestLogfBehavior/LevelSetTo_Warning
+=== RUN   TestLogfBehavior/LevelSetTo_Info
+=== RUN   TestLogfBehavior/LevelSetTo_Debug
+--- PASS: TestLogfBehavior (0.00s)
+    --- PASS: TestLogfBehavior/LevelSetTo_None (0.00s)
+    --- PASS: TestLogfBehavior/LevelSetTo_Error (0.00s)
+    --- PASS: TestLogfBehavior/LevelSetTo_Warning (0.00s)
+    --- PASS: TestLogfBehavior/LevelSetTo_Info (0.00s)
+    --- PASS: TestLogfBehavior/LevelSetTo_Debug (0.00s)
+=== RUN   TestLogfTimestamp
+--- PASS: TestLogfTimestamp (0.00s)
+=== RUN   TestLogConcurrency
+    logging_test.go:407: Concurrent logging produced 840 lines (max possible ~2000)
+--- PASS: TestLogConcurrency (0.00s)
+=== RUN   TestDefaultLogger
+--- PASS: TestDefaultLogger (0.00s)
+PASS
+ok  	etl-tool/internal/logging	0.875s
+=== RUN   TestNewProcessor
+=== RUN   TestNewProcessor/Nil_configs
+=== RUN   TestNewProcessor/Dedup_with_no_strategy
+=== RUN   TestNewProcessor/Error_handling_skip,_logErrors_nil
+=== RUN   TestNewProcessor/Flattening_config_defaults
+=== RUN   TestNewProcessor/Flattening_config_explicit
+--- PASS: TestNewProcessor (0.00s)
+    --- PASS: TestNewProcessor/Nil_configs (0.00s)
+    --- PASS: TestNewProcessor/Dedup_with_no_strategy (0.00s)
+    --- PASS: TestNewProcessor/Error_handling_skip,_logErrors_nil (0.00s)
+    --- PASS: TestNewProcessor/Flattening_config_defaults (0.00s)
+    --- PASS: TestNewProcessor/Flattening_config_explicit (0.00s)
+=== RUN   TestProcessRecords
+=== RUN   TestProcessRecords/Basic_mapping_success
+=== RUN   TestProcessRecords/Mapping_chain_success
+=== RUN   TestProcessRecords/Mapping_source_missing_(uses_nil)
+=== RUN   TestProcessRecords/Validation_pass
+=== RUN   TestProcessRecords/Validation_fail_(Halt_Mode)
+2025/04/09 10:09:15.682538 [ERROR] Processor: Error record 1 (mapping): validation failed for rule #0 ('email' -> 'email', transform: 'validateRegex'): value "invalid-email" does not match required pattern '\w+@\w+\.\w+'. Halting.
+=== RUN   TestProcessRecords/Validation_fail_(Skip_Mode_-_Log)
+2025/04/09 10:09:15.682808 [WARN] Processor: Error record 1 (mapping): validation failed for rule #1 ('status' -> 'status', transform: 'validateRequired'): required string value is empty or whitespace. Skipping. Original (masked): map[age:40 email:good@email.org status:]
+2025/04/09 10:09:15.682829 [WARN] Processor: Error record 2 (mapping): validation failed for rule #2 ('age' -> 'age', transform: 'validateNumericRange'): value 150 is greater than maximum allowed 120. Skipping. Original (masked): map[age:150 email:ok@domain.net status:active]
+2025/04/09 10:09:15.682843 [WARN] Processor: Finished processing. Skipped 2 records/parents due to errors.
+=== RUN   TestProcessRecords/Validation_fail_(Skip_Mode_-_With_Error_Writer)
+2025/04/09 10:09:15.682902 [WARN] Processor: Error record 1 (mapping): validation failed for rule #0 ('email' -> 'email', transform: 'validateRegex'): value "invalid" does not match required pattern '\w+@\w+\.\w+'. Skipping. Original (masked): map[age:40 email:invalid status:active]
+2025/04/09 10:09:15.682922 [WARN] Processor: Error record 2 (mapping): validation failed for rule #2 ('age' -> 'age', transform: 'validateNumericRange'): value -5 is less than minimum allowed 0. Skipping. Original (masked): map[age:-5 email:ok@domain.net status:ok]
+2025/04/09 10:09:15.682925 [WARN] Processor: Finished processing. Skipped 2 records/parents due to errors.
+=== RUN   TestProcessRecords/Validation_fail_(Skip_Mode_-_Error_Writer_Fails)
+2025/04/09 10:09:15.682978 [WARN] Processor: Error record 1 (mapping): validation failed for rule #0 ('email' -> 'email', transform: 'validateRegex'): value "invalid" does not match required pattern '\w+@\w+\.\w+'. Skipping. Original (masked): map[age:40 email:invalid status:active]
+2025/04/09 10:09:15.682983 [ERROR] Processor: Failed to write record 1 (mapping) error to error file: mock write error
+2025/04/09 10:09:15.682984 [WARN] Processor: Finished processing. Skipped 1 records/parents due to errors.
+=== RUN   TestProcessRecords/Deduplication_(First)
+2025/04/09 10:09:15.683016 [INFO] Processor: Deduplication removed 2 records (5 -> 3).
+=== RUN   TestProcessRecords/Empty_input_records
+2025/04/09 10:09:15.683043 [INFO] Processor: No input records to process.
+=== RUN   TestProcessRecords/No_mappings_defined
+=== RUN   TestProcessRecords/Flatten_Simple_List_(IncludeParent=true)
+=== RUN   TestProcessRecords/Flatten_Nested_List_(Dot_Notation)
+=== RUN   TestProcessRecords/Flatten_List_(IncludeParent=false)
+=== RUN   TestProcessRecords/Flatten_Skip_Non-List_(ErrorOnNonList=false)
+=== RUN   TestProcessRecords/Flatten_Error_Non-List_(ErrorOnNonList=true)
+2025/04/09 10:09:15.683332 [ERROR] Processor: Error record 0 (flattening): flattening source field 'items' is not a slice (type: string). Halting.
+=== RUN   TestProcessRecords/Flatten_Error_Missing_Field_(ErrorOnNonList=true)
+2025/04/09 10:09:15.683354 [ERROR] Processor: Error record 0 (flattening): flattening source field 'items' not found or is nil. Halting.
+=== RUN   TestProcessRecords/Flatten_Conditional_-_Match
+=== RUN   TestProcessRecords/Flatten_Conditional_-_No_Match
+=== RUN   TestProcessRecords/Flatten_Empty_List
+=== RUN   TestProcessRecords/Flatten_Skip_Error_Write
+2025/04/09 10:09:15.683498 [WARN] Processor: Error record 0 (flattening): flattening source field 'items' is not a slice (type: string). Skipping parent record. Parent (masked): map[id:1 items:not-list]
+2025/04/09 10:09:15.683505 [WARN] Processor: Finished processing. Skipped 1 records/parents due to errors.
+=== RUN   TestProcessRecords/Flatten_then_Dedup_(First)
+2025/04/09 10:09:15.683548 [INFO] Processor: Deduplication removed 1 records (4 -> 3).
+--- PASS: TestProcessRecords (0.00s)
+    --- PASS: TestProcessRecords/Basic_mapping_success (0.00s)
+    --- PASS: TestProcessRecords/Mapping_chain_success (0.00s)
+    --- PASS: TestProcessRecords/Mapping_source_missing_(uses_nil) (0.00s)
+    --- PASS: TestProcessRecords/Validation_pass (0.00s)
+    --- PASS: TestProcessRecords/Validation_fail_(Halt_Mode) (0.00s)
+    --- PASS: TestProcessRecords/Validation_fail_(Skip_Mode_-_Log) (0.00s)
+    --- PASS: TestProcessRecords/Validation_fail_(Skip_Mode_-_With_Error_Writer) (0.00s)
+    --- PASS: TestProcessRecords/Validation_fail_(Skip_Mode_-_Error_Writer_Fails) (0.00s)
+    --- PASS: TestProcessRecords/Deduplication_(First) (0.00s)
+    --- PASS: TestProcessRecords/Empty_input_records (0.00s)
+    --- PASS: TestProcessRecords/No_mappings_defined (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Simple_List_(IncludeParent=true) (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Nested_List_(Dot_Notation) (0.00s)
+    --- PASS: TestProcessRecords/Flatten_List_(IncludeParent=false) (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Skip_Non-List_(ErrorOnNonList=false) (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Error_Non-List_(ErrorOnNonList=true) (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Error_Missing_Field_(ErrorOnNonList=true) (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Conditional_-_Match (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Conditional_-_No_Match (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Empty_List (0.00s)
+    --- PASS: TestProcessRecords/Flatten_Skip_Error_Write (0.00s)
+    --- PASS: TestProcessRecords/Flatten_then_Dedup_(First) (0.00s)
+PASS
+ok  	etl-tool/internal/processor	0.449s
+=== RUN   TestApplyTransform
+=== RUN   TestApplyTransform/Known_function_lookup_-_toUpperCase
+=== RUN   TestApplyTransform/Known_function_lookup_-_toInt
+=== RUN   TestApplyTransform/Unknown_function
+2025/04/09 10:09:16.236468 [WARN] Transformation function 'nonexistentfunction' not found; using original value.
+=== RUN   TestApplyTransform/Empty_transform_string
+=== RUN   TestApplyTransform/Function_with_explicit_params_-_replaceAll
+=== RUN   TestApplyTransform/Function_with_shorthand_param_-_regexExtract
+=== RUN   TestApplyTransform/Shorthand_param_ignored_if_explicit_exists
+=== RUN   TestApplyTransform/Shorthand_param_for_function_without_default_key
+2025/04/09 10:09:16.236948 [WARN] Transform string 'toUpperCase:ignored' has a shorthand parameter, but no default key is defined for function 'touppercase'. Shorthand ignored.
+=== RUN   TestApplyTransform/Validation_function_passes
+=== RUN   TestApplyTransform/Validation_function_fails
+=== RUN   TestApplyTransform/Strict_function_passes
+=== RUN   TestApplyTransform/Strict_function_fails
+=== RUN   TestApplyTransform/Context-aware_transform_-_branch
+--- PASS: TestApplyTransform (0.00s)
+    --- PASS: TestApplyTransform/Known_function_lookup_-_toUpperCase (0.00s)
+    --- PASS: TestApplyTransform/Known_function_lookup_-_toInt (0.00s)
+    --- PASS: TestApplyTransform/Unknown_function (0.00s)
+    --- PASS: TestApplyTransform/Empty_transform_string (0.00s)
+    --- PASS: TestApplyTransform/Function_with_explicit_params_-_replaceAll (0.00s)
+    --- PASS: TestApplyTransform/Function_with_shorthand_param_-_regexExtract (0.00s)
+    --- PASS: TestApplyTransform/Shorthand_param_ignored_if_explicit_exists (0.00s)
+    --- PASS: TestApplyTransform/Shorthand_param_for_function_without_default_key (0.00s)
+    --- PASS: TestApplyTransform/Validation_function_passes (0.00s)
+    --- PASS: TestApplyTransform/Validation_function_fails (0.00s)
+    --- PASS: TestApplyTransform/Strict_function_passes (0.00s)
+    --- PASS: TestApplyTransform/Strict_function_fails (0.00s)
+    --- PASS: TestApplyTransform/Context-aware_transform_-_branch (0.00s)
+=== RUN   TestEpochToDate
+=== RUN   TestEpochToDate/valid_int_epoch
+=== RUN   TestEpochToDate/valid_int64_epoch
+=== RUN   TestEpochToDate/valid_float_epoch
+=== RUN   TestEpochToDate/valid_string_epoch
+=== RUN   TestEpochToDate/valid_string_float_epoch
+=== RUN   TestEpochToDate/unlikely_low_int
+=== RUN   TestEpochToDate/unlikely_high_float
+=== RUN   TestEpochToDate/zero_string
+=== RUN   TestEpochToDate/negative_epoch
+=== RUN   TestEpochToDate/invalid_string
+2025/04/09 10:09:16.237393 [WARN] epochToDate: could not parse input 'not a number' (type string) as epoch seconds.
+=== RUN   TestEpochToDate/empty_string
+2025/04/09 10:09:16.237436 [WARN] epochToDate: could not parse input '' (type string) as epoch seconds.
+=== RUN   TestEpochToDate/nil_input
+2025/04/09 10:09:16.237452 [WARN] epochToDate: could not parse input '<nil>' (type <nil>) as epoch seconds.
+=== RUN   TestEpochToDate/bool_input
+2025/04/09 10:09:16.237468 [WARN] epochToDate: could not parse input 'true' (type bool) as epoch seconds.
+--- PASS: TestEpochToDate (0.00s)
+    --- PASS: TestEpochToDate/valid_int_epoch (0.00s)
+    --- PASS: TestEpochToDate/valid_int64_epoch (0.00s)
+    --- PASS: TestEpochToDate/valid_float_epoch (0.00s)
+    --- PASS: TestEpochToDate/valid_string_epoch (0.00s)
+    --- PASS: TestEpochToDate/valid_string_float_epoch (0.00s)
+    --- PASS: TestEpochToDate/unlikely_low_int (0.00s)
+    --- PASS: TestEpochToDate/unlikely_high_float (0.00s)
+    --- PASS: TestEpochToDate/zero_string (0.00s)
+    --- PASS: TestEpochToDate/negative_epoch (0.00s)
+    --- PASS: TestEpochToDate/invalid_string (0.00s)
+    --- PASS: TestEpochToDate/empty_string (0.00s)
+    --- PASS: TestEpochToDate/nil_input (0.00s)
+    --- PASS: TestEpochToDate/bool_input (0.00s)
+=== RUN   TestMustEpochToDate
+=== RUN   TestMustEpochToDate/valid_int_epoch
+=== RUN   TestMustEpochToDate/valid_string_epoch
+=== RUN   TestMustEpochToDate/valid_float_epoch
+=== RUN   TestMustEpochToDate/unlikely_low_int
+=== RUN   TestMustEpochToDate/unlikely_high_float
+=== RUN   TestMustEpochToDate/invalid_string
+=== RUN   TestMustEpochToDate/nil_input
+--- PASS: TestMustEpochToDate (0.00s)
+    --- PASS: TestMustEpochToDate/valid_int_epoch (0.00s)
+    --- PASS: TestMustEpochToDate/valid_string_epoch (0.00s)
+    --- PASS: TestMustEpochToDate/valid_float_epoch (0.00s)
+    --- PASS: TestMustEpochToDate/unlikely_low_int (0.00s)
+    --- PASS: TestMustEpochToDate/unlikely_high_float (0.00s)
+    --- PASS: TestMustEpochToDate/invalid_string (0.00s)
+    --- PASS: TestMustEpochToDate/nil_input (0.00s)
+=== RUN   TestCalculateAge
+=== RUN   TestCalculateAge/10_days_ago
+=== RUN   TestCalculateAge/approx_5_years_ago
+=== RUN   TestCalculateAge/future_date
+=== RUN   TestCalculateAge/zero_epoch
+=== RUN   TestCalculateAge/low_int_epoch
+=== RUN   TestCalculateAge/invalid_string
+2025/04/09 10:09:16.237771 [WARN] calculateAge: could not parse input 'text' (type string) as numeric epoch seconds.
+=== RUN   TestCalculateAge/nil_input
+2025/04/09 10:09:16.237790 [WARN] calculateAge: could not parse input '<nil>' (type <nil>) as numeric epoch seconds.
+=== RUN   TestCalculateAge/very_old_epoch
+--- PASS: TestCalculateAge (0.00s)
+    --- PASS: TestCalculateAge/10_days_ago (0.00s)
+    --- PASS: TestCalculateAge/approx_5_years_ago (0.00s)
+    --- PASS: TestCalculateAge/future_date (0.00s)
+    --- PASS: TestCalculateAge/zero_epoch (0.00s)
+    --- PASS: TestCalculateAge/low_int_epoch (0.00s)
+    --- PASS: TestCalculateAge/invalid_string (0.00s)
+    --- PASS: TestCalculateAge/nil_input (0.00s)
+    --- PASS: TestCalculateAge/very_old_epoch (0.00s)
+=== RUN   TestRegexExtract
+=== RUN   TestRegexExtract/simple_match
+=== RUN   TestRegexExtract/match_word
+=== RUN   TestRegexExtract/no_match
+=== RUN   TestRegexExtract/no_capture_group
+=== RUN   TestRegexExtract/empty_string_input
+=== RUN   TestRegexExtract/nil_input
+2025/04/09 10:09:16.237950 [WARN] regexExtract: input value is not a string (type <nil>)
+=== RUN   TestRegexExtract/non-string_input
+2025/04/09 10:09:16.237968 [WARN] regexExtract: input value is not a string (type int)
+=== RUN   TestRegexExtract/missing_pattern_param
+2025/04/09 10:09:16.237985 [WARN] regexExtract: missing or empty 'pattern' string parameter.
+=== RUN   TestRegexExtract/empty_pattern_param
+2025/04/09 10:09:16.238003 [WARN] regexExtract: missing or empty 'pattern' string parameter.
+=== RUN   TestRegexExtract/invalid_pattern_param_(type)
+2025/04/09 10:09:16.238020 [WARN] regexExtract: missing or empty 'pattern' string parameter.
+=== RUN   TestRegexExtract/invalid_regex_syntax
+2025/04/09 10:09:16.238042 [ERROR] regexExtract: Invalid regex pattern '(': error parsing regexp: missing closing ): `(`
+--- PASS: TestRegexExtract (0.00s)
+    --- PASS: TestRegexExtract/simple_match (0.00s)
+    --- PASS: TestRegexExtract/match_word (0.00s)
+    --- PASS: TestRegexExtract/no_match (0.00s)
+    --- PASS: TestRegexExtract/no_capture_group (0.00s)
+    --- PASS: TestRegexExtract/empty_string_input (0.00s)
+    --- PASS: TestRegexExtract/nil_input (0.00s)
+    --- PASS: TestRegexExtract/non-string_input (0.00s)
+    --- PASS: TestRegexExtract/missing_pattern_param (0.00s)
+    --- PASS: TestRegexExtract/empty_pattern_param (0.00s)
+    --- PASS: TestRegexExtract/invalid_pattern_param_(type) (0.00s)
+    --- PASS: TestRegexExtract/invalid_regex_syntax (0.00s)
+=== RUN   TestTrim
+=== RUN   TestTrim/leading/trailing_spaces
+=== RUN   TestTrim/leading_spaces_only
+=== RUN   TestTrim/trailing_spaces_only
+=== RUN   TestTrim/spaces_and_tabs
+=== RUN   TestTrim/newlines
+=== RUN   TestTrim/no_spaces
+=== RUN   TestTrim/empty_string
+=== RUN   TestTrim/whitespace_only_string
+=== RUN   TestTrim/non-string_number
+=== RUN   TestTrim/nil_input
+--- PASS: TestTrim (0.00s)
+    --- PASS: TestTrim/leading/trailing_spaces (0.00s)
+    --- PASS: TestTrim/leading_spaces_only (0.00s)
+    --- PASS: TestTrim/trailing_spaces_only (0.00s)
+    --- PASS: TestTrim/spaces_and_tabs (0.00s)
+    --- PASS: TestTrim/newlines (0.00s)
+    --- PASS: TestTrim/no_spaces (0.00s)
+    --- PASS: TestTrim/empty_string (0.00s)
+    --- PASS: TestTrim/whitespace_only_string (0.00s)
+    --- PASS: TestTrim/non-string_number (0.00s)
+    --- PASS: TestTrim/nil_input (0.00s)
+=== RUN   TestToUpper
+=== RUN   TestToUpper/lowercase_string
+=== RUN   TestToUpper/mixed_case_string
+=== RUN   TestToUpper/uppercase_string
+=== RUN   TestToUpper/string_with_numbers/symbols
+=== RUN   TestToUpper/empty_string
+=== RUN   TestToUpper/non-string_number
+=== RUN   TestToUpper/non-string_bool
+=== RUN   TestToUpper/nil_input
+--- PASS: TestToUpper (0.00s)
+    --- PASS: TestToUpper/lowercase_string (0.00s)
+    --- PASS: TestToUpper/mixed_case_string (0.00s)
+    --- PASS: TestToUpper/uppercase_string (0.00s)
+    --- PASS: TestToUpper/string_with_numbers/symbols (0.00s)
+    --- PASS: TestToUpper/empty_string (0.00s)
+    --- PASS: TestToUpper/non-string_number (0.00s)
+    --- PASS: TestToUpper/non-string_bool (0.00s)
+    --- PASS: TestToUpper/nil_input (0.00s)
+=== RUN   TestToLower
+=== RUN   TestToLower/uppercase_string
+=== RUN   TestToLower/mixed_case_string
+=== RUN   TestToLower/lowercase_string
+=== RUN   TestToLower/string_with_numbers/symbols
+=== RUN   TestToLower/empty_string
+=== RUN   TestToLower/non-string_number
+=== RUN   TestToLower/non-string_bool
+=== RUN   TestToLower/nil_input
+--- PASS: TestToLower (0.00s)
+    --- PASS: TestToLower/uppercase_string (0.00s)
+    --- PASS: TestToLower/mixed_case_string (0.00s)
+    --- PASS: TestToLower/lowercase_string (0.00s)
+    --- PASS: TestToLower/string_with_numbers/symbols (0.00s)
+    --- PASS: TestToLower/empty_string (0.00s)
+    --- PASS: TestToLower/non-string_number (0.00s)
+    --- PASS: TestToLower/non-string_bool (0.00s)
+    --- PASS: TestToLower/nil_input (0.00s)
+=== RUN   TestBranchTransform
+=== RUN   TestBranchTransform/first_condition_matches
+=== RUN   TestBranchTransform/second_condition_matches
+=== RUN   TestBranchTransform/no_condition_matches
+=== RUN   TestBranchTransform/condition_uses_input_value
+=== RUN   TestBranchTransform/condition_evaluation_error
+=== RUN   TestBranchTransform/invalid_condition_syntax
+2025/04/09 10:09:16.238729 [ERROR] branchTransform: Failed to parse condition 'status ==' in branch 0: Unexpected end of expression
+=== RUN   TestBranchTransform/missing_branches_param
+2025/04/09 10:09:16.238748 [WARN] branchTransform: missing 'branches' parameter.
+=== RUN   TestBranchTransform/branches_param_not_array
+2025/04/09 10:09:16.238766 [WARN] branchTransform: 'branches' parameter is not a non-empty array.
+=== RUN   TestBranchTransform/branches_array_empty
+2025/04/09 10:09:16.238787 [WARN] branchTransform: 'branches' parameter is not a non-empty array.
+=== RUN   TestBranchTransform/branch_definition_not_map
+2025/04/09 10:09:16.238806 [WARN] branchTransform: branch 0 definition is not a map structure.
+=== RUN   TestBranchTransform/branch_missing_condition
+2025/04/09 10:09:16.238831 [WARN] branchTransform: branch 0 is missing 'condition' key.
+=== RUN   TestBranchTransform/branch_missing_value
+2025/04/09 10:09:16.238860 [WARN] branchTransform: branch 0 is missing 'value' key.
+--- PASS: TestBranchTransform (0.00s)
+    --- PASS: TestBranchTransform/first_condition_matches (0.00s)
+    --- PASS: TestBranchTransform/second_condition_matches (0.00s)
+    --- PASS: TestBranchTransform/no_condition_matches (0.00s)
+    --- PASS: TestBranchTransform/condition_uses_input_value (0.00s)
+    --- PASS: TestBranchTransform/condition_evaluation_error (0.00s)
+    --- PASS: TestBranchTransform/invalid_condition_syntax (0.00s)
+    --- PASS: TestBranchTransform/missing_branches_param (0.00s)
+    --- PASS: TestBranchTransform/branches_param_not_array (0.00s)
+    --- PASS: TestBranchTransform/branches_array_empty (0.00s)
+    --- PASS: TestBranchTransform/branch_definition_not_map (0.00s)
+    --- PASS: TestBranchTransform/branch_missing_condition (0.00s)
+    --- PASS: TestBranchTransform/branch_missing_value (0.00s)
+=== RUN   TestDateConvert
+=== RUN   TestDateConvert/RFC3339_to_YYYY-MM-DD
+=== RUN   TestDateConvert/YYYY-MM-DD_input_to_RFC3339_output
+=== RUN   TestDateConvert/MM/DD/YYYY_input_to_YYYYMMDD_output
+=== RUN   TestDateConvert/time.Time_input_to_HH:MM_output
+=== RUN   TestDateConvert/Default_formats_(RFC3339_in/out)
+=== RUN   TestDateConvert/Fallback_parse_YYYY/MM/DD
+=== RUN   TestDateConvert/Fallback_parse_MM/DD/YYYY
+=== RUN   TestDateConvert/Fallback_parse_YYYYMMDD
+=== RUN   TestDateConvert/Specific_format_parse_fails
+2025/04/09 10:09:16.239058 [WARN] dateConvert: failed to parse '2023-03-15' with specified format '01/02/2006': parsing time "2023-03-15": month out of range
+=== RUN   TestDateConvert/Fallback_parse_fails
+2025/04/09 10:09:16.239079 [WARN] dateConvert: failed to parse '15-Mar-2023' with default format '2006-01-02T15:04:05Z07:00' or common fallbacks.
+=== RUN   TestDateConvert/Nil_input
+2025/04/09 10:09:16.239102 [WARN] dateConvert: input value is not a string or time.Time (type <nil>)
+=== RUN   TestDateConvert/Non-string/non-time_input
+2025/04/09 10:09:16.239120 [WARN] dateConvert: input value is not a string or time.Time (type int)
+=== RUN   TestDateConvert/Empty_output_format
+=== RUN   TestDateConvert/Zero_time_input
+=== RUN   TestDateConvert/Invalid_time_string_input
+2025/04/09 10:09:16.239173 [WARN] dateConvert: failed to parse 'invalid date' with specified format '2006-01-02': parsing time "invalid date" as "2006-01-02": cannot parse "invalid date" as "2006"
+--- PASS: TestDateConvert (0.00s)
+    --- PASS: TestDateConvert/RFC3339_to_YYYY-MM-DD (0.00s)
+    --- PASS: TestDateConvert/YYYY-MM-DD_input_to_RFC3339_output (0.00s)
+    --- PASS: TestDateConvert/MM/DD/YYYY_input_to_YYYYMMDD_output (0.00s)
+    --- PASS: TestDateConvert/time.Time_input_to_HH:MM_output (0.00s)
+    --- PASS: TestDateConvert/Default_formats_(RFC3339_in/out) (0.00s)
+    --- PASS: TestDateConvert/Fallback_parse_YYYY/MM/DD (0.00s)
+    --- PASS: TestDateConvert/Fallback_parse_MM/DD/YYYY (0.00s)
+    --- PASS: TestDateConvert/Fallback_parse_YYYYMMDD (0.00s)
+    --- PASS: TestDateConvert/Specific_format_parse_fails (0.00s)
+    --- PASS: TestDateConvert/Fallback_parse_fails (0.00s)
+    --- PASS: TestDateConvert/Nil_input (0.00s)
+    --- PASS: TestDateConvert/Non-string/non-time_input (0.00s)
+    --- PASS: TestDateConvert/Empty_output_format (0.00s)
+    --- PASS: TestDateConvert/Zero_time_input (0.00s)
+    --- PASS: TestDateConvert/Invalid_time_string_input (0.00s)
+=== RUN   TestMustDateConvert
+=== RUN   TestMustDateConvert/Valid_conversion
+=== RUN   TestMustDateConvert/Fallback_parse_success
+=== RUN   TestMustDateConvert/Specific_format_parse_fails
+=== RUN   TestMustDateConvert/Fallback_parse_fails
+=== RUN   TestMustDateConvert/Nil_input
+=== RUN   TestMustDateConvert/Non-string/non-time_input
+--- PASS: TestMustDateConvert (0.00s)
+    --- PASS: TestMustDateConvert/Valid_conversion (0.00s)
+    --- PASS: TestMustDateConvert/Fallback_parse_success (0.00s)
+    --- PASS: TestMustDateConvert/Specific_format_parse_fails (0.00s)
+    --- PASS: TestMustDateConvert/Fallback_parse_fails (0.00s)
+    --- PASS: TestMustDateConvert/Nil_input (0.00s)
+    --- PASS: TestMustDateConvert/Non-string/non-time_input (0.00s)
+=== RUN   TestMultiDateConvert
+=== RUN   TestMultiDateConvert/First_format_matches
+=== RUN   TestMultiDateConvert/Second_format_matches
+=== RUN   TestMultiDateConvert/Third_format_matches
+=== RUN   TestMultiDateConvert/No_format_matches
+2025/04/09 10:09:16.239450 [WARN] multiDateConvert: Could not parse '15 Mar 2023' with any of the provided formats: [2006-01-02 01/02/2006 2006/01/02]
+=== RUN   TestMultiDateConvert/Nil_input
+2025/04/09 10:09:16.239466 [WARN] multiDateConvert: input value is not a string (type <nil>)
+=== RUN   TestMultiDateConvert/Non-string_input
+2025/04/09 10:09:16.239483 [WARN] multiDateConvert: input value is not a string (type int)
+=== RUN   TestMultiDateConvert/Missing_formats_param
+2025/04/09 10:09:16.239498 [WARN] multiDateConvert: requires both 'formats' and 'outputFormat' parameters.
+=== RUN   TestMultiDateConvert/Missing_outputFormat_param
+2025/04/09 10:09:16.239511 [WARN] multiDateConvert: requires both 'formats' and 'outputFormat' parameters.
+=== RUN   TestMultiDateConvert/Empty_formats_array
+2025/04/09 10:09:16.239529 [WARN] multiDateConvert: requires non-empty 'formats' array and non-empty 'outputFormat' string parameters.
+--- PASS: TestMultiDateConvert (0.00s)
+    --- PASS: TestMultiDateConvert/First_format_matches (0.00s)
+    --- PASS: TestMultiDateConvert/Second_format_matches (0.00s)
+    --- PASS: TestMultiDateConvert/Third_format_matches (0.00s)
+    --- PASS: TestMultiDateConvert/No_format_matches (0.00s)
+    --- PASS: TestMultiDateConvert/Nil_input (0.00s)
+    --- PASS: TestMultiDateConvert/Non-string_input (0.00s)
+    --- PASS: TestMultiDateConvert/Missing_formats_param (0.00s)
+    --- PASS: TestMultiDateConvert/Missing_outputFormat_param (0.00s)
+    --- PASS: TestMultiDateConvert/Empty_formats_array (0.00s)
+=== RUN   TestToInt
+=== RUN   TestToInt/valid_int_string
+=== RUN   TestToInt/valid_negative_int_string
+=== RUN   TestToInt/valid_float_string_(whole)
+=== RUN   TestToInt/valid_float_string_(negative_whole)
+=== RUN   TestToInt/float_string_(fractional)
+2025/04/09 10:09:16.239640 [WARN] toInt: conversion failed for input '99.5' (type string); returning nil
+=== RUN   TestToInt/string_with_space
+=== RUN   TestToInt/int_input
+=== RUN   TestToInt/int32_input
+=== RUN   TestToInt/uint64_input_(fits)
+=== RUN   TestToInt/uint64_input_(overflow)
+2025/04/09 10:09:16.239725 [WARN] toInt: conversion failed for input '18446744073709551615' (type uint64); returning nil
+=== RUN   TestToInt/float32_input_(whole)
+=== RUN   TestToInt/float64_input_(whole)
+=== RUN   TestToInt/float_input_(fractional)
+2025/04/09 10:09:16.239787 [WARN] toInt: conversion failed for input '3.14' (type float64); returning nil
+=== RUN   TestToInt/bool_true
+2025/04/09 10:09:16.239802 [WARN] toInt: conversion failed for input 'true' (type bool); returning nil
+=== RUN   TestToInt/bool_false
+2025/04/09 10:09:16.239820 [WARN] toInt: conversion failed for input 'false' (type bool); returning nil
+=== RUN   TestToInt/invalid_string
+2025/04/09 10:09:16.239848 [WARN] toInt: conversion failed for input 'abc' (type string); returning nil
+=== RUN   TestToInt/empty_string
+2025/04/09 10:09:16.239864 [WARN] toInt: conversion failed for input '' (type string); returning nil
+=== RUN   TestToInt/nil_input
+2025/04/09 10:09:16.239879 [WARN] toInt: conversion failed for input '<nil>' (type <nil>); returning nil
+--- PASS: TestToInt (0.00s)
+    --- PASS: TestToInt/valid_int_string (0.00s)
+    --- PASS: TestToInt/valid_negative_int_string (0.00s)
+    --- PASS: TestToInt/valid_float_string_(whole) (0.00s)
+    --- PASS: TestToInt/valid_float_string_(negative_whole) (0.00s)
+    --- PASS: TestToInt/float_string_(fractional) (0.00s)
+    --- PASS: TestToInt/string_with_space (0.00s)
+    --- PASS: TestToInt/int_input (0.00s)
+    --- PASS: TestToInt/int32_input (0.00s)
+    --- PASS: TestToInt/uint64_input_(fits) (0.00s)
+    --- PASS: TestToInt/uint64_input_(overflow) (0.00s)
+    --- PASS: TestToInt/float32_input_(whole) (0.00s)
+    --- PASS: TestToInt/float64_input_(whole) (0.00s)
+    --- PASS: TestToInt/float_input_(fractional) (0.00s)
+    --- PASS: TestToInt/bool_true (0.00s)
+    --- PASS: TestToInt/bool_false (0.00s)
+    --- PASS: TestToInt/invalid_string (0.00s)
+    --- PASS: TestToInt/empty_string (0.00s)
+    --- PASS: TestToInt/nil_input (0.00s)
+=== RUN   TestMustToInt
+=== RUN   TestMustToInt/valid_int_string
+=== RUN   TestMustToInt/valid_int
+=== RUN   TestMustToInt/valid_float_string_(whole)
+=== RUN   TestMustToInt/float_string_(fractional)
+=== RUN   TestMustToInt/uint64_input_(overflow)
+=== RUN   TestMustToInt/float_input_(fractional)
+=== RUN   TestMustToInt/invalid_string
+=== RUN   TestMustToInt/nil_input
+--- PASS: TestMustToInt (0.00s)
+    --- PASS: TestMustToInt/valid_int_string (0.00s)
+    --- PASS: TestMustToInt/valid_int (0.00s)
+    --- PASS: TestMustToInt/valid_float_string_(whole) (0.00s)
+    --- PASS: TestMustToInt/float_string_(fractional) (0.00s)
+    --- PASS: TestMustToInt/uint64_input_(overflow) (0.00s)
+    --- PASS: TestMustToInt/float_input_(fractional) (0.00s)
+    --- PASS: TestMustToInt/invalid_string (0.00s)
+    --- PASS: TestMustToInt/nil_input (0.00s)
+=== RUN   TestToFloat
+=== RUN   TestToFloat/valid_float_string
+=== RUN   TestToFloat/valid_negative_float_string
+=== RUN   TestToFloat/valid_int_string
+=== RUN   TestToFloat/string_with_space
+=== RUN   TestToFloat/scientific_notation_string
+=== RUN   TestToFloat/int_input
+=== RUN   TestToFloat/int32_input
+=== RUN   TestToFloat/uint64_input
+=== RUN   TestToFloat/float32_input
+=== RUN   TestToFloat/float64_input
+=== RUN   TestToFloat/bool_true
+2025/04/09 10:09:16.240201 [WARN] toFloat: conversion failed for input 'true' (type bool); returning nil
+=== RUN   TestToFloat/bool_false
+2025/04/09 10:09:16.240218 [WARN] toFloat: conversion failed for input 'false' (type bool); returning nil
+=== RUN   TestToFloat/invalid_string
+2025/04/09 10:09:16.240235 [WARN] toFloat: conversion failed for input 'abc' (type string); returning nil
+=== RUN   TestToFloat/empty_string
+2025/04/09 10:09:16.240251 [WARN] toFloat: conversion failed for input '' (type string); returning nil
+=== RUN   TestToFloat/nil_input
+2025/04/09 10:09:16.240265 [WARN] toFloat: conversion failed for input '<nil>' (type <nil>); returning nil
+--- PASS: TestToFloat (0.00s)
+    --- PASS: TestToFloat/valid_float_string (0.00s)
+    --- PASS: TestToFloat/valid_negative_float_string (0.00s)
+    --- PASS: TestToFloat/valid_int_string (0.00s)
+    --- PASS: TestToFloat/string_with_space (0.00s)
+    --- PASS: TestToFloat/scientific_notation_string (0.00s)
+    --- PASS: TestToFloat/int_input (0.00s)
+    --- PASS: TestToFloat/int32_input (0.00s)
+    --- PASS: TestToFloat/uint64_input (0.00s)
+    --- PASS: TestToFloat/float32_input (0.00s)
+    --- PASS: TestToFloat/float64_input (0.00s)
+    --- PASS: TestToFloat/bool_true (0.00s)
+    --- PASS: TestToFloat/bool_false (0.00s)
+    --- PASS: TestToFloat/invalid_string (0.00s)
+    --- PASS: TestToFloat/empty_string (0.00s)
+    --- PASS: TestToFloat/nil_input (0.00s)
+=== RUN   TestMustToFloat
+=== RUN   TestMustToFloat/valid_float_string
+=== RUN   TestMustToFloat/valid_int
+=== RUN   TestMustToFloat/bool_true
+=== RUN   TestMustToFloat/invalid_string
+=== RUN   TestMustToFloat/nil_input
+--- PASS: TestMustToFloat (0.00s)
+    --- PASS: TestMustToFloat/valid_float_string (0.00s)
+    --- PASS: TestMustToFloat/valid_int (0.00s)
+    --- PASS: TestMustToFloat/bool_true (0.00s)
+    --- PASS: TestMustToFloat/invalid_string (0.00s)
+    --- PASS: TestMustToFloat/nil_input (0.00s)
+=== RUN   TestToBool
+=== RUN   TestToBool/bool_true
+=== RUN   TestToBool/string_true
+=== RUN   TestToBool/string_TRUE
+=== RUN   TestToBool/string_t
+=== RUN   TestToBool/string_T
+=== RUN   TestToBool/string_1
+=== RUN   TestToBool/string_yes
+=== RUN   TestToBool/string_Y
+=== RUN   TestToBool/int_1
+=== RUN   TestToBool/int_-1
+=== RUN   TestToBool/float_1.0
+=== RUN   TestToBool/float_-0.5
+=== RUN   TestToBool/bool_false
+=== RUN   TestToBool/string_false
+=== RUN   TestToBool/string_FALSE
+=== RUN   TestToBool/string_f
+=== RUN   TestToBool/string_F
+=== RUN   TestToBool/string_0
+=== RUN   TestToBool/string_no
+=== RUN   TestToBool/string_N
+=== RUN   TestToBool/string_empty
+=== RUN   TestToBool/int_0
+=== RUN   TestToBool/uint_0
+=== RUN   TestToBool/float_0.0
+=== RUN   TestToBool/nil_input
+=== RUN   TestToBool/string_ambiguous_maybe
+2025/04/09 10:09:16.240759 [WARN] toBool: unrecognized string value 'maybe'; returning nil
+=== RUN   TestToBool/string_ambiguous_whitespace
+=== RUN   TestToBool/map_input
+2025/04/09 10:09:16.240797 [WARN] toBool: conversion received unsupported type 'map[string]int'; returning nil
+--- PASS: TestToBool (0.00s)
+    --- PASS: TestToBool/bool_true (0.00s)
+    --- PASS: TestToBool/string_true (0.00s)
+    --- PASS: TestToBool/string_TRUE (0.00s)
+    --- PASS: TestToBool/string_t (0.00s)
+    --- PASS: TestToBool/string_T (0.00s)
+    --- PASS: TestToBool/string_1 (0.00s)
+    --- PASS: TestToBool/string_yes (0.00s)
+    --- PASS: TestToBool/string_Y (0.00s)
+    --- PASS: TestToBool/int_1 (0.00s)
+    --- PASS: TestToBool/int_-1 (0.00s)
+    --- PASS: TestToBool/float_1.0 (0.00s)
+    --- PASS: TestToBool/float_-0.5 (0.00s)
+    --- PASS: TestToBool/bool_false (0.00s)
+    --- PASS: TestToBool/string_false (0.00s)
+    --- PASS: TestToBool/string_FALSE (0.00s)
+    --- PASS: TestToBool/string_f (0.00s)
+    --- PASS: TestToBool/string_F (0.00s)
+    --- PASS: TestToBool/string_0 (0.00s)
+    --- PASS: TestToBool/string_no (0.00s)
+    --- PASS: TestToBool/string_N (0.00s)
+    --- PASS: TestToBool/string_empty (0.00s)
+    --- PASS: TestToBool/int_0 (0.00s)
+    --- PASS: TestToBool/uint_0 (0.00s)
+    --- PASS: TestToBool/float_0.0 (0.00s)
+    --- PASS: TestToBool/nil_input (0.00s)
+    --- PASS: TestToBool/string_ambiguous_maybe (0.00s)
+    --- PASS: TestToBool/string_ambiguous_whitespace (0.00s)
+    --- PASS: TestToBool/map_input (0.00s)
+=== RUN   TestMustToBool
+=== RUN   TestMustToBool/bool_true
+=== RUN   TestMustToBool/string_true
+=== RUN   TestMustToBool/string_1
+=== RUN   TestMustToBool/int_1
+=== RUN   TestMustToBool/bool_false
+=== RUN   TestMustToBool/string_false
+=== RUN   TestMustToBool/string_0
+=== RUN   TestMustToBool/int_0
+=== RUN   TestMustToBool/nil_input
+=== RUN   TestMustToBool/string_empty
+=== RUN   TestMustToBool/string_ambiguous_maybe
+=== RUN   TestMustToBool/map_input
+--- PASS: TestMustToBool (0.00s)
+    --- PASS: TestMustToBool/bool_true (0.00s)
+    --- PASS: TestMustToBool/string_true (0.00s)
+    --- PASS: TestMustToBool/string_1 (0.00s)
+    --- PASS: TestMustToBool/int_1 (0.00s)
+    --- PASS: TestMustToBool/bool_false (0.00s)
+    --- PASS: TestMustToBool/string_false (0.00s)
+    --- PASS: TestMustToBool/string_0 (0.00s)
+    --- PASS: TestMustToBool/int_0 (0.00s)
+    --- PASS: TestMustToBool/nil_input (0.00s)
+    --- PASS: TestMustToBool/string_empty (0.00s)
+    --- PASS: TestMustToBool/string_ambiguous_maybe (0.00s)
+    --- PASS: TestMustToBool/map_input (0.00s)
+=== RUN   TestToString
+=== RUN   TestToString/string_input
+=== RUN   TestToString/int_input
+=== RUN   TestToString/float_input
+=== RUN   TestToString/bool_true_input
+=== RUN   TestToString/bool_false_input
+=== RUN   TestToString/nil_input
+=== RUN   TestToString/byte_slice_input
+=== RUN   TestToString/empty_byte_slice
+=== RUN   TestToString/time_input
+=== RUN   TestToString/map_input
+=== RUN   TestToString/slice_input
+--- PASS: TestToString (0.00s)
+    --- PASS: TestToString/string_input (0.00s)
+    --- PASS: TestToString/int_input (0.00s)
+    --- PASS: TestToString/float_input (0.00s)
+    --- PASS: TestToString/bool_true_input (0.00s)
+    --- PASS: TestToString/bool_false_input (0.00s)
+    --- PASS: TestToString/nil_input (0.00s)
+    --- PASS: TestToString/byte_slice_input (0.00s)
+    --- PASS: TestToString/empty_byte_slice (0.00s)
+    --- PASS: TestToString/time_input (0.00s)
+    --- PASS: TestToString/map_input (0.00s)
+    --- PASS: TestToString/slice_input (0.00s)
+=== RUN   TestReplaceAll
+=== RUN   TestReplaceAll/simple_replace
+=== RUN   TestReplaceAll/replace_multiple
+=== RUN   TestReplaceAll/replace_with_empty
+=== RUN   TestReplaceAll/replace_empty_with_char
+=== RUN   TestReplaceAll/no_occurrences
+=== RUN   TestReplaceAll/non-string_input
+2025/04/09 10:09:16.241285 [WARN] replaceAll: input value is not a string (type int)
+=== RUN   TestReplaceAll/missing_old_param
+2025/04/09 10:09:16.241301 [WARN] replaceAll: requires both 'old' and 'new' string parameters.
+=== RUN   TestReplaceAll/missing_new_param
+2025/04/09 10:09:16.241330 [WARN] replaceAll: requires both 'old' and 'new' string parameters.
+--- PASS: TestReplaceAll (0.00s)
+    --- PASS: TestReplaceAll/simple_replace (0.00s)
+    --- PASS: TestReplaceAll/replace_multiple (0.00s)
+    --- PASS: TestReplaceAll/replace_with_empty (0.00s)
+    --- PASS: TestReplaceAll/replace_empty_with_char (0.00s)
+    --- PASS: TestReplaceAll/no_occurrences (0.00s)
+    --- PASS: TestReplaceAll/non-string_input (0.00s)
+    --- PASS: TestReplaceAll/missing_old_param (0.00s)
+    --- PASS: TestReplaceAll/missing_new_param (0.00s)
+=== RUN   TestSubstring
+=== RUN   TestSubstring/simple_substring
+=== RUN   TestSubstring/substring_from_start
+=== RUN   TestSubstring/substring_to_end
+=== RUN   TestSubstring/length_1
+=== RUN   TestSubstring/multibyte_runes
+=== RUN   TestSubstring/start_out_of_bounds
+=== RUN   TestSubstring/negative_start
+=== RUN   TestSubstring/zero_length
+=== RUN   TestSubstring/negative_length
+=== RUN   TestSubstring/non-string_input
+2025/04/09 10:09:16.241479 [WARN] substring: input value is not a string (type int)
+=== RUN   TestSubstring/missing_start
+2025/04/09 10:09:16.241495 [WARN] substring: requires both 'start' and 'length' integer parameters.
+=== RUN   TestSubstring/missing_length
+2025/04/09 10:09:16.241510 [WARN] substring: requires both 'start' and 'length' integer parameters.
+=== RUN   TestSubstring/params_wrong_type
+2025/04/09 10:09:16.241526 [WARN] substring: requires both 'start' and 'length' integer parameters.
+--- PASS: TestSubstring (0.00s)
+    --- PASS: TestSubstring/simple_substring (0.00s)
+    --- PASS: TestSubstring/substring_from_start (0.00s)
+    --- PASS: TestSubstring/substring_to_end (0.00s)
+    --- PASS: TestSubstring/length_1 (0.00s)
+    --- PASS: TestSubstring/multibyte_runes (0.00s)
+    --- PASS: TestSubstring/start_out_of_bounds (0.00s)
+    --- PASS: TestSubstring/negative_start (0.00s)
+    --- PASS: TestSubstring/zero_length (0.00s)
+    --- PASS: TestSubstring/negative_length (0.00s)
+    --- PASS: TestSubstring/non-string_input (0.00s)
+    --- PASS: TestSubstring/missing_start (0.00s)
+    --- PASS: TestSubstring/missing_length (0.00s)
+    --- PASS: TestSubstring/params_wrong_type (0.00s)
+=== RUN   TestCoalesceTransform
+=== RUN   TestCoalesceTransform/first_non-nil
+=== RUN   TestCoalesceTransform/includes_non-string_non-nil
+=== RUN   TestCoalesceTransform/includes_false
+=== RUN   TestCoalesceTransform/all_are_nil/empty_string
+=== RUN   TestCoalesceTransform/field_not_in_record
+=== RUN   TestCoalesceTransform/empty_fields_array
+2025/04/09 10:09:16.241636 [WARN] coalesceTransform: 'fields' parameter is not a non-empty array.
+=== RUN   TestCoalesceTransform/missing_fields_param
+2025/04/09 10:09:16.241652 [WARN] coalesceTransform: missing 'fields' array parameter.
+=== RUN   TestCoalesceTransform/fields_not_array
+2025/04/09 10:09:16.241668 [WARN] coalesceTransform: 'fields' parameter is not a non-empty array.
+=== RUN   TestCoalesceTransform/field_name_not_string
+2025/04/09 10:09:16.241683 [WARN] coalesceTransform: field name at index 0 is not a string: 123. Skipping.
+--- PASS: TestCoalesceTransform (0.00s)
+    --- PASS: TestCoalesceTransform/first_non-nil (0.00s)
+    --- PASS: TestCoalesceTransform/includes_non-string_non-nil (0.00s)
+    --- PASS: TestCoalesceTransform/includes_false (0.00s)
+    --- PASS: TestCoalesceTransform/all_are_nil/empty_string (0.00s)
+    --- PASS: TestCoalesceTransform/field_not_in_record (0.00s)
+    --- PASS: TestCoalesceTransform/empty_fields_array (0.00s)
+    --- PASS: TestCoalesceTransform/missing_fields_param (0.00s)
+    --- PASS: TestCoalesceTransform/fields_not_array (0.00s)
+    --- PASS: TestCoalesceTransform/field_name_not_string (0.00s)
+=== RUN   TestValidateRequired
+=== RUN   TestValidateRequired/valid_string
+=== RUN   TestValidateRequired/valid_number
+=== RUN   TestValidateRequired/valid_bool
+=== RUN   TestValidateRequired/nil_input
+=== RUN   TestValidateRequired/empty_string
+=== RUN   TestValidateRequired/whitespace_string
+--- PASS: TestValidateRequired (0.00s)
+    --- PASS: TestValidateRequired/valid_string (0.00s)
+    --- PASS: TestValidateRequired/valid_number (0.00s)
+    --- PASS: TestValidateRequired/valid_bool (0.00s)
+    --- PASS: TestValidateRequired/nil_input (0.00s)
+    --- PASS: TestValidateRequired/empty_string (0.00s)
+    --- PASS: TestValidateRequired/whitespace_string (0.00s)
+=== RUN   TestValidateRegex
+=== RUN   TestValidateRegex/valid_match
+=== RUN   TestValidateRegex/no_match
+=== RUN   TestValidateRegex/empty_string_match
+=== RUN   TestValidateRegex/empty_string_no_match
+=== RUN   TestValidateRegex/non-string_input_passes
+=== RUN   TestValidateRegex/nil_input_passes
+=== RUN   TestValidateRegex/missing_pattern
+=== RUN   TestValidateRegex/empty_pattern
+=== RUN   TestValidateRegex/invalid_pattern_syntax
+--- PASS: TestValidateRegex (0.00s)
+    --- PASS: TestValidateRegex/valid_match (0.00s)
+    --- PASS: TestValidateRegex/no_match (0.00s)
+    --- PASS: TestValidateRegex/empty_string_match (0.00s)
+    --- PASS: TestValidateRegex/empty_string_no_match (0.00s)
+    --- PASS: TestValidateRegex/non-string_input_passes (0.00s)
+    --- PASS: TestValidateRegex/nil_input_passes (0.00s)
+    --- PASS: TestValidateRegex/missing_pattern (0.00s)
+    --- PASS: TestValidateRegex/empty_pattern (0.00s)
+    --- PASS: TestValidateRegex/invalid_pattern_syntax (0.00s)
+=== RUN   TestValidateNumericRange
+=== RUN   TestValidateNumericRange/within_range_(int)
+=== RUN   TestValidateNumericRange/within_range_(float)
+=== RUN   TestValidateNumericRange/within_range_(string)
+=== RUN   TestValidateNumericRange/at_min_boundary
+=== RUN   TestValidateNumericRange/at_max_boundary
+=== RUN   TestValidateNumericRange/only_min_specified_(valid)
+=== RUN   TestValidateNumericRange/only_max_specified_(valid)
+=== RUN   TestValidateNumericRange/below_min_(int)
+=== RUN   TestValidateNumericRange/above_max_(float)
+=== RUN   TestValidateNumericRange/below_min_(only_min_specified)
+=== RUN   TestValidateNumericRange/above_max_(only_max_specified)
+=== RUN   TestValidateNumericRange/non-numeric_input_passes
+=== RUN   TestValidateNumericRange/nil_input_passes
+=== RUN   TestValidateNumericRange/missing_min/max
+=== RUN   TestValidateNumericRange/min_not_number
+=== RUN   TestValidateNumericRange/max_not_number
+--- PASS: TestValidateNumericRange (0.00s)
+    --- PASS: TestValidateNumericRange/within_range_(int) (0.00s)
+    --- PASS: TestValidateNumericRange/within_range_(float) (0.00s)
+    --- PASS: TestValidateNumericRange/within_range_(string) (0.00s)
+    --- PASS: TestValidateNumericRange/at_min_boundary (0.00s)
+    --- PASS: TestValidateNumericRange/at_max_boundary (0.00s)
+    --- PASS: TestValidateNumericRange/only_min_specified_(valid) (0.00s)
+    --- PASS: TestValidateNumericRange/only_max_specified_(valid) (0.00s)
+    --- PASS: TestValidateNumericRange/below_min_(int) (0.00s)
+    --- PASS: TestValidateNumericRange/above_max_(float) (0.00s)
+    --- PASS: TestValidateNumericRange/below_min_(only_min_specified) (0.00s)
+    --- PASS: TestValidateNumericRange/above_max_(only_max_specified) (0.00s)
+    --- PASS: TestValidateNumericRange/non-numeric_input_passes (0.00s)
+    --- PASS: TestValidateNumericRange/nil_input_passes (0.00s)
+    --- PASS: TestValidateNumericRange/missing_min/max (0.00s)
+    --- PASS: TestValidateNumericRange/min_not_number (0.00s)
+    --- PASS: TestValidateNumericRange/max_not_number (0.00s)
+=== RUN   TestValidateAllowedValues
+=== RUN   TestValidateAllowedValues/string_found
+=== RUN   TestValidateAllowedValues/int_found
+=== RUN   TestValidateAllowedValues/int_as_string_found
+=== RUN   TestValidateAllowedValues/string_as_int_found
+=== RUN   TestValidateAllowedValues/mixed_found_(string)
+=== RUN   TestValidateAllowedValues/mixed_found_(int)
+=== RUN   TestValidateAllowedValues/mixed_found_(bool)
+=== RUN   TestValidateAllowedValues/mixed_found_(nil)
+=== RUN   TestValidateAllowedValues/string_not_found
+=== RUN   TestValidateAllowedValues/int_not_found
+=== RUN   TestValidateAllowedValues/type_mismatch_(int_vs_string_list)
+=== RUN   TestValidateAllowedValues/nil_not_in_list
+=== RUN   TestValidateAllowedValues/missing_values_param
+=== RUN   TestValidateAllowedValues/values_not_array
+=== RUN   TestValidateAllowedValues/values_empty_array
+--- PASS: TestValidateAllowedValues (0.00s)
+    --- PASS: TestValidateAllowedValues/string_found (0.00s)
+    --- PASS: TestValidateAllowedValues/int_found (0.00s)
+    --- PASS: TestValidateAllowedValues/int_as_string_found (0.00s)
+    --- PASS: TestValidateAllowedValues/string_as_int_found (0.00s)
+    --- PASS: TestValidateAllowedValues/mixed_found_(string) (0.00s)
+    --- PASS: TestValidateAllowedValues/mixed_found_(int) (0.00s)
+    --- PASS: TestValidateAllowedValues/mixed_found_(bool) (0.00s)
+    --- PASS: TestValidateAllowedValues/mixed_found_(nil) (0.00s)
+    --- PASS: TestValidateAllowedValues/string_not_found (0.00s)
+    --- PASS: TestValidateAllowedValues/int_not_found (0.00s)
+    --- PASS: TestValidateAllowedValues/type_mismatch_(int_vs_string_list) (0.00s)
+    --- PASS: TestValidateAllowedValues/nil_not_in_list (0.00s)
+    --- PASS: TestValidateAllowedValues/missing_values_param (0.00s)
+    --- PASS: TestValidateAllowedValues/values_not_array (0.00s)
+    --- PASS: TestValidateAllowedValues/values_empty_array (0.00s)
+=== RUN   TestCompareValues
+=== RUN   TestCompareValues/int_equal
+=== RUN   TestCompareValues/int_less
+=== RUN   TestCompareValues/int_greater
+=== RUN   TestCompareValues/float_equal
+=== RUN   TestCompareValues/float_less
+=== RUN   TestCompareValues/float_greater
+=== RUN   TestCompareValues/int_vs_float_equal
+=== RUN   TestCompareValues/int_vs_float_less
+=== RUN   TestCompareValues/int_vs_float_greater
+=== RUN   TestCompareValues/string_number_vs_int_equal
+=== RUN   TestCompareValues/string_number_vs_float_less
+=== RUN   TestCompareValues/int_vs_string_number_greater
+=== RUN   TestCompareValues/string_equal
+=== RUN   TestCompareValues/string_less
+=== RUN   TestCompareValues/string_greater
+=== RUN   TestCompareValues/empty_strings
+=== RUN   TestCompareValues/time_equal
+=== RUN   TestCompareValues/time_less
+=== RUN   TestCompareValues/time_greater
+=== RUN   TestCompareValues/bool_equal_true
+=== RUN   TestCompareValues/bool_equal_false
+=== RUN   TestCompareValues/bool_true_>_false
+=== RUN   TestCompareValues/bool_false_<_true
+=== RUN   TestCompareValues/nil_equal
+=== RUN   TestCompareValues/nil_less_than_int
+=== RUN   TestCompareValues/string_greater_than_nil
+=== RUN   TestCompareValues/int_vs_string
+=== RUN   TestCompareValues/string_vs_int
+=== RUN   TestCompareValues/bool_vs_int
+=== RUN   TestCompareValues/time_vs_string
+=== RUN   TestCompareValues/map_vs_map_(equal)
+=== RUN   TestCompareValues/map_vs_map_(unequal)
+=== RUN   TestCompareValues/slice_vs_slice_(equal)
+=== RUN   TestCompareValues/slice_vs_slice_(unequal)
+--- PASS: TestCompareValues (0.00s)
+    --- PASS: TestCompareValues/int_equal (0.00s)
+    --- PASS: TestCompareValues/int_less (0.00s)
+    --- PASS: TestCompareValues/int_greater (0.00s)
+    --- PASS: TestCompareValues/float_equal (0.00s)
+    --- PASS: TestCompareValues/float_less (0.00s)
+    --- PASS: TestCompareValues/float_greater (0.00s)
+    --- PASS: TestCompareValues/int_vs_float_equal (0.00s)
+    --- PASS: TestCompareValues/int_vs_float_less (0.00s)
+    --- PASS: TestCompareValues/int_vs_float_greater (0.00s)
+    --- PASS: TestCompareValues/string_number_vs_int_equal (0.00s)
+    --- PASS: TestCompareValues/string_number_vs_float_less (0.00s)
+    --- PASS: TestCompareValues/int_vs_string_number_greater (0.00s)
+    --- PASS: TestCompareValues/string_equal (0.00s)
+    --- PASS: TestCompareValues/string_less (0.00s)
+    --- PASS: TestCompareValues/string_greater (0.00s)
+    --- PASS: TestCompareValues/empty_strings (0.00s)
+    --- PASS: TestCompareValues/time_equal (0.00s)
+    --- PASS: TestCompareValues/time_less (0.00s)
+    --- PASS: TestCompareValues/time_greater (0.00s)
+    --- PASS: TestCompareValues/bool_equal_true (0.00s)
+    --- PASS: TestCompareValues/bool_equal_false (0.00s)
+    --- PASS: TestCompareValues/bool_true_>_false (0.00s)
+    --- PASS: TestCompareValues/bool_false_<_true (0.00s)
+    --- PASS: TestCompareValues/nil_equal (0.00s)
+    --- PASS: TestCompareValues/nil_less_than_int (0.00s)
+    --- PASS: TestCompareValues/string_greater_than_nil (0.00s)
+    --- PASS: TestCompareValues/int_vs_string (0.00s)
+    --- PASS: TestCompareValues/string_vs_int (0.00s)
+    --- PASS: TestCompareValues/bool_vs_int (0.00s)
+    --- PASS: TestCompareValues/time_vs_string (0.00s)
+    --- PASS: TestCompareValues/map_vs_map_(equal) (0.00s)
+    --- PASS: TestCompareValues/map_vs_map_(unequal) (0.00s)
+    --- PASS: TestCompareValues/slice_vs_slice_(equal) (0.00s)
+    --- PASS: TestCompareValues/slice_vs_slice_(unequal) (0.00s)
+=== RUN   TestHashTransform
+=== RUN   TestHashTransform/SHA256_success
+=== RUN   TestHashTransform/SHA512_success
+=== RUN   TestHashTransform/MD5_success_(FIPS_off)
+=== RUN   TestHashTransform/MD5_fail_(FIPS_on)
+=== RUN   TestHashTransform/SHA256_success_(FIPS_on)
+=== RUN   TestHashTransform/Missing_field_included
+=== RUN   TestHashTransform/Nil_value_field_included
+=== RUN   TestHashTransform/Error_-_missing_algorithm
+=== RUN   TestHashTransform/Error_-_missing_fields
+=== RUN   TestHashTransform/Error_-_fields_not_array
+=== RUN   TestHashTransform/Error_-_fields_empty_array
+=== RUN   TestHashTransform/Error_-_field_name_not_string
+=== RUN   TestHashTransform/Error_-_unknown_algorithm
+--- PASS: TestHashTransform (0.00s)
+    --- PASS: TestHashTransform/SHA256_success (0.00s)
+    --- PASS: TestHashTransform/SHA512_success (0.00s)
+    --- PASS: TestHashTransform/MD5_success_(FIPS_off) (0.00s)
+    --- PASS: TestHashTransform/MD5_fail_(FIPS_on) (0.00s)
+    --- PASS: TestHashTransform/SHA256_success_(FIPS_on) (0.00s)
+    --- PASS: TestHashTransform/Missing_field_included (0.00s)
+    --- PASS: TestHashTransform/Nil_value_field_included (0.00s)
+    --- PASS: TestHashTransform/Error_-_missing_algorithm (0.00s)
+    --- PASS: TestHashTransform/Error_-_missing_fields (0.00s)
+    --- PASS: TestHashTransform/Error_-_fields_not_array (0.00s)
+    --- PASS: TestHashTransform/Error_-_fields_empty_array (0.00s)
+    --- PASS: TestHashTransform/Error_-_field_name_not_string (0.00s)
+    --- PASS: TestHashTransform/Error_-_unknown_algorithm (0.00s)
+PASS
+ok  	etl-tool/internal/transform	1.008s
+=== RUN   TestExpandEnvUniversal
+=== RUN   TestExpandEnvUniversal/no_variables
+=== RUN   TestExpandEnvUniversal/unix_style_var_exists
+=== RUN   TestExpandEnvUniversal/unix_style_var_missing
+=== RUN   TestExpandEnvUniversal/unix_style_brace_var_exists
+=== RUN   TestExpandEnvUniversal/unix_style_brace_var_missing
+=== RUN   TestExpandEnvUniversal/windows_style_var_exists
+=== RUN   TestExpandEnvUniversal/windows_style_var_missing
+=== RUN   TestExpandEnvUniversal/mixed_styles_vars_exist
+=== RUN   TestExpandEnvUniversal/mixed_styles_one_missing
+=== RUN   TestExpandEnvUniversal/mixed_styles_win_missing
+=== RUN   TestExpandEnvUniversal/empty_input
+=== RUN   TestExpandEnvUniversal/variable_is_entire_string
+=== RUN   TestExpandEnvUniversal/windows_variable_is_entire_string
+=== RUN   TestExpandEnvUniversal/consecutive_variables
+=== RUN   TestExpandEnvUniversal/consecutive_windows_variables
+--- PASS: TestExpandEnvUniversal (0.00s)
+    --- PASS: TestExpandEnvUniversal/no_variables (0.00s)
+    --- PASS: TestExpandEnvUniversal/unix_style_var_exists (0.00s)
+    --- PASS: TestExpandEnvUniversal/unix_style_var_missing (0.00s)
+    --- PASS: TestExpandEnvUniversal/unix_style_brace_var_exists (0.00s)
+    --- PASS: TestExpandEnvUniversal/unix_style_brace_var_missing (0.00s)
+    --- PASS: TestExpandEnvUniversal/windows_style_var_exists (0.00s)
+    --- PASS: TestExpandEnvUniversal/windows_style_var_missing (0.00s)
+    --- PASS: TestExpandEnvUniversal/mixed_styles_vars_exist (0.00s)
+    --- PASS: TestExpandEnvUniversal/mixed_styles_one_missing (0.00s)
+    --- PASS: TestExpandEnvUniversal/mixed_styles_win_missing (0.00s)
+    --- PASS: TestExpandEnvUniversal/empty_input (0.00s)
+    --- PASS: TestExpandEnvUniversal/variable_is_entire_string (0.00s)
+    --- PASS: TestExpandEnvUniversal/windows_variable_is_entire_string (0.00s)
+    --- PASS: TestExpandEnvUniversal/consecutive_variables (0.00s)
+    --- PASS: TestExpandEnvUniversal/consecutive_windows_variables (0.00s)
+=== RUN   TestSnippet
+=== RUN   TestSnippet/short_input
+=== RUN   TestSnippet/long_input
+=== RUN   TestSnippet/empty_input
+=== RUN   TestSnippet/nil_input
+=== RUN   TestSnippet/input_exactly_limit
+=== RUN   TestSnippet/multibyte_runes
+--- PASS: TestSnippet (0.00s)
+    --- PASS: TestSnippet/short_input (0.00s)
+    --- PASS: TestSnippet/long_input (0.00s)
+    --- PASS: TestSnippet/empty_input (0.00s)
+    --- PASS: TestSnippet/nil_input (0.00s)
+    --- PASS: TestSnippet/input_exactly_limit (0.00s)
+    --- PASS: TestSnippet/multibyte_runes (0.00s)
+=== RUN   TestLooksLikeJSON
+=== RUN   TestLooksLikeJSON/valid_object
+=== RUN   TestLooksLikeJSON/valid_array
+=== RUN   TestLooksLikeJSON/object_with_whitespace
+=== RUN   TestLooksLikeJSON/array_with_whitespace
+=== RUN   TestLooksLikeJSON/empty_object
+=== RUN   TestLooksLikeJSON/empty_array
+=== RUN   TestLooksLikeJSON/plain_string
+=== RUN   TestLooksLikeJSON/xml_string
+=== RUN   TestLooksLikeJSON/incomplete_object
+=== RUN   TestLooksLikeJSON/incomplete_array
+=== RUN   TestLooksLikeJSON/object_missing_closing_brace
+=== RUN   TestLooksLikeJSON/array_missing_closing_bracket
+=== RUN   TestLooksLikeJSON/number_string
+=== RUN   TestLooksLikeJSON/boolean_string
+=== RUN   TestLooksLikeJSON/null_string
+=== RUN   TestLooksLikeJSON/empty_string
+=== RUN   TestLooksLikeJSON/whitespace_string
+--- PASS: TestLooksLikeJSON (0.00s)
+    --- PASS: TestLooksLikeJSON/valid_object (0.00s)
+    --- PASS: TestLooksLikeJSON/valid_array (0.00s)
+    --- PASS: TestLooksLikeJSON/object_with_whitespace (0.00s)
+    --- PASS: TestLooksLikeJSON/array_with_whitespace (0.00s)
+    --- PASS: TestLooksLikeJSON/empty_object (0.00s)
+    --- PASS: TestLooksLikeJSON/empty_array (0.00s)
+    --- PASS: TestLooksLikeJSON/plain_string (0.00s)
+    --- PASS: TestLooksLikeJSON/xml_string (0.00s)
+    --- PASS: TestLooksLikeJSON/incomplete_object (0.00s)
+    --- PASS: TestLooksLikeJSON/incomplete_array (0.00s)
+    --- PASS: TestLooksLikeJSON/object_missing_closing_brace (0.00s)
+    --- PASS: TestLooksLikeJSON/array_missing_closing_bracket (0.00s)
+    --- PASS: TestLooksLikeJSON/number_string (0.00s)
+    --- PASS: TestLooksLikeJSON/boolean_string (0.00s)
+    --- PASS: TestLooksLikeJSON/null_string (0.00s)
+    --- PASS: TestLooksLikeJSON/empty_string (0.00s)
+    --- PASS: TestLooksLikeJSON/whitespace_string (0.00s)
+=== RUN   TestMaskCredentials
+=== RUN   TestMaskCredentials/postgres_full
+=== RUN   TestMaskCredentials/postgresql_full
+=== RUN   TestMaskCredentials/postgres_user_only
+=== RUN   TestMaskCredentials/postgres_password_only
+=== RUN   TestMaskCredentials/postgres_no_user/pass
+=== RUN   TestMaskCredentials/mysql_full
+=== RUN   TestMaskCredentials/sqlserver_full
+=== RUN   TestMaskCredentials/plain_string
+=== RUN   TestMaskCredentials/string_with_colon/at
+=== RUN   TestMaskCredentials/empty_string
+=== RUN   TestMaskCredentials/uri_without_scheme
+=== RUN   TestMaskCredentials/password_with_special_chars
+=== RUN   TestMaskCredentials/password_with_percent_encoding
+--- PASS: TestMaskCredentials (0.00s)
+    --- PASS: TestMaskCredentials/postgres_full (0.00s)
+    --- PASS: TestMaskCredentials/postgresql_full (0.00s)
+    --- PASS: TestMaskCredentials/postgres_user_only (0.00s)
+    --- PASS: TestMaskCredentials/postgres_password_only (0.00s)
+    --- PASS: TestMaskCredentials/postgres_no_user/pass (0.00s)
+    --- PASS: TestMaskCredentials/mysql_full (0.00s)
+    --- PASS: TestMaskCredentials/sqlserver_full (0.00s)
+    --- PASS: TestMaskCredentials/plain_string (0.00s)
+    --- PASS: TestMaskCredentials/string_with_colon/at (0.00s)
+    --- PASS: TestMaskCredentials/empty_string (0.00s)
+    --- PASS: TestMaskCredentials/uri_without_scheme (0.00s)
+    --- PASS: TestMaskCredentials/password_with_special_chars (0.00s)
+    --- PASS: TestMaskCredentials/password_with_percent_encoding (0.00s)
+=== RUN   TestMaskSensitiveData
+=== RUN   TestMaskSensitiveData/no_sensitive_keys
+=== RUN   TestMaskSensitiveData/simple_password_key
+=== RUN   TestMaskSensitiveData/mixed_case_sensitive_keys
+=== RUN   TestMaskSensitiveData/nested_map_with_sensitive_leaf_key
+=== RUN   TestMaskSensitiveData/nested_map_does_not_mask_based_on_parent_key
+=== RUN   TestMaskSensitiveData/value_is_connection_string
+=== RUN   TestMaskSensitiveData/value_is_nested_map_with_connection_string_and_sensitive_key
+=== RUN   TestMaskSensitiveData/nil_map_input
+=== RUN   TestMaskSensitiveData/empty_map_input
+=== RUN   TestMaskSensitiveData/map_with_nil_sensitive_value
+=== RUN   TestMaskSensitiveData/map_with_non-string_non-map_value
+--- PASS: TestMaskSensitiveData (0.00s)
+    --- PASS: TestMaskSensitiveData/no_sensitive_keys (0.00s)
+    --- PASS: TestMaskSensitiveData/simple_password_key (0.00s)
+    --- PASS: TestMaskSensitiveData/mixed_case_sensitive_keys (0.00s)
+    --- PASS: TestMaskSensitiveData/nested_map_with_sensitive_leaf_key (0.00s)
+    --- PASS: TestMaskSensitiveData/nested_map_does_not_mask_based_on_parent_key (0.00s)
+    --- PASS: TestMaskSensitiveData/value_is_connection_string (0.00s)
+    --- PASS: TestMaskSensitiveData/value_is_nested_map_with_connection_string_and_sensitive_key (0.00s)
+    --- PASS: TestMaskSensitiveData/nil_map_input (0.00s)
+    --- PASS: TestMaskSensitiveData/empty_map_input (0.00s)
+    --- PASS: TestMaskSensitiveData/map_with_nil_sensitive_value (0.00s)
+    --- PASS: TestMaskSensitiveData/map_with_non-string_non-map_value (0.00s)
+PASS
+ok  	etl-tool/internal/util	0.742s

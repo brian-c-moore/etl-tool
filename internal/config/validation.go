@@ -89,6 +89,11 @@ func ValidateConfig(cfg *ETLConfig) error {
 		}
 	}
 
+	// Flattening Validation ---
+	if cfg.Flattening != nil {
+		allErrors = append(allErrors, validateFlatteningConfig("Config.Flattening", cfg.Flattening, mappingTargetFields)...)
+	}
+
 	if cfg.Dedup != nil {
 		// Pass mapping targets for dedup field validation
 		allErrors = append(allErrors, validateDedupConfig("Config.Dedup", cfg.Dedup, mappingTargetFields)...)
@@ -574,6 +579,36 @@ func validateTransformParams(prefix, funcName, transformString string, params ma
 	return errs
 }
 
+// Flattening Validation ---
+// validateFlatteningConfig validates the Flattening section.
+func validateFlatteningConfig(prefix string, cfg *FlatteningConfig, mappingTargets map[string]bool) []string {
+	var errs []string
+	if cfg.SourceField == "" {
+		errs = append(errs, fmt.Sprintf("- %s.SourceField: is required", prefix))
+	}
+	if cfg.TargetField == "" {
+		errs = append(errs, fmt.Sprintf("- %s.TargetField: is required", prefix))
+	}
+
+	// Check if ConditionField is set without ConditionValue
+	if cfg.ConditionField != "" && cfg.ConditionValue == "" {
+		// Changed from warning to error as per plan review
+		errs = append(errs, fmt.Sprintf("- %s.ConditionValue: is required when ConditionField ('%s') is set", prefix, cfg.ConditionField))
+	}
+
+	// Check if Flattening.TargetField conflicts with any MappingRule.Target
+	if cfg.TargetField != "" {
+		if _, exists := mappingTargets[cfg.TargetField]; exists {
+			errs = append(errs, fmt.Sprintf("- %s.TargetField: '%s' conflicts with a target field defined in mappings", prefix, cfg.TargetField))
+		}
+	}
+
+	// Note: Validating if Flattening.TargetField conflicts with parent fields
+	// when IncludeParent is true is difficult at config time and is deferred to runtime/documentation.
+
+	return errs
+}
+
 // validateDedupConfig validates the Deduplication section.
 func validateDedupConfig(prefix string, cfg *DedupConfig, mappingTargets map[string]bool) []string {
 	var errs []string
@@ -584,8 +619,15 @@ func validateDedupConfig(prefix string, cfg *DedupConfig, mappingTargets map[str
 		for i, key := range cfg.Keys {
 			if key == "" {
 				errs = append(errs, fmt.Sprintf("- %s.Keys[%d]: key cannot be empty", prefix, i))
-			} else if _, isTarget := mappingTargets[key]; !isTarget {
-				logging.Logf(logging.Warning, "Validation: %s.Keys[%d]: key '%s' is not a defined target field in mappings. Ensure it exists in the final processed record.", prefix, i, key)
+			}
+			// Check against mapping targets AND the flattening target field if it exists
+			// (Dedup happens after flattening)
+			// Note: We don't have flattening target here. Revisit if needed, but likely okay
+			// as dedup keys refer to fields in the *final* record structure before writing.
+			// The user needs to ensure the keys exist post-mapping/flattening.
+			// We only warn if it's not a MAPPING target for now.
+			if _, isMappingTarget := mappingTargets[key]; !isMappingTarget {
+				logging.Logf(logging.Warning, "Validation: %s.Keys[%d]: key '%s' is not an explicit target field in mappings. Ensure it exists in the final processed record.", prefix, i, key)
 			}
 		}
 	}
@@ -601,8 +643,11 @@ func validateDedupConfig(prefix string, cfg *DedupConfig, mappingTargets map[str
 		if lcStrategy == DedupStrategyMin || lcStrategy == DedupStrategyMax {
 			if cfg.StrategyField == "" {
 				errs = append(errs, fmt.Sprintf("- %s.StrategyField: is required when strategy is '%s' or '%s'", prefix, DedupStrategyMin, DedupStrategyMax))
-			} else if _, isTarget := mappingTargets[cfg.StrategyField]; !isTarget {
-				logging.Logf(logging.Warning, "Validation: %s.StrategyField: field '%s' is not a defined target field in mappings. Ensure it exists for comparison.", prefix, cfg.StrategyField)
+			} else {
+				// Similar check for StrategyField's existence in mapping targets
+				if _, isMappingTarget := mappingTargets[cfg.StrategyField]; !isMappingTarget {
+					logging.Logf(logging.Warning, "Validation: %s.StrategyField: field '%s' is not an explicit target field in mappings. Ensure it exists for comparison.", prefix, cfg.StrategyField)
+				}
 			}
 		} else {
 			// Strategy is 'first' or 'last', StrategyField should not be set

@@ -2,20 +2,20 @@
 
 ## Overview
 
-etl-tool is a command-line application for performing Extract, Transform, and Load (ETL) operations. It reads data from various sources, applies transformations based on a configuration file, and writes the results to various destinations. It's designed to be flexible and driven by a declarative YAML configuration.
+etl-tool is a command-line application for performing Extract, Transform, and Load (ETL) operations. It reads data from various sources, applies transformations based on a configuration file, and writes the results to various destinations.
 
 ## Features
 
 *   Configuration-driven ETL processes using YAML.
 *   Supports multiple data sources: CSV, JSON, XLSX, XML, YAML, PostgreSQL.
 *   Supports multiple data destinations: CSV, JSON, XLSX, XML, YAML, PostgreSQL.
-*   Data filtering capabilities using expressions applied before transformations.
-*   Extensive record transformation and validation rules (type conversion, string manipulation, date/time handling, regex, hashing, required fields, numeric ranges, allowed values).
-*   Data deduplication based on specified keys and strategies (first, last, min, max), applied after transformations.
-*   Configurable error handling (halt or skip) with optional error logging to a file.
-*   Optional FIPS compliance mode (restricts certain crypto algorithms like MD5 hashing).
-*   Dry-run mode to preview actions without writing data to the destination.
-*   Environment variable expansion (Unix-style `$VAR`, `${VAR}` and Windows-style `%VAR%`) in configuration file paths and connection strings.
+*   Data filtering capabilities using expressions.
+*   Record transformation and validation rules.
+*   Data deduplication based on specified keys and strategies.
+*   Configurable error handling (halt or skip).
+*   Optional FIPS compliance mode.
+*   Dry-run mode to preview actions without writing data.
+*   Environment variable expansion in configuration paths and connection strings.
 
 ## Usage
 
@@ -37,44 +37,11 @@ etl-tool -config <config_file.yaml> [options]
 *   `DB_CREDENTIALS`: PostgreSQL connection string (used if -db flag is not set).
 *   Other variables (e.g., `$MY_PATH`, `${VAR_NAME}`, `%WIN_PATH%`) can be used within configuration file paths and connection strings for expansion.
 
-### Build from Source
-
-Ensure you have Go (version 1.22 or later recommended) installed and configured.
-
-```sh
-# Clone the repository
-git clone https://github.com/brian-c-moore/api-tool.git
-cd api-tool
-
-# Tidy dependencies
-go mod tidy
-
-# Build the binary
-go build -o api-tool ./cmd/api-tool/
-
-# (Optional) Install to your Go bin directory
-go install ./cmd/api-tool/
-# Make sure $GOPATH/bin (or $HOME/go/bin) is in your PATH
-```
-
-## Testing
+## Building and Testing
 
 *   Build: `go build -o etl-tool ./cmd/etl-tool/main.go`
 *   Run Tests: `go test ./...`
 *   Run Tests (Docker): `./docker-test.sh`
-
-Example test output:
-
-```
-?       etl-tool/cmd/etl-tool   [no test files]
-ok      etl-tool/internal/app   0.391s
-ok      etl-tool/internal/config        0.204s
-ok      etl-tool/internal/io    0.830s
-ok      etl-tool/internal/logging       0.448s
-ok      etl-tool/internal/processor     0.595s
-ok      etl-tool/internal/transform     1.018s
-ok      etl-tool/internal/util  0.887s
-```
 
 ## License
 
